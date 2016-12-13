@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F720540A-D134-448B-A396-67EBF013432E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Project.Infrastructure</RootNamespace>
+    <AssemblyName>Project.Infrastructure</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Contexts\CustomHistoryContext.cs" />
+    <Compile Include="Contexts\ResourceContext.cs" />
+    <Compile Include="Migrations\ResourceMigrations\201610051433406_inicial.cs" />
+    <Compile Include="Migrations\ResourceMigrations\201610051433406_inicial.Designer.cs">
+      <DependentUpon>201610051433406_inicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\ResourceMigrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Project.Configurations\Project.Configurations.csproj">
+      <Project>{c4d7fbce-2c55-49c3-8f6d-f76ef32a1bf7}</Project>
+      <Name>Project.Configurations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Project.Helpers\Project.Helpers.csproj">
+      <Project>{0c0e552c-5335-4889-a44f-d559981359c5}</Project>
+      <Name>Project.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Project.Models.Core\Project.Models.Core.csproj">
+      <Project>{056e585a-1407-4463-9248-01dd179f2b9d}</Project>
+      <Name>Project.Models.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Project.Models.Publicacoes\Project.Models.Publicacoes.csproj">
+      <Project>{d382a72d-1237-4b20-97a6-1b725ff4d492}</Project>
+      <Name>Project.Models.Publicacoes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Project.Models.Universidade\Project.Models.Universidade.csproj">
+      <Project>{b767dbac-5552-41f2-9802-8c1dbfd9af5b}</Project>
+      <Name>Project.Models.Universidade</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\ResourceMigrations\201610051433406_inicial.resx">
+      <DependentUpon>201610051433406_inicial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
