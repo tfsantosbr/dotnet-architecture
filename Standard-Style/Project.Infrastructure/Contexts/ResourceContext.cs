@@ -16,7 +16,7 @@ namespace Project.Infrastructure.Contexts
         #region - CONSTRUCTORS -
 
         public ResourceContext()
-            : base(ConnectionStrings.ResourceConnection)
+            : base(ConnectionStrings.SQLServerConnection)
         {
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = false;

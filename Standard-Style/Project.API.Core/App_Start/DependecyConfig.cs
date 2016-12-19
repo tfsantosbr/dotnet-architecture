@@ -7,6 +7,7 @@ using Project.Domain.Core.Domains;
 using Project.Domain.Core.Interfaces;
 using Project.Models.Core.Entities;
 using Project.Persistence.Core.Contexts;
+using Project.Persistence.Core.Contexts.Base;
 using Project.Persistence.Core.Interfaces;
 using Project.Persistence.Core.Repositories;
 using SimpleInjector;
@@ -52,6 +53,7 @@ namespace Project.API.Core
 
             #region - CONTEXTS -
             container.Register<DbContext, CoreContext>(Lifestyle.Scoped);
+            container.Register<DocumentContextBase, CoreMongoContext>(Lifestyle.Scoped);
             #endregion
 
             #region - REPOSITORIES -

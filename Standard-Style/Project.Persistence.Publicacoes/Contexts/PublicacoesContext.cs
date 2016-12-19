@@ -8,7 +8,7 @@ namespace Project.Persistence.Publicacoes.Contexts
     /// <summary>
     ///     PUBLICACOES CONTEXT
     /// </summary>
-    public class PublicacoesContext : BaseContext<PublicacoesContext>
+    public class PublicacoesContext : RelationalContextBase<PublicacoesContext>
     {
         #region - CONSTRUCTORS -
 

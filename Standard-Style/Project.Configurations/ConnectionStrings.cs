@@ -7,10 +7,10 @@ namespace Project.Configurations
     /// </summary>
     public static class ConnectionStrings
     {
-        public static string ResourceConnection
-            => ConfigurationManager.ConnectionStrings["ResourceConnection"].ConnectionString;
+        public static string SQLServerConnection
+            => ConfigurationManager.ConnectionStrings["SQLServerConnection"].ConnectionString;
 
-        public static string AuthenticationConnection
-            => ConfigurationManager.ConnectionStrings["AuthenticationCOnnection"].ConnectionString;
+        public static string MongoConnection
+            => ConfigurationManager.ConnectionStrings["MongoConnection"].ConnectionString;
     }
 }

@@ -8,7 +8,7 @@ namespace Project.Persistence.Universidade.Contexts
     /// <summary>
     ///     UNIVERSIDADE CONTEXT
     /// </summary>
-    public class UniversidadeContext : BaseContext<UniversidadeContext>
+    public class UniversidadeContext : RelationalContextBase<UniversidadeContext>
     {
         #region - CONSTRUCTORS -
 

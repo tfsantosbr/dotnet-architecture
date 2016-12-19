@@ -1,12 +1,12 @@
-﻿using Project.Models.Core.Entities.Base;
-using Project.Models.Core.Exceptions;
-using Project.Persistence.Core.Interfaces.Base;
-using System;
+﻿using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Project.Models.Core.Entities.Base;
+using Project.Models.Core.Exceptions;
+using Project.Persistence.Core.Interfaces.Base;
 
 namespace Project.Persistence.Core.Repositories.Base
 {
@@ -54,7 +54,7 @@ namespace Project.Persistence.Core.Repositories.Base
 
         public virtual IQueryable<TEntity> Query(Func<TEntity, bool> predicate)
         {
-            return Context.Set<TEntity>().Where(predicate).AsQueryable();
+            return Query().Where(predicate).AsQueryable();
         }
 
         public virtual TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
@@ -126,31 +126,5 @@ namespace Project.Persistence.Core.Repositories.Base
         #endregion
 
         #endregion
-
-        //#region - AUXILIARY METHODS -
-
-        //#region - DISPOSE -
-
-        //~RepositoryBase()
-        //{
-        //    Dispose(false);
-        //}
-
-        //public void Dispose()
-        //{
-        //    Dispose(true);
-        //    GC.SuppressFinalize(this);
-        //}
-
-        //protected virtual void Dispose(bool disposing)
-        //{
-        //    if (!disposing) return;
-        //    Context?.Dispose();
-        //    //Context = null;
-        //}
-
-        //#endregion
-
-        //#endregion
     }
 }
