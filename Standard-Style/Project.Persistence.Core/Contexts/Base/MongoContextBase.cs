@@ -3,7 +3,7 @@ using Project.Configurations;
 
 namespace Project.Persistence.Core.Contexts.Base
 {
-    public abstract class DocumentContextBase
+    public abstract class MongoContextBase
     {
         #region - PROPERTIES -
 
@@ -14,12 +14,12 @@ namespace Project.Persistence.Core.Contexts.Base
 
         #region - CONSTRUCTORS -
 
-        public DocumentContextBase()
+        public MongoContextBase()
             : this(ConnectionStrings.MongoConnection)
         {
         }
 
-        public DocumentContextBase(string connectionString)
+        public MongoContextBase(string connectionString)
         {
             var url = MongoUrl.Create(connectionString);
 

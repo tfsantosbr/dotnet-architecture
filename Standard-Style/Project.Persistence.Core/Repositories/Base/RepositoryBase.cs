@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Project.Models.Core.Entities.Base;
-using Project.Models.Core.Exceptions;
 using Project.Persistence.Core.Interfaces.Base;
 
 namespace Project.Persistence.Core.Repositories.Base
@@ -18,113 +15,67 @@ namespace Project.Persistence.Core.Repositories.Base
     public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity>, IRepositoryBaseAsync<TEntity>
         where TEntity : EntityBase
     {
-        #region - PROPERTIES -
-
-        public DbContext Context;
-
-        #endregion
-
-        #region - CONSTRUCTORS -
-
-        protected RepositoryBase(DbContext context)
-        {
-            Context = context;
-        }
-
-        #endregion
-
-        #region - MAIN METHODS -
-
-        #region - READ METHODS -
-
-        public virtual TEntity Read(params object[] key)
-        {
-            return Context.Set<TEntity>().Find(key);
-        }
-
-        public virtual async Task<TEntity> ReadAsync(params object[] key)
-        {
-            return await Context.Set<TEntity>().FindAsync(key);
-        }
-
-        public virtual IQueryable<TEntity> Query()
-        {
-            return Context.Set<TEntity>();
-        }
-
-        public virtual IQueryable<TEntity> Query(Func<TEntity, bool> predicate)
-        {
-            return Query().Where(predicate).AsQueryable();
-        }
-
-        public virtual TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
-        {
-            return Context.Set<TEntity>().SingleOrDefault(predicate);
-        }
-
-        public virtual Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
-        {
-            return Context.Set<TEntity>().SingleOrDefaultAsync(predicate);
-        }
-
-        #endregion
-
-        #region - WRITE METHODS -
-
         public virtual void Create(TEntity obj)
         {
             obj.CreationDate = DateTime.Now;
             obj.ModificationDate = DateTime.Now;
-
-            Context.Set<TEntity>().Add(obj);
         }
 
-        public virtual void Update(TEntity obj)
+        // not implemented
+
+        public void Delete(Func<TEntity, bool> predicate)
         {
-            obj.ModificationDate = DateTime.Now;
-
-            Context.Entry(obj).State = EntityState.Modified;
-            Context.Entry(obj).Property(p => p.CreationDate).IsModified = false;
+            throw new NotImplementedException();
         }
 
-        public virtual void Delete(TEntity obj)
+        public void Delete(TEntity obj)
         {
-            Context.Entry(obj).State = EntityState.Deleted;
+            throw new NotImplementedException();
         }
 
-        public virtual void Delete(Func<TEntity, bool> predicate)
+        public IQueryable<TEntity> Query()
         {
-            Context.Set<TEntity>()
-                .Where(predicate).ToList()
-                .ForEach(r => Context.Set<TEntity>().Remove(r));
+            throw new NotImplementedException();
         }
 
-        public virtual int Save()
+        public IQueryable<TEntity> Query(Func<TEntity, bool> predicate)
         {
-            try
-            {
-                return Context.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                throw new RecordConcurrencyException(ex.Message);
-            }
+            throw new NotImplementedException();
         }
 
-        public virtual async Task<int> SaveAsync()
+        public TEntity Read(params object[] key)
         {
-            try
-            {
-                return await Context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                throw new RecordConcurrencyException(ex.Message);
-            }
+            throw new NotImplementedException();
         }
 
-        #endregion
+        public Task<TEntity> ReadAsync(params object[] key)
+        {
+            throw new NotImplementedException();
+        }
 
-        #endregion
+        public int Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> SaveAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(TEntity obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

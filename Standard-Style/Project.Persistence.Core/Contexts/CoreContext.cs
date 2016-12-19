@@ -5,7 +5,7 @@ using Project.Persistence.Core.Contexts.Base;
 
 namespace Project.Persistence.Core.Contexts
 {
-    public class CoreContext : RelationalContextBase<CoreContext>
+    public class CoreContext : ContextBase<CoreContext>
     {
         #region - CONSTRUCTORS -
 

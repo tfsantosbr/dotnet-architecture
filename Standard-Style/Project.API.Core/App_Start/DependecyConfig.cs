@@ -53,7 +53,7 @@ namespace Project.API.Core
 
             #region - CONTEXTS -
             container.Register<DbContext, CoreContext>(Lifestyle.Scoped);
-            container.Register<DocumentContextBase, CoreMongoContext>(Lifestyle.Scoped);
+            container.Register<MongoContextBase, CoreMongoContext>(Lifestyle.Scoped);
             #endregion
 
             #region - REPOSITORIES -
