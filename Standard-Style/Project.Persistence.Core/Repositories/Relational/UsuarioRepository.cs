@@ -1,16 +1,16 @@
-﻿using Project.Models.Core.Entities;
-using Project.Persistence.Core.Interfaces;
-using Project.Persistence.Core.Repositories.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Project.Models.Core.Entities;
+using Project.Persistence.Core.Interfaces;
+using Project.Persistence.Core.Repositories.Base;
 
 namespace Project.Persistence.Core.Repositories
 {
-    public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
+    public class UsuarioRepository : RepositoryRelationalBase<Usuario>, IUsuarioRepository
     {
         public UsuarioRepository(DbContext context)
             : base(context)

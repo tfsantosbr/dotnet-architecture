@@ -15,7 +15,7 @@ namespace Project.Persistence.Core.Repositories.Base
     /// </summary>
     /// <typeparam name="TEntity">EntityBase Type</typeparam>
 
-    public abstract class RepositoryRelationalBase<TEntity> : IRepositoryBase<TEntity>, IRepositoryBaseAsync<TEntity>
+    public abstract class RepositoryRelationalBase<TEntity> : RepositoryBase<TEntity>, IRepositoryBase<TEntity>, IRepositoryBaseAsync<TEntity>
         where TEntity : EntityBase
     {
         #region - PROPERTIES -
@@ -71,17 +71,16 @@ namespace Project.Persistence.Core.Repositories.Base
 
         #region - WRITE METHODS -
 
-        public virtual void Create(TEntity obj)
+        public new virtual void Create(TEntity obj)
         {
-            obj.CreationDate = DateTime.Now;
-            obj.ModificationDate = DateTime.Now;
+            base.Create(obj);
 
             Context.Set<TEntity>().Add(obj);
         }
 
-        public virtual void Update(TEntity obj)
+        public new virtual void Update(TEntity obj)
         {
-            obj.ModificationDate = DateTime.Now;
+            base.Update(obj);
 
             Context.Entry(obj).State = EntityState.Modified;
             Context.Entry(obj).Property(p => p.CreationDate).IsModified = false;

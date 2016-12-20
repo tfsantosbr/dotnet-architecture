@@ -9,7 +9,7 @@ namespace Project.Persistence.Publicacoes.Repositories
     ///     CONTEUDO REPOSITORY
     /// </summary>
 
-    public class ConteudoRepository : RepositoryBase<Conteudo>, IConteudoRepository
+    public class ConteudoRepository : RepositoryRelationalBase<Conteudo>, IConteudoRepository
     {
         public ConteudoRepository(DbContext context)
             : base(context)

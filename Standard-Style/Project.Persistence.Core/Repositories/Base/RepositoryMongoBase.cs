@@ -47,22 +47,22 @@ namespace Project.Persistence.Core.Repositories.Base
 
         #region - READ METHODS -
 
-        public new virtual IQueryable<TEntity> Query()
+        public virtual IQueryable<TEntity> Query()
         {
             return Context.GetCollection<TEntity>().AsQueryable();
         }
 
-        public new virtual IQueryable<TEntity> Query(Func<TEntity, bool> predicate)
+        public virtual IQueryable<TEntity> Query(Func<TEntity, bool> predicate)
         {
             return Query().Where(predicate).AsQueryable();
         }
 
-        public new virtual TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
+        public virtual TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
             return Context.GetCollection<TEntity>().Find(predicate).SingleOrDefault();
         }
 
-        public new virtual async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
+        public virtual async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
         {
             return await Context.GetCollection<TEntity>().Find(predicate).SingleOrDefaultAsync();
         }
@@ -71,12 +71,12 @@ namespace Project.Persistence.Core.Repositories.Base
 
         #endregion
 
-        public new virtual TEntity Read(params object[] key)
+        public virtual TEntity Read(params object[] key)
         {
             throw new NotImplementedException();
         }
 
-        public new virtual int Save()
+        public virtual int Save()
         {
             throw new NotImplementedException();
         }
@@ -86,22 +86,22 @@ namespace Project.Persistence.Core.Repositories.Base
             throw new NotImplementedException();
         }
 
-        public new virtual void Delete(Func<TEntity, bool> predicate)
+        public virtual void Delete(Func<TEntity, bool> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public new virtual void Delete(TEntity obj)
+        public virtual void Delete(TEntity obj)
         {
             throw new NotImplementedException();
         }
 
-        public new virtual Task<int> SaveAsync()
+        public virtual Task<int> SaveAsync()
         {
             throw new NotImplementedException();
         }
 
-        public new virtual Task<TEntity> ReadAsync(params object[] key)
+        public virtual Task<TEntity> ReadAsync(params object[] key)
         {
             throw new NotImplementedException();
         }
