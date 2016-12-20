@@ -37,7 +37,7 @@ namespace Project.Persistence.Core.Contexts.Base
 
         public IMongoCollection<T> GetCollection<T>()
         {
-            return _dataBase.GetCollection<T>(nameof(T).ToLower());
+            return _dataBase.GetCollection<T>(typeof(T).Name.ToLower());
         }
 
         #endregion
