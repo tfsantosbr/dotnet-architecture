@@ -15,7 +15,7 @@ namespace Project.Persistence.Core.Repositories.Base
     /// </summary>
     /// <typeparam name="TEntity">EntityBase Type</typeparam>
 
-    public abstract class RepositoryRelationalBase<TEntity> : RepositoryBase<TEntity>, IRepositoryBase<TEntity>, IRepositoryBaseAsync<TEntity>
+    public abstract class RepositoryRelationalBase<TEntity> : RepositoryBase<TEntity>, IRepositoryRelationalBase<TEntity>, IRepositoryRelationalBaseAsync<TEntity>
         where TEntity : EntityBase
     {
         #region - PROPERTIES -

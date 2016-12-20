@@ -9,7 +9,7 @@ using Project.Persistence.Core.Interfaces.Base;
 
 namespace Project.Persistence.Core.Repositories.Base
 {
-    public abstract class RepositoryMongoBase<TEntity> : RepositoryBase<TEntity>, IRepositoryBase<TEntity>, IRepositoryBaseAsync<TEntity>
+    public abstract class RepositoryMongoBase<TEntity> : RepositoryBase<TEntity>, IRepositoryMongoBase<TEntity>, IRepositoryMongoBaseAsync<TEntity>
         where TEntity : EntityBase
     {
         #region - PROPERTIES -
@@ -33,14 +33,36 @@ namespace Project.Persistence.Core.Repositories.Base
 
         public new virtual void Create(TEntity obj)
         {
-            base.Create(obj);
+            Create(obj);
             Context.GetCollection<TEntity>().InsertOneAsync(obj);
         }
 
         public virtual async Task CreateAsync(TEntity obj)
         {
-            base.Create(obj);
+            Create(obj);
             await Context.GetCollection<TEntity>().InsertOneAsync(obj);
+        }
+
+        public virtual void Update(Expression<Func<TEntity, bool>> predicate, TEntity obj)
+        {
+            Update(obj);
+            Context.GetCollection<TEntity>().ReplaceOne(predicate, obj);
+        }
+
+        public virtual async Task UpdateAsync(Expression<Func<TEntity, bool>> predicate, TEntity obj)
+        {
+            Update(obj);
+            await Context.GetCollection<TEntity>().ReplaceOneAsync(predicate, obj);
+        }
+
+        public virtual void Delete(Expression<Func<TEntity, bool>> predicate)
+        {
+            Context.GetCollection<TEntity>().DeleteOne(predicate);
+        }
+
+        public virtual void DeleteOneAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            Context.GetCollection<TEntity>().DeleteOneAsync(predicate);
         }
 
         #endregion
@@ -81,20 +103,8 @@ namespace Project.Persistence.Core.Repositories.Base
             throw new NotImplementedException();
         }
 
-        public new virtual void Update(TEntity obj)
-        {
-            throw new NotImplementedException();
-        }
 
-        public virtual void Delete(Func<TEntity, bool> predicate)
-        {
-            throw new NotImplementedException();
-        }
 
-        public virtual void Delete(TEntity obj)
-        {
-            throw new NotImplementedException();
-        }
 
         public virtual Task<int> SaveAsync()
         {

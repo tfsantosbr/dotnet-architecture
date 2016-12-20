@@ -67,11 +67,17 @@
   <ItemGroup>
     <Compile Include="Contexts\Base\MongoContextBase.cs" />
     <Compile Include="Contexts\CoreMongoContext.cs" />
+    <Compile Include="Interfaces\Base\IRepositoryMongoBase.cs" />
+    <Compile Include="Interfaces\Base\IRepositoryMongoBaseAsync.cs" />
+    <Compile Include="Interfaces\Base\IRepositoryRelationalBaseAsync.cs" />
+    <Compile Include="Interfaces\Base\IRepositoryRelationalBase.cs" />
     <Compile Include="Interfaces\IClientRepository.cs" />
     <Compile Include="Interfaces\IRefreshTokenRepository.cs" />
     <Compile Include="Interfaces\IUsuarioRepository.cs" />
     <Compile Include="Repositories\Base\RepositoryRelationalBase.cs" />
     <Compile Include="Repositories\Base\RepositoryMongoBase.cs" />
+    <Compile Include="Repositories\Mongo\UsuarioMongoRepository.cs" />
+    <Compile Include="Repositories\Mongo\RefreshTokenMongoRepository.cs" />
     <Compile Include="Repositories\Mongo\ClientMongoRepository.cs" />
     <Compile Include="Repositories\Relational\ClientRepository.cs" />
     <Compile Include="Contexts\Base\ContextBase.cs" />

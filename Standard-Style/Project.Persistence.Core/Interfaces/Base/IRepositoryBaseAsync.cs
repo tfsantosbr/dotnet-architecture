@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Project.Models.Core.Entities.Base;
+﻿using Project.Models.Core.Entities.Base;
 
 namespace Project.Persistence.Core.Interfaces.Base
 {
@@ -15,15 +12,11 @@ namespace Project.Persistence.Core.Interfaces.Base
     {
         #region - WRITE METHODS -
 
-        Task<int> SaveAsync();
 
         #endregion
 
         #region - READ METHODS -
 
-        Task<TEntity> ReadAsync(params object[] key);
-
-        Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
 
         #endregion
     }

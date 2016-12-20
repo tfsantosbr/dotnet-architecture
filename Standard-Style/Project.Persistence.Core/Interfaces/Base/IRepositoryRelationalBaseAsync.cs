@@ -1,31 +1,29 @@
 ﻿using System;
-using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Project.Models.Core.Entities.Base;
 
 namespace Project.Persistence.Core.Interfaces.Base
 {
     /// <summary>
-    ///     REPOSITORY BASE INTERFACE
+    ///    REPOSITORY BASE ASYNC INTERFACE
     /// </summary>
     /// <typeparam name="TEntity">EntityBase Type</typeparam>
 
-    public interface IRepositoryBase<TEntity>
+    public interface IRepositoryRelationalBaseAsync<TEntity> : IRepositoryBaseAsync<TEntity>
         where TEntity : IEntityBase, IRowVersion
     {
         #region - WRITE METHODS -
 
-        void Create(TEntity obj);
+        Task<int> SaveAsync();
 
         #endregion
 
         #region - READ METHODS -
 
-        IQueryable<TEntity> Query();
+        Task<TEntity> ReadAsync(params object[] key);
 
-        IQueryable<TEntity> Query(Func<TEntity, bool> predicate);
-
-        TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate);
+        Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
 
         #endregion
     }

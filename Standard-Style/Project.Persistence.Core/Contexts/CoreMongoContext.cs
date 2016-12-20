@@ -44,6 +44,5 @@ namespace Project.Persistence.Core.Contexts
         }
 
         #endregion
-
     }
 }
