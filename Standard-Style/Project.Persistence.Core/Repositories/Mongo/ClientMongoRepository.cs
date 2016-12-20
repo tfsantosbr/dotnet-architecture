@@ -5,7 +5,7 @@ using Project.Persistence.Core.Repositories.Base;
 
 namespace Project.Persistence.Core.Repositories.Mongo
 {
-    public class ClientMongoRepository : RepositoryMongoBase<Client>, IClientRepository
+    public class ClientMongoRepository : RepositoryMongoBase<Client>, IClientMongoRepository
     {
         public ClientMongoRepository(MongoContextBase context)
             : base(context)

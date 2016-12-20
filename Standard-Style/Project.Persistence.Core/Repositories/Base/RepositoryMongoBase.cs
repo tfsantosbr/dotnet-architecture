@@ -60,9 +60,9 @@ namespace Project.Persistence.Core.Repositories.Base
             Context.GetCollection<TEntity>().DeleteOne(predicate);
         }
 
-        public virtual void DeleteOneAsync(Expression<Func<TEntity, bool>> predicate)
+        public virtual async Task DeleteOneAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            Context.GetCollection<TEntity>().DeleteOneAsync(predicate);
+            await Context.GetCollection<TEntity>().DeleteOneAsync(predicate);
         }
 
         #endregion
@@ -92,28 +92,5 @@ namespace Project.Persistence.Core.Repositories.Base
         #endregion
 
         #endregion
-
-        public virtual TEntity Read(params object[] key)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual int Save()
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-
-        public virtual Task<int> SaveAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual Task<TEntity> ReadAsync(params object[] key)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

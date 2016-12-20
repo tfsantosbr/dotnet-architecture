@@ -10,18 +10,18 @@ namespace Project.Persistence.Core.Interfaces.Base
     /// </summary>
     /// <typeparam name="TEntity">EntityBase Type</typeparam>
 
-    public interface IRepositoryMongoBaseAsync<TEntity> : IRepositoryBaseAsync<TEntity>
+    public interface IRepositoryRelationalBaseAsync<TEntity>
         where TEntity : IEntityBase, IRowVersion
     {
         #region - WRITE METHODS -
 
-        Task CreateAsync(TEntity obj);
-
-        Task UpdateAsync(Expression<Func<TEntity, bool>> predicate, TEntity obj);
+        Task<int> SaveAsync();
 
         #endregion
 
         #region - READ METHODS -
+
+        Task<TEntity> ReadAsync(params object[] key);
 
         Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
 

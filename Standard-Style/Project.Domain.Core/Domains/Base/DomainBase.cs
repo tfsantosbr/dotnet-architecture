@@ -19,7 +19,7 @@ namespace Project.Domain.Core.Domains.Base
 
     public abstract class DomainBase<TEntity, TRepository> : IDomainBase<TEntity>, IDomainBaseAsync<TEntity>
         where TEntity : EntityBase
-        where TRepository : IRepositoryBase<TEntity>, IRepositoryBaseAsync<TEntity>
+        where TRepository : IRepositoryRelationalBase<TEntity>, IRepositoryRelationalBaseAsync<TEntity>
     {
         #region - PROPERTIES -
 

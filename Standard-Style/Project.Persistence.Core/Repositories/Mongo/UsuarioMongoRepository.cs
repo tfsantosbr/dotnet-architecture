@@ -11,7 +11,7 @@ using Project.Persistence.Core.Repositories.Base;
 
 namespace Project.Persistence.Core.Repositories.Mongo
 {
-    public class UsuarioMongoRepository : RepositoryMongoBase<Usuario>, IUsuarioRepository
+    public class UsuarioMongoRepository : RepositoryMongoBase<Usuario>, IUsuarioMongoRepository
     {
         public UsuarioMongoRepository(MongoContextBase context)
             : base(context)

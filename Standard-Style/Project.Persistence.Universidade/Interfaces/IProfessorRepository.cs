@@ -7,7 +7,7 @@ namespace Project.Persistence.Universidade.Interfaces
     ///     PROFESSOR REPOSITORY INTERFACE
     /// </summary>
 
-    public interface IProfessorRepository<TEntity> : IRepositoryBase<TEntity>, IRepositoryBaseAsync<TEntity>
+    public interface IProfessorRepository<TEntity> : IRepositoryRelationalBase<TEntity>, IRepositoryRelationalBaseAsync<TEntity>
         where TEntity : IEntityBase, IRowVersion
     {
     }

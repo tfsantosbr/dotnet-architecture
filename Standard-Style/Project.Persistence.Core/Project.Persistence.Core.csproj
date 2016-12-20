@@ -67,25 +67,26 @@
   <ItemGroup>
     <Compile Include="Contexts\Base\MongoContextBase.cs" />
     <Compile Include="Contexts\CoreMongoContext.cs" />
-    <Compile Include="Interfaces\Base\IRepositoryMongoBase.cs" />
-    <Compile Include="Interfaces\Base\IRepositoryMongoBaseAsync.cs" />
-    <Compile Include="Interfaces\Base\IRepositoryRelationalBaseAsync.cs" />
-    <Compile Include="Interfaces\Base\IRepositoryRelationalBase.cs" />
-    <Compile Include="Interfaces\IClientRepository.cs" />
-    <Compile Include="Interfaces\IRefreshTokenRepository.cs" />
-    <Compile Include="Interfaces\IUsuarioRepository.cs" />
+    <Compile Include="Interfaces\Base\Mongo\IRepositoryMongoBase.cs" />
+    <Compile Include="Interfaces\Base\Mongo\IRepositoryMongoBaseAsync.cs" />
+    <Compile Include="Interfaces\Base\Relational\IRepositoryRelationalBaseAsync.cs" />
+    <Compile Include="Interfaces\Base\Relational\IRepositoryRelationalBase.cs" />
+    <Compile Include="Interfaces\Mongo\IClientMongoRepository.cs" />
+    <Compile Include="Interfaces\Mongo\IRefreshTokenMongoRepository.cs" />
+    <Compile Include="Interfaces\Mongo\IUsuarioMongoRepository.cs" />
+    <Compile Include="Interfaces\Relational\IClientRepository.cs" />
+    <Compile Include="Interfaces\Relational\IRefreshTokenRepository.cs" />
+    <Compile Include="Interfaces\Relational\IUsuarioRepository.cs" />
     <Compile Include="Repositories\Base\RepositoryRelationalBase.cs" />
     <Compile Include="Repositories\Base\RepositoryMongoBase.cs" />
     <Compile Include="Repositories\Mongo\UsuarioMongoRepository.cs" />
     <Compile Include="Repositories\Mongo\RefreshTokenMongoRepository.cs" />
     <Compile Include="Repositories\Mongo\ClientMongoRepository.cs" />
     <Compile Include="Repositories\Relational\ClientRepository.cs" />
-    <Compile Include="Contexts\Base\ContextBase.cs" />
+    <Compile Include="Contexts\Base\RelationalContextBase.cs" />
     <Compile Include="Contexts\CoreContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Interfaces\Base\IRepositoryBaseAsync.cs" />
     <Compile Include="Repositories\Base\RepositoryBase.cs" />
-    <Compile Include="Interfaces\Base\IRepositoryBase.cs" />
     <Compile Include="Repositories\Relational\RefreshTokenRepository.cs" />
     <Compile Include="Repositories\Relational\UsuarioRepository.cs" />
   </ItemGroup>

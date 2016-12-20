@@ -7,7 +7,7 @@ namespace Project.Persistence.Publicacoes.Interfaces
     ///     CONTEUDO REPOSITORY INTERFACE
     /// </summary>
 
-    public interface IConteudoRepository : IRepositoryBase<Conteudo>, IRepositoryBaseAsync<Conteudo>
+    public interface IConteudoRepository : IRepositoryRelationalBase<Conteudo>, IRepositoryRelationalBaseAsync<Conteudo>
     {
     }
 }

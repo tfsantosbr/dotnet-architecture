@@ -9,7 +9,7 @@ namespace Project.Persistence.Core.Contexts.Base
     ///     BASE CONTEXT
     /// </summary>
     /// <typeparam name="TContext">DbContext Type</typeparam>
-    public abstract class ContextBase<TContext> : DbContext
+    public abstract class RelationalContextBase<TContext> : DbContext
         where TContext : DbContext
     {
         #region - MAIN METHODS -
@@ -24,12 +24,12 @@ namespace Project.Persistence.Core.Contexts.Base
 
         #region - CONSTRUCTORS -
 
-        static ContextBase()
+        static RelationalContextBase()
         {
             Database.SetInitializer<TContext>(null);
         }
 
-        protected ContextBase()
+        protected RelationalContextBase()
             : base(ConnectionStrings.SQLServerConnection)
         {
         }

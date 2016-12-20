@@ -5,7 +5,7 @@ using Project.Persistence.Core.Repositories.Base;
 
 namespace Project.Persistence.Core.Repositories.Mongo
 {
-    public class RefreshTokenMongoRepository : RepositoryMongoBase<RefreshToken>, IRefreshTokenRepository
+    public class RefreshTokenMongoRepository : RepositoryMongoBase<RefreshToken>, IRefreshTokenMongoRepository
     {
         public RefreshTokenMongoRepository(MongoContextBase context)
             : base(context)

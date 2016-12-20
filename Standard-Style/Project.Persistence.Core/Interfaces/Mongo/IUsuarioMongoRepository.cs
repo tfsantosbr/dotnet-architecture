@@ -1,12 +1,12 @@
-﻿using Project.Models.Core.Entities;
-using Project.Persistence.Core.Interfaces.Base;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Project.Models.Core.Entities;
+using Project.Persistence.Core.Interfaces.Base;
 
 namespace Project.Persistence.Core.Interfaces
 {
-    public interface IUsuarioRepository : IRepositoryBase<Usuario>, IRepositoryBaseAsync<Usuario>
+    public interface IUsuarioMongoRepository : IRepositoryMongoBase<Usuario>, IRepositoryMongoBaseAsync<Usuario>
     {
         #region - Senha -
         string RetornaSenha(long idUsuario);
