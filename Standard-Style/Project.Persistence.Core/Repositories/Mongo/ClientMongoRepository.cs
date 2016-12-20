@@ -3,9 +3,9 @@ using Project.Persistence.Core.Contexts.Base;
 using Project.Persistence.Core.Interfaces;
 using Project.Persistence.Core.Repositories.Base;
 
-namespace Project.Persistence.Core.Repositories.Mongo
+namespace Project.Persistence.Core.Repositories
 {
-    public class ClientMongoRepository : RepositoryMongoBase<Client>, IClientMongoRepository
+    public class ClientMongoRepository : MongoRepositoryBase<Client>, IClientRepository
     {
         public ClientMongoRepository(MongoContextBase context)
             : base(context)

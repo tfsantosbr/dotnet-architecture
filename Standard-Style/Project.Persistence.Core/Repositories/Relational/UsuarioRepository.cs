@@ -10,7 +10,7 @@ using Project.Persistence.Core.Repositories.Base;
 
 namespace Project.Persistence.Core.Repositories
 {
-    public class UsuarioRepository : RepositoryRelationalBase<Usuario>, IUsuarioRepository
+    public class UsuarioRepository : RelationalRepositoryBase<Usuario>, IUsuarioRepository<Guid>
     {
         public UsuarioRepository(DbContext context)
             : base(context)
@@ -19,7 +19,7 @@ namespace Project.Persistence.Core.Repositories
 
         #region - Senha -
 
-        public string RetornaSenha(long idUsuario)
+        public string RetornaSenha(Guid idUsuario)
         {
             return Query(r => r.Id == idUsuario).SingleOrDefault()?.Senha;
         }
@@ -28,7 +28,7 @@ namespace Project.Persistence.Core.Repositories
 
         #region - Claims -
 
-        public void AdicionarClaims(Claim claim, long idUsuario)
+        public void AdicionarClaims(Claim claim, Guid idUsuario)
         {
             var objeto = new UsuarioClaim
             {
@@ -42,7 +42,7 @@ namespace Project.Persistence.Core.Repositories
             Context.Set<UsuarioClaim>().Add(objeto);
         }
 
-        public IList<Claim> RetornarClaimsUsuario(long idUsuario)
+        public IList<Claim> RetornarClaimsUsuario(Guid idUsuario)
         {
             List<Claim> claimsList = null;
 
@@ -58,7 +58,7 @@ namespace Project.Persistence.Core.Repositories
             return claimsList;
         }
 
-        public async Task RemoveClaimAsync(long idUsuario, Claim claim)
+        public async Task RemoveClaimAsync(Guid idUsuario, Claim claim)
         {
             var resultado = await Context.Set<UsuarioClaim>()
                 .Where(r => r.IdUsuario == idUsuario && r.Tipo == claim.Type && r.Valor == claim.Value)

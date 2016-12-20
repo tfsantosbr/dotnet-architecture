@@ -5,7 +5,7 @@ using Project.Persistence.Core.Repositories.Base;
 
 namespace Project.Persistence.Core.Repositories
 {
-    public class RefreshTokenRepository : RepositoryRelationalBase<RefreshToken>, IRefreshTokenRepository
+    public class RefreshTokenRepository : RelationalRepositoryBase<RefreshToken>, IRefreshTokenRepository
     {
         public RefreshTokenRepository(DbContext context)
             : base(context)

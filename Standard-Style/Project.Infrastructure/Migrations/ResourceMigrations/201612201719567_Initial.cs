@@ -3,7 +3,7 @@ namespace Project.Infrastructure.Migrations.ResourceMigrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class inicial : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -29,11 +29,11 @@ namespace Project.Infrastructure.Migrations.ResourceMigrations
                 "Publicacoes.Conteudo",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Guid(nullable: false),
                         Titulo = c.String(nullable: false),
                         Corpo = c.String(nullable: false),
-                        IdAutor = c.Long(nullable: false),
-                        IdAuditor = c.Long(),
+                        IdAutor = c.Guid(nullable: false),
+                        IdAuditor = c.Guid(nullable: false),
                         Status = c.Byte(nullable: false),
                         CreationDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         ModificationDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
@@ -50,7 +50,7 @@ namespace Project.Infrastructure.Migrations.ResourceMigrations
                 "Core.Usuario",
                 c => new
                     {
-                        Id = c.Long(nullable: false, identity: true),
+                        Id = c.Guid(nullable: false),
                         UserName = c.String(),
                         Email = c.String(),
                         EmailConfirmed = c.Boolean(nullable: false),
@@ -67,24 +67,25 @@ namespace Project.Infrastructure.Migrations.ResourceMigrations
                 "Universidade.Curso",
                 c => new
                     {
-                        Id = c.Short(nullable: false, identity: true),
+                        Id = c.Guid(nullable: false),
                         Titulo = c.String(nullable: false, maxLength: 30),
                         ProfessorId = c.Long(),
                         CreationDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         ModificationDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         ExclusionDate = c.DateTime(precision: 7, storeType: "datetime2"),
                         RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                        Professor_Id = c.Guid(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("Universidade.Professor", t => t.ProfessorId)
-                .Index(t => t.ProfessorId);
+                .ForeignKey("Universidade.Professor", t => t.Professor_Id)
+                .Index(t => t.Professor_Id);
             
             CreateTable(
                 "Universidade.Matricula",
                 c => new
                     {
-                        CursoId = c.Short(nullable: false),
-                        EstudanteId = c.Long(nullable: false),
+                        CursoId = c.Guid(nullable: false),
+                        EstudanteId = c.Guid(nullable: false),
                         CreationDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         ModificationDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         ExclusionDate = c.DateTime(precision: 7, storeType: "datetime2"),
@@ -100,7 +101,7 @@ namespace Project.Infrastructure.Migrations.ResourceMigrations
                 "Universidade.Estudante",
                 c => new
                     {
-                        Id = c.Long(nullable: false, identity: true),
+                        Id = c.Guid(nullable: false),
                         Nome = c.String(),
                         CreationDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         ModificationDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
@@ -113,9 +114,9 @@ namespace Project.Infrastructure.Migrations.ResourceMigrations
                 "Universidade.Nota",
                 c => new
                     {
-                        Id = c.Long(nullable: false),
-                        CursoId = c.Short(nullable: false),
-                        EstudanteId = c.Long(nullable: false),
+                        Id = c.Guid(nullable: false),
+                        CursoId = c.Guid(nullable: false),
+                        EstudanteId = c.Guid(nullable: false),
                         Valor = c.Decimal(nullable: false, precision: 18, scale: 2),
                         CreationDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         ModificationDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
@@ -130,7 +131,7 @@ namespace Project.Infrastructure.Migrations.ResourceMigrations
                 "Core.RefreshToken",
                 c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128),
+                        Id = c.Guid(nullable: false),
                         Browser = c.String(nullable: false, maxLength: 50),
                         Subject = c.String(nullable: false, maxLength: 50),
                         ClientId = c.String(nullable: false, maxLength: 50),
@@ -148,7 +149,7 @@ namespace Project.Infrastructure.Migrations.ResourceMigrations
                 "Core.Role",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Guid(nullable: false),
                         Name = c.String(),
                         CreationDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         ModificationDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
@@ -161,8 +162,8 @@ namespace Project.Infrastructure.Migrations.ResourceMigrations
                 "Core.UsuarioClaim",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
-                        IdUsuario = c.Long(nullable: false),
+                        Id = c.Guid(nullable: false),
+                        IdUsuario = c.Guid(nullable: false),
                         Tipo = c.String(),
                         Valor = c.String(),
                         CreationDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
@@ -178,24 +179,20 @@ namespace Project.Infrastructure.Migrations.ResourceMigrations
                 "Core.UsuarioRole",
                 c => new
                     {
-                        IdUsuario = c.Long(nullable: false),
-                        IdPerfil = c.Int(nullable: false),
+                        IdUsuario = c.Guid(nullable: false),
+                        IdPerfil = c.Guid(nullable: false),
                         CreationDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         ModificationDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         ExclusionDate = c.DateTime(precision: 7, storeType: "datetime2"),
                         RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
                     })
-                .PrimaryKey(t => new { t.IdUsuario, t.IdPerfil })
-                .ForeignKey("Core.Role", t => t.IdPerfil)
-                .ForeignKey("Core.Usuario", t => t.IdUsuario)
-                .Index(t => t.IdUsuario)
-                .Index(t => t.IdPerfil);
+                .PrimaryKey(t => new { t.IdUsuario, t.IdPerfil });
             
             CreateTable(
                 "Universidade.Professor",
                 c => new
                     {
-                        Id = c.Long(nullable: false),
+                        Id = c.Guid(nullable: false),
                         Salario = c.Decimal(nullable: false, precision: 18, scale: 2),
                     })
                 .PrimaryKey(t => t.Id)
@@ -207,23 +204,19 @@ namespace Project.Infrastructure.Migrations.ResourceMigrations
         public override void Down()
         {
             DropForeignKey("Universidade.Professor", "Id", "Core.Usuario");
-            DropForeignKey("Core.UsuarioRole", "IdUsuario", "Core.Usuario");
-            DropForeignKey("Core.UsuarioRole", "IdPerfil", "Core.Role");
             DropForeignKey("Core.UsuarioClaim", "IdUsuario", "Core.Usuario");
             DropForeignKey("Publicacoes.Conteudo", "IdAutor", "Core.Usuario");
             DropForeignKey("Publicacoes.Conteudo", "IdAuditor", "Core.Usuario");
-            DropForeignKey("Universidade.Curso", "ProfessorId", "Universidade.Professor");
+            DropForeignKey("Universidade.Curso", "Professor_Id", "Universidade.Professor");
             DropForeignKey("Universidade.Nota", new[] { "CursoId", "EstudanteId" }, "Universidade.Matricula");
             DropForeignKey("Universidade.Matricula", "EstudanteId", "Universidade.Estudante");
             DropForeignKey("Universidade.Matricula", "CursoId", "Universidade.Curso");
             DropIndex("Universidade.Professor", new[] { "Id" });
-            DropIndex("Core.UsuarioRole", new[] { "IdPerfil" });
-            DropIndex("Core.UsuarioRole", new[] { "IdUsuario" });
             DropIndex("Core.UsuarioClaim", new[] { "IdUsuario" });
             DropIndex("Universidade.Nota", new[] { "CursoId", "EstudanteId" });
             DropIndex("Universidade.Matricula", new[] { "EstudanteId" });
             DropIndex("Universidade.Matricula", new[] { "CursoId" });
-            DropIndex("Universidade.Curso", new[] { "ProfessorId" });
+            DropIndex("Universidade.Curso", new[] { "Professor_Id" });
             DropIndex("Publicacoes.Conteudo", new[] { "IdAuditor" });
             DropIndex("Publicacoes.Conteudo", new[] { "IdAutor" });
             DropTable("Universidade.Professor");

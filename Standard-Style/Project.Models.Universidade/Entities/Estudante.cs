@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Project.Models.Core.Entities.Base;
 
 namespace Project.Models.Universidade.Entities
@@ -6,7 +7,7 @@ namespace Project.Models.Universidade.Entities
     /// <summary>
     ///     ESTUDANTE
     /// </summary>
-    public class Estudante : IdentityEntityBase<long>
+    public class Estudante : IdentityEntityBase<Guid>
     {
         #region - PROPERTIES -
 

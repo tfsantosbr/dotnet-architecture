@@ -3,7 +3,6 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using Project.Models.Core.Entities.Base;
 using Project.Models.Core.Exceptions;
 using Project.Persistence.Core.Interfaces.Base;
@@ -15,7 +14,7 @@ namespace Project.Persistence.Core.Repositories.Base
     /// </summary>
     /// <typeparam name="TEntity">EntityBase Type</typeparam>
 
-    public abstract class RepositoryRelationalBase<TEntity> : RepositoryBase<TEntity>, IRepositoryRelationalBase<TEntity>, IRepositoryRelationalBaseAsync<TEntity>
+    public abstract class RelationalRepositoryBase<TEntity> : RepositoryBase<TEntity>, IRepositoryBase<TEntity>, IRepositoryBaseAsync<TEntity>
         where TEntity : EntityBase
     {
         #region - PROPERTIES -
@@ -26,7 +25,7 @@ namespace Project.Persistence.Core.Repositories.Base
 
         #region - CONSTRUCTORS -
 
-        protected RepositoryRelationalBase(DbContext context)
+        protected RelationalRepositoryBase(DbContext context)
         {
             Context = context;
         }
@@ -37,22 +36,12 @@ namespace Project.Persistence.Core.Repositories.Base
 
         #region - READ METHODS -
 
-        public virtual TEntity Read(params object[] key)
-        {
-            return Context.Set<TEntity>().Find(key);
-        }
-
-        public virtual async Task<TEntity> ReadAsync(params object[] key)
-        {
-            return await Context.Set<TEntity>().FindAsync(key);
-        }
-
         public virtual IQueryable<TEntity> Query()
         {
             return Context.Set<TEntity>();
         }
 
-        public virtual IQueryable<TEntity> Query(Func<TEntity, bool> predicate)
+        public virtual IQueryable<TEntity> Query(Expression<Func<TEntity, bool>> predicate)
         {
             return Query().Where(predicate).AsQueryable();
         }
@@ -60,11 +49,6 @@ namespace Project.Persistence.Core.Repositories.Base
         public virtual TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
             return Context.Set<TEntity>().SingleOrDefault(predicate);
-        }
-
-        public virtual Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
-        {
-            return Context.Set<TEntity>().SingleOrDefaultAsync(predicate);
         }
 
         #endregion
@@ -76,6 +60,7 @@ namespace Project.Persistence.Core.Repositories.Base
             base.Create(obj);
 
             Context.Set<TEntity>().Add(obj);
+            Save();
         }
 
         public new virtual void Update(TEntity obj)
@@ -84,19 +69,31 @@ namespace Project.Persistence.Core.Repositories.Base
 
             Context.Entry(obj).State = EntityState.Modified;
             Context.Entry(obj).Property(p => p.CreationDate).IsModified = false;
+
+            Save();
         }
 
         public virtual void Delete(TEntity obj)
         {
             Context.Entry(obj).State = EntityState.Deleted;
+            Save();
         }
 
-        public virtual void Delete(Func<TEntity, bool> predicate)
+        public virtual void Delete(Expression<Func<TEntity, bool>> predicate)
         {
             Context.Set<TEntity>()
-                .Where(predicate).ToList()
+                .Where(predicate)
+                .ToList()
                 .ForEach(r => Context.Set<TEntity>().Remove(r));
+
+            Save();
         }
+
+        #endregion
+
+        #endregion
+
+        #region - AUXILIARY METHODS -
 
         public virtual int Save()
         {
@@ -109,20 +106,6 @@ namespace Project.Persistence.Core.Repositories.Base
                 throw new RecordConcurrencyException(ex.Message);
             }
         }
-
-        public virtual async Task<int> SaveAsync()
-        {
-            try
-            {
-                return await Context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                throw new RecordConcurrencyException(ex.Message);
-            }
-        }
-
-        #endregion
 
         #endregion
     }

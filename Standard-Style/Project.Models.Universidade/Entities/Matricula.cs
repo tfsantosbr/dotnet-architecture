@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Project.Models.Core.Entities.Base;
@@ -16,13 +17,13 @@ namespace Project.Models.Universidade.Entities
         ///     CURSO ID
         /// </summary>
         [Key, Column(Order = 0)]
-        public short CursoId { get; set; }
+        public Guid CursoId { get; set; }
 
         /// <summary>
         ///     ESTUDANTE ID
         /// </summary>
         [Key, Column(Order = 1)]
-        public long EstudanteId { get; set; }
+        public Guid EstudanteId { get; set; }
 
         #endregion
 

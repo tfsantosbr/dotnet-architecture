@@ -5,13 +5,13 @@ using Project.Models.Core.Entities.Base;
 
 namespace Project.Models.Core.Entities
 {
-    public class RefreshToken : IdentityEntityBase<string>
+    public class RefreshToken : EntityBase
     {
         /// <summary>
         ///     ID
         /// </summary>
         [Key, Column(Order = 0)]
-        public override string Id { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         ///     BROWSER
@@ -33,7 +33,6 @@ namespace Project.Models.Core.Entities
         [Required]
         [MaxLength(50)]
         public string ClientId { get; set; }
-
 
         /// <summary>
         ///     ISSUEDUTC

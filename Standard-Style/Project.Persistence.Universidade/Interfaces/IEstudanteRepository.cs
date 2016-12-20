@@ -7,7 +7,7 @@ namespace Project.Persistence.Universidade.Interfaces
     ///     ESTUDANTE REPOSITORY INTERFACE
     /// </summary>
 
-    public interface IEstudanteRepository : IRepositoryRelationalBase<Estudante>, IRepositoryRelationalBaseAsync<Estudante>
+    public interface IEstudanteRepository : IRepositoryBase<Estudante>, IRepositoryBaseAsync<Estudante>
     {
     }
 }

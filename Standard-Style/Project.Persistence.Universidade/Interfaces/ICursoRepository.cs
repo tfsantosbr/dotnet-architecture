@@ -7,7 +7,7 @@ namespace Project.Persistence.Universidade.Interfaces
     ///     CURSO REPOSITORY INTERFACE
     /// </summary>
 
-    public interface ICursoRepository<TEntity> : IRepositoryRelationalBase<TEntity>, IRepositoryRelationalBaseAsync<TEntity>
+    public interface ICursoRepository<TEntity> : IRepositoryBase<TEntity>, IRepositoryBaseAsync<TEntity>
         where TEntity : IEntityBase, IRowVersion
     {
     }

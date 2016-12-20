@@ -5,7 +5,7 @@ using Project.Persistence.Core.Repositories.Base;
 
 namespace Project.Persistence.Core.Repositories
 {
-    public class ClientRepository : RepositoryRelationalBase<Client>, IClientRepository
+    public class ClientRepository : RelationalRepositoryBase<Client>, IClientRepository
     {
         public ClientRepository(DbContext context)
             : base(context)

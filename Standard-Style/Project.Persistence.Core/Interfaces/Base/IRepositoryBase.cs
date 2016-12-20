@@ -10,14 +10,16 @@ namespace Project.Persistence.Core.Interfaces.Base
     /// </summary>
     /// <typeparam name="TEntity">EntityBase Type</typeparam>
 
-    public interface IRepositoryMongoBase<TEntity>
+    public interface IRepositoryBase<TEntity>
         where TEntity : IEntityBase, IRowVersion
     {
         #region - WRITE METHODS -
 
         void Create(TEntity obj);
 
-        void Update(Expression<Func<TEntity, bool>> predicate, TEntity obj);
+        void Update(TEntity obj);
+
+        void Delete(TEntity obj);
 
         void Delete(Expression<Func<TEntity, bool>> predicate);
 
@@ -27,7 +29,7 @@ namespace Project.Persistence.Core.Interfaces.Base
 
         IQueryable<TEntity> Query();
 
-        IQueryable<TEntity> Query(Func<TEntity, bool> predicate);
+        IQueryable<TEntity> Query(Expression<Func<TEntity, bool>> predicate);
 
         TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate);
 

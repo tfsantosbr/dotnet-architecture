@@ -1,13 +1,13 @@
-﻿using Project.Domain.Core.Interfaces.Base;
-using Project.Models.Core.Entities.Base;
-using Project.Models.Core.Exceptions;
-using Project.Persistence.Core.Interfaces.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using Project.Domain.Core.Interfaces.Base;
+using Project.Models.Core.Entities.Base;
+using Project.Models.Core.Exceptions;
+using Project.Persistence.Core.Interfaces.Base;
 
 namespace Project.Domain.Core.Domains.Base
 {
@@ -19,7 +19,7 @@ namespace Project.Domain.Core.Domains.Base
 
     public abstract class DomainBase<TEntity, TRepository> : IDomainBase<TEntity>, IDomainBaseAsync<TEntity>
         where TEntity : EntityBase
-        where TRepository : IRepositoryRelationalBase<TEntity>, IRepositoryRelationalBaseAsync<TEntity>
+        where TRepository : IRepositoryBase<TEntity>, IRepositoryBaseAsync<TEntity>
     {
         #region - PROPERTIES -
 
@@ -357,31 +357,6 @@ namespace Project.Domain.Core.Domains.Base
         #endregion
 
         #endregion
-
-        //#region - AUXILIARY METHODS -
-
-        //#region - DISPOSE -
-
-        //~DomainBase()
-        //{
-        //    Dispose(false);
-        //}
-
-        //public virtual void Dispose()
-        //{
-        //    Dispose(true);
-        //    GC.SuppressFinalize(this);
-        //}
-
-        //protected virtual void Dispose(bool disposing)
-        //{
-        //    if (!disposing) return;
-        //    //Repository?.Dispose();
-        //}
-
-        //#endregion
-
-        //#endregion
     }
 
     /// <summary>

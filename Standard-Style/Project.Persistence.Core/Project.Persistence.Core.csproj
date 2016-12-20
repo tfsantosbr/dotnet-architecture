@@ -67,18 +67,13 @@
   <ItemGroup>
     <Compile Include="Contexts\Base\MongoContextBase.cs" />
     <Compile Include="Contexts\CoreMongoContext.cs" />
-    <Compile Include="Interfaces\Base\Mongo\IRepositoryMongoBase.cs" />
-    <Compile Include="Interfaces\Base\Mongo\IRepositoryMongoBaseAsync.cs" />
-    <Compile Include="Interfaces\Base\Relational\IRepositoryRelationalBaseAsync.cs" />
-    <Compile Include="Interfaces\Base\Relational\IRepositoryRelationalBase.cs" />
-    <Compile Include="Interfaces\Mongo\IClientMongoRepository.cs" />
-    <Compile Include="Interfaces\Mongo\IRefreshTokenMongoRepository.cs" />
-    <Compile Include="Interfaces\Mongo\IUsuarioMongoRepository.cs" />
-    <Compile Include="Interfaces\Relational\IClientRepository.cs" />
-    <Compile Include="Interfaces\Relational\IRefreshTokenRepository.cs" />
-    <Compile Include="Interfaces\Relational\IUsuarioRepository.cs" />
-    <Compile Include="Repositories\Base\RepositoryRelationalBase.cs" />
-    <Compile Include="Repositories\Base\RepositoryMongoBase.cs" />
+    <Compile Include="Interfaces\Base\IRepositoryBaseAsync.cs" />
+    <Compile Include="Interfaces\Base\IRepositoryBase.cs" />
+    <Compile Include="Interfaces\IClientRepository.cs" />
+    <Compile Include="Interfaces\IRefreshTokenRepository.cs" />
+    <Compile Include="Interfaces\IUsuarioRepository.cs" />
+    <Compile Include="Repositories\Base\RelationalRepositoryBase.cs" />
+    <Compile Include="Repositories\Base\MongoRepositoryBase.cs" />
     <Compile Include="Repositories\Mongo\UsuarioMongoRepository.cs" />
     <Compile Include="Repositories\Mongo\RefreshTokenMongoRepository.cs" />
     <Compile Include="Repositories\Mongo\ClientMongoRepository.cs" />

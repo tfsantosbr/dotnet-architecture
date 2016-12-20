@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Project.Models.Core.Entities.Base;
 
@@ -24,19 +25,19 @@ namespace Project.Models.Universidade.Entities
         ///     ID
         /// </summary>
         [Key, Column(Order = 0)]
-        public long Id { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         ///     CURSO ID
         /// </summary>
         [Key, Column(Order = 1)]
-        public short CursoId { get; set; }
+        public Guid CursoId { get; set; }
 
         /// <summary>
         ///     ESTUDANTE ID
         /// </summary>
         [Key, Column(Order = 2)]
-        public long EstudanteId { get; set; }
+        public Guid EstudanteId { get; set; }
 
         /// <summary>
         ///     VALOR

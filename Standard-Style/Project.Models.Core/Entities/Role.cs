@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System;
+using Microsoft.AspNet.Identity;
 using Project.Models.Core.Entities.Base;
 
 namespace Project.Models.Core.Entities
 {
-    public class Role : IdentityEntityBase<int>, IRole<int>
+    public class Role : IdentityEntityBase<Guid>, IRole<Guid>
     {
         #region - PROPERTIES -
 
@@ -23,7 +24,7 @@ namespace Project.Models.Core.Entities
             Name = name;
         }
 
-        public Role(int id, string name)
+        public Role(Guid id, string name)
         {
             Name = name;
             Id = id;

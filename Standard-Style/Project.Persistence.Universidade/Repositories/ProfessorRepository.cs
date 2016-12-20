@@ -9,7 +9,7 @@ namespace Project.Persistence.Universidade.Repositories
     ///     PROFESSOR REPOSITORY
     /// </summary>
 
-    public class ProfessorRepository : RepositoryRelationalBase<Professor>, IProfessorRepository<Professor>
+    public class ProfessorRepository : RelationalRepositoryBase<Professor>, IProfessorRepository<Professor>
     {
         public ProfessorRepository(DbContext context)
             : base(context)
