@@ -39,10 +39,9 @@ namespace Project.Domain.Core.Domains
 
         #region - MAIN METHODS -
 
-        public override async Task<bool> CreateAsync(Usuario user)
+        public override async Task CreateAsync(Usuario user)
         {
-            var result = await _userManager.CreateAsync(user);
-            return result.Succeeded;
+            await _userManager.CreateAsync(user);
         }
 
         public async Task<IdentityResult> CreateAsync(Usuario user, string password)

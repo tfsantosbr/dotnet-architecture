@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Project.Models.Core.Entities.Base;
 using Project.Models.Core.Exceptions;
 using Project.Persistence.Core.Interfaces.Base;
@@ -36,6 +37,8 @@ namespace Project.Persistence.Core.Repositories.Base
 
         #region - READ METHODS -
 
+        #region - SYNC -
+
         public virtual IQueryable<TEntity> Query()
         {
             return Context.Set<TEntity>();
@@ -53,41 +56,65 @@ namespace Project.Persistence.Core.Repositories.Base
 
         #endregion
 
+        #endregion
+
         #region - WRITE METHODS -
+
+        #region - SYNC -
 
         public new virtual void Create(TEntity obj)
         {
-            base.Create(obj);
-
-            Context.Set<TEntity>().Add(obj);
+            CreateBase(obj);
             Save();
         }
 
         public new virtual void Update(TEntity obj)
         {
-            base.Update(obj);
-
-            Context.Entry(obj).State = EntityState.Modified;
-            Context.Entry(obj).Property(p => p.CreationDate).IsModified = false;
-
+            UpdateBase(obj);
             Save();
         }
 
         public virtual void Delete(TEntity obj)
         {
-            Context.Entry(obj).State = EntityState.Deleted;
+            DeleteBase(obj);
             Save();
         }
 
         public virtual void Delete(Expression<Func<TEntity, bool>> predicate)
         {
-            Context.Set<TEntity>()
-                .Where(predicate)
-                .ToList()
-                .ForEach(r => Context.Set<TEntity>().Remove(r));
-
+            DeleteBase(predicate);
             Save();
         }
+
+        #endregion
+
+        #region - ASYNC -
+
+        public virtual async Task CreateAsync(TEntity obj)
+        {
+            CreateBase(obj);
+            await SaveAsync();
+        }
+
+        public virtual async Task UpdateAsync(TEntity obj)
+        {
+            UpdateBase(obj);
+            await SaveAsync();
+        }
+
+        public virtual async Task DeleteAsync(TEntity obj)
+        {
+            DeleteBase(obj);
+            await SaveAsync();
+        }
+
+        public virtual async Task DeleteAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            DeleteBase(predicate);
+            await SaveAsync();
+        }
+
+        #endregion
 
         #endregion
 
@@ -95,7 +122,40 @@ namespace Project.Persistence.Core.Repositories.Base
 
         #region - AUXILIARY METHODS -
 
-        public virtual int Save()
+        #region - BASE CRUD METHODS -
+
+        private void CreateBase(TEntity obj)
+        {
+            base.Create(obj);
+            Context.Set<TEntity>().Add(obj);
+        }
+
+        private void UpdateBase(TEntity obj)
+        {
+            base.Update(obj);
+
+            Context.Entry(obj).State = EntityState.Modified;
+            Context.Entry(obj).Property(p => p.CreationDate).IsModified = false;
+        }
+
+        private void DeleteBase(TEntity obj)
+        {
+            Context.Entry(obj).State = EntityState.Deleted;
+        }
+
+        private void DeleteBase(Expression<Func<TEntity, bool>> predicate)
+        {
+            Context.Set<TEntity>()
+                .Where(predicate)
+                .ToList()
+                .ForEach(r => Context.Set<TEntity>().Remove(r));
+        }
+
+        #endregion
+
+        #region - SAVE METHODS -
+
+        private int Save()
         {
             try
             {
@@ -106,6 +166,20 @@ namespace Project.Persistence.Core.Repositories.Base
                 throw new RecordConcurrencyException(ex.Message);
             }
         }
+
+        private async Task<int> SaveAsync()
+        {
+            try
+            {
+                return await Context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                throw new RecordConcurrencyException(ex.Message);
+            }
+        }
+
+        #endregion
 
         #endregion
     }

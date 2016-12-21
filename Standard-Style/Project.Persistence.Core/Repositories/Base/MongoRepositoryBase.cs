@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using MongoDB.Driver;
 using Project.Models.Core.Entities.Base;
 using Project.Persistence.Core.Contexts.Base;
@@ -30,6 +31,8 @@ namespace Project.Persistence.Core.Repositories.Base
 
         #region - READ METHODS -
 
+        #region - SYNC -
+
         public virtual IQueryable<TEntity> Query()
         {
             return Context.GetCollection<TEntity>().AsQueryable();
@@ -47,7 +50,11 @@ namespace Project.Persistence.Core.Repositories.Base
 
         #endregion
 
+        #endregion
+
         #region - WRITE METHODS -
+
+        #region - SYNC -
 
         public new virtual void Create(TEntity obj)
         {
@@ -70,6 +77,34 @@ namespace Project.Persistence.Core.Repositories.Base
         {
             Context.GetCollection<TEntity>().DeleteMany(predicate);
         }
+
+        #endregion
+
+        #region - ASYNC -
+
+        public virtual async Task CreateAsync(TEntity obj)
+        {
+            base.Create(obj);
+            await Context.GetCollection<TEntity>().InsertOneAsync(obj);
+        }
+
+        public virtual async Task UpdateAsync(TEntity obj)
+        {
+            base.Update(obj);
+            await Context.GetCollection<TEntity>().ReplaceOneAsync(r => r.Equals(obj), obj);
+        }
+
+        public virtual async Task DeleteAsync(TEntity obj)
+        {
+            await Context.GetCollection<TEntity>().DeleteOneAsync(r => r.Equals(obj));
+        }
+
+        public virtual async Task DeleteAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            await Context.GetCollection<TEntity>().DeleteManyAsync(predicate);
+        }
+
+        #endregion
 
         #endregion
 

@@ -1,12 +1,12 @@
-﻿using Project.API.Base.Filters;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Web.Http;
+using Project.API.Base.Filters;
 using Project.API.Base.MapperAdapters;
 using Project.API.Base.Models;
 using Project.Domain.Core.Interfaces.Base;
 using Project.Models.Core.Entities.Base;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Web.Http;
 
 namespace Project.API.Base.Controllers
 {
@@ -25,7 +25,7 @@ namespace Project.API.Base.Controllers
     public class GenericBaseApiControllerAsync
         <TKey, TDomain, TEntity, TModel, TGetModel, TListItemModel, TPostModel, TPutModel> :
             BaseApiController<TDomain, TEntity, TKey>, IGenericBaseApiControllerAsync<TKey, TPostModel, TPutModel>
-        where TKey : struct, IComparable
+        where TKey : IFormattable, IComparable
         where TDomain : IDomainBase<TEntity>, IDomainBaseAsync<TEntity>
         where TEntity : IdentityEntityBase<TKey>
         where TModel : IIdentityModelBase<TKey>
@@ -57,7 +57,7 @@ namespace Project.API.Base.Controllers
         [NullParametersFilter]
         public virtual async Task<IHttpActionResult> Get(TKey id)
         {
-            var domainModel = await Domain.ReadAsync(id);
+            var domainModel = await Domain.ReadAsync(x => x.Id.Equals(id));
 
             if (domainModel == null)
                 return NotFound();
@@ -79,7 +79,7 @@ namespace Project.API.Base.Controllers
         }
 
         [NullParametersFilter, ModelStateFilter]
-        public virtual async Task<IHttpActionResult> Put(TKey? id, [FromBody] TPutModel viewModel)
+        public virtual async Task<IHttpActionResult> Put(TKey id, [FromBody] TPutModel viewModel)
         {
             var domailModel = MapperAdapter.Adapt<TPutModel, TEntity>(viewModel);
 
@@ -90,7 +90,7 @@ namespace Project.API.Base.Controllers
         }
 
         [NullParametersFilter]
-        public virtual async Task<IHttpActionResult> Delete(TKey? id)
+        public virtual async Task<IHttpActionResult> Delete(TKey id)
         {
             var domainModel = Activator.CreateInstance<TEntity>();
 

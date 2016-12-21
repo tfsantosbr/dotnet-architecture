@@ -73,6 +73,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "10 - Solution Itens", "10 -
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A26DF8CD-663B-4ECC-9722-F448458B18CE}"
+	ProjectSection(SolutionItems) = preProject
+		CHANGELOG.md = CHANGELOG.md
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Persistence.Publicacoes.Tests", "Project.Persistence.Publicacoes.Tests\Project.Persistence.Publicacoes.Tests.csproj", "{3CA2C1DC-4FBC-4E70-88D5-1B0A3830284D}"
 EndProject

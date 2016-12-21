@@ -47,7 +47,7 @@ namespace Project.Domain.Core.Domains
 
         public Task<Usuario> FindByIdAsync(Guid id)
         {
-            var usuario = Read(id);
+            var usuario = Read(x => x.Id == id);
 
             if (usuario == null)
                 throw new BusinessException(IDENTITY_MESSAGES.INVALID_USER);

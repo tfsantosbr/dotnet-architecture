@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Project.Models.Core.Entities.Base;
 
 namespace Project.Domain.Core.Interfaces.Base
@@ -12,25 +13,23 @@ namespace Project.Domain.Core.Interfaces.Base
     public interface IDomainBase<TEntity>
         where TEntity : IEntityBase, IRowVersion
     {
-        bool Create(TEntity obj);
-        bool Create(IEnumerable<TEntity> objectList);
+        void Create(TEntity obj);
+        void Create(IEnumerable<TEntity> objectList);
 
-        bool Update(TEntity obj);
-        bool Update(IEnumerable<TEntity> objectList);
+        void Update(TEntity obj);
+        void Update(IEnumerable<TEntity> objectList);
 
-        bool Delete(TEntity obj);
-        bool Delete(IEnumerable<TEntity> objectList);
-        bool Delete(Func<TEntity, bool> predicate);
+        void Delete(TEntity obj);
+        void Delete(IEnumerable<TEntity> objectList);
+        void Delete(Expression<Func<TEntity, bool>> predicate);
 
-        bool Active(params object[] key);
-        bool Active(Func<TEntity, bool> predicate);
+        void Active(Expression<Func<TEntity, bool>> predicate);
 
-        bool Inactive(params object[] key);
-        bool Inactive(Func<TEntity, bool> predicate);
+        void Inactive(Expression<Func<TEntity, bool>> predicate);
 
-        TEntity Read(params object[] key);
+        TEntity Read(Expression<Func<TEntity, bool>> predicate);
 
         IEnumerable<TEntity> List();
-        IEnumerable<TEntity> List(Func<TEntity, bool> predicate);
+        IEnumerable<TEntity> List(Expression<Func<TEntity, bool>> predicate);
     }
 }

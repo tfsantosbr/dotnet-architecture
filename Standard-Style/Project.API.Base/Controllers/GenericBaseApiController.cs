@@ -1,11 +1,11 @@
-﻿using Project.API.Base.Filters;
+﻿using System;
+using System.Collections.Generic;
+using System.Web.Http;
+using Project.API.Base.Filters;
 using Project.API.Base.MapperAdapters;
 using Project.API.Base.Models;
 using Project.Domain.Core.Interfaces.Base;
 using Project.Models.Core.Entities.Base;
-using System;
-using System.Collections.Generic;
-using System.Web.Http;
 
 namespace Project.API.Base.Controllers
 {
@@ -53,7 +53,7 @@ namespace Project.API.Base.Controllers
         [NullParametersFilter]
         public virtual IHttpActionResult Get(TKey id)
         {
-            var domainModel = Domain.Read(id);
+            var domainModel = Domain.Read(x => x.Id.Equals(id));
 
             if (domainModel == null)
                 return NotFound();

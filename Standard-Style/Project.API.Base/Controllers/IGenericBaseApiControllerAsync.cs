@@ -12,7 +12,7 @@ namespace Project.API.Base.Controllers
     /// <typeparam name="TPutModel">Put View Model</typeparam>
 
     public interface IGenericBaseApiControllerAsync<TKey, TPostModel, TPutModel>
-        where TKey : struct, IComparable
+        where TKey : IFormattable, IComparable
     {
         IHttpActionResult Get();
 
@@ -20,8 +20,8 @@ namespace Project.API.Base.Controllers
 
         Task<IHttpActionResult> Post([FromBody] TPostModel viewModel);
 
-        Task<IHttpActionResult> Put(TKey? id, [FromBody] TPutModel viewModel);
+        Task<IHttpActionResult> Put(TKey id, [FromBody] TPutModel viewModel);
 
-        Task<IHttpActionResult> Delete(TKey? id);
+        Task<IHttpActionResult> Delete(TKey id);
     }
 }
