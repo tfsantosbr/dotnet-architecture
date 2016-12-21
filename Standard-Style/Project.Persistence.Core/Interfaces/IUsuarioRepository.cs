@@ -15,8 +15,8 @@ namespace Project.Persistence.Core.Interfaces
         #endregion
 
         #region - Claims -
-        void AdicionarClaims(Claim claim, TKey idUsuario);
-        IList<Claim> RetornarClaimsUsuario(TKey idUsuario);
+        Task AddClaimAsync(Claim claim, TKey idUsuario);
+        IList<Claim> GetClaimsUsuario(TKey idUsuario);
         Task RemoveClaimAsync(TKey idUsuario, Claim claim);
         #endregion
     }

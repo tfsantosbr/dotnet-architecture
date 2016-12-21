@@ -20,7 +20,7 @@ namespace Project.Models.Publicacoes.Entities
         [Required]
         public Guid IdAutor { get; set; }
 
-        public Guid IdAuditor { get; set; }
+        public Guid? IdAuditor { get; set; }
 
         [Required]
         public ConteudoStatus Status { get; set; }

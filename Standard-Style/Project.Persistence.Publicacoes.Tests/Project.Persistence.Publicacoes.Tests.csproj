@@ -79,9 +79,14 @@
   <ItemGroup>
     <Compile Include="ContextsTests\PublicacoesMongoContextTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoriesTests\ConteudoMongoRepositoryTests.cs" />
     <Compile Include="RepositoriesTests\ConteudoRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Project.Models.Core\Project.Models.Core.csproj">
+      <Project>{056e585a-1407-4463-9248-01dd179f2b9d}</Project>
+      <Name>Project.Models.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Project.Models.Publicacoes\Project.Models.Publicacoes.csproj">
       <Project>{D382A72D-1237-4B20-97A6-1B725FF4D492}</Project>
       <Name>Project.Models.Publicacoes</Name>

@@ -1,30 +1,30 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 using Project.Domain.Core.Domains.Base;
 using Project.Domain.Core.Interfaces;
 using Project.Models.Core.Entities;
 using Project.Models.Core.Exceptions;
 using Project.Persistence.Core.Interfaces;
 using Project.Resources.Core.Messages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace Project.Domain.Core.Domains
 {
-    public class UsuarioDomain : DomainBase<Usuario, IUsuarioRepository>,
+    public class UsuarioDomain : DomainBase<Usuario, IUsuarioRepository<Guid>>,
         IUsuarioDomain,
-        IUserPasswordStore<Usuario, long>,
-        IUserSecurityStampStore<Usuario, long>,
-        IUserEmailStore<Usuario, long>,
-        IUserClaimStore<Usuario, long>,
-        IUserLoginStore<Usuario, long>,
-        IUserRoleStore<Usuario, long>
+        IUserPasswordStore<Usuario, Guid>,
+        IUserSecurityStampStore<Usuario, Guid>,
+        IUserEmailStore<Usuario, Guid>,
+        IUserClaimStore<Usuario, Guid>,
+        IUserLoginStore<Usuario, Guid>,
+        IUserRoleStore<Usuario, Guid>
     {
         #region - CONSTRUCTORS -
 
-        public UsuarioDomain(IUsuarioRepository repository)
+        public UsuarioDomain(IUsuarioRepository<Guid> repository)
             : base(repository)
         {
         }
@@ -45,7 +45,7 @@ namespace Project.Domain.Core.Domains
             await base.DeleteAsync(usuario);
         }
 
-        public Task<Usuario> FindByIdAsync(long id)
+        public Task<Usuario> FindByIdAsync(Guid id)
         {
             var usuario = Read(id);
 
@@ -152,7 +152,7 @@ namespace Project.Domain.Core.Domains
 
         public Task<IList<Claim>> GetClaimsAsync(Usuario usuario)
         {
-            return Task.FromResult(Repository.RetornarClaimsUsuario(usuario.Id));
+            return Task.FromResult(Repository.GetClaimsUsuario(usuario.Id));
         }
 
         public async Task RemoveClaimAsync(Usuario usuario, Claim claim)
@@ -162,8 +162,7 @@ namespace Project.Domain.Core.Domains
 
         public async Task AddClaimAsync(Usuario usuario, Claim claim)
         {
-            Repository.AdicionarClaims(claim, usuario.Id);
-            await Repository.SaveAsync();
+            await Repository.AddClaimAsync(claim, usuario.Id);
         }
 
         #endregion

@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security.DataProtection;
 using Project.Configurations;
@@ -10,28 +15,24 @@ using Project.Models.Core.Exceptions;
 using Project.Persistence.Core.Interfaces;
 using Project.Resources.Core.Messages;
 using Project.Resources.Core.Templates;
-using System.Collections.Generic;
-using System.Net;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace Project.Domain.Core.Domains
 {
-    public class AccountDomain : DomainBase<Usuario, IUsuarioRepository>, IAccountDomain
+    public class AccountDomain : DomainBase<Usuario, IUsuarioRepository<Guid>>, IAccountDomain<Guid>
     {
         #region - PROPERTIES -
-        private readonly UserManager<Usuario, long> _userManager;
+        private readonly UserManager<Usuario, Guid> _userManager;
         #endregion
 
         #region - CONSTRUCTORS -
 
-        public AccountDomain(UserManager<Usuario, long> userManager, IUsuarioRepository repository)
+        public AccountDomain(UserManager<Usuario, Guid> userManager, IUsuarioRepository<Guid> repository)
             : base(repository)
         {
             _userManager = userManager;
 
-            var provider = new DpapiDataProtectionProvider("YourAppName");
-            _userManager.UserTokenProvider = new DataProtectorTokenProvider<Usuario, long>(provider.Create("EmailConfirmation"));
+            var provider = new DpapiDataProtectionProvider(GlobalSettings.APPLICATION_NAME);
+            _userManager.UserTokenProvider = new DataProtectorTokenProvider<Usuario, Guid>(provider.Create("EmailConfirmation"));
         }
 
         #endregion
@@ -55,7 +56,7 @@ namespace Project.Domain.Core.Domains
 
         }
 
-        public async Task<IdentityResult> ResetPasswordAsync(long userId, string token, string newPassword)
+        public async Task<IdentityResult> ResetPasswordAsync(Guid userId, string token, string newPassword)
         {
             return await _userManager.ResetPasswordAsync(userId, token, newPassword);
         }
@@ -70,7 +71,7 @@ namespace Project.Domain.Core.Domains
             return await _userManager.GetClaimsAsync(usuario.Id);
         }
 
-        public async Task<IdentityResult> ConfirmEmailAsync(long userId, string token)
+        public async Task<IdentityResult> ConfirmEmailAsync(Guid userId, string token)
         {
             return await _userManager.ConfirmEmailAsync(userId, token);
         }
@@ -130,7 +131,7 @@ namespace Project.Domain.Core.Domains
             await emailService.SendAsync(emailMessage);
         }
 
-        public async Task EnviarNotificacaoAtivacaoConta(long id)
+        public async Task EnviarNotificacaoAtivacaoConta(Guid id)
         {
             var usuario = await _userManager.FindByIdAsync(id);
 
@@ -154,7 +155,7 @@ namespace Project.Domain.Core.Domains
             await emailService.SendAsync(emailMessage);
         }
 
-        public async Task EnviarNotificacaoRedefinicaoSenha(long id)
+        public async Task EnviarNotificacaoRedefinicaoSenha(Guid id)
         {
             var usuario = await _userManager.FindByIdAsync(id);
 
@@ -186,30 +187,5 @@ namespace Project.Domain.Core.Domains
         }
 
         #endregion
-
-        //#region - AUXILIARY METHODS -
-
-        //#region - DISPOSE -
-
-        //~AccountDomain()
-        //{
-        //    Dispose(false);
-        //}
-
-        //public override void Dispose()
-        //{
-        //    Dispose(true);
-        //    GC.SuppressFinalize(this);
-        //}
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (!disposing) return;
-        //    _userManager?.Dispose();
-        //}
-
-        //#endregion
-
-        //#endregion
     }
 }

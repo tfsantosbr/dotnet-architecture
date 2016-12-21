@@ -29,7 +29,7 @@ namespace Project.Persistence.Core.Repositories
 
         #region - Claims -
 
-        public void AdicionarClaims(Claim claim, Guid idUsuario)
+        public async Task AddClaimAsync(Claim claim, Guid idUsuario)
         {
             var objeto = new UsuarioClaim
             {
@@ -40,10 +40,10 @@ namespace Project.Persistence.Core.Repositories
                 ModificationDate = DateTime.Now
             };
 
-            Context.GetCollection<UsuarioClaim>().InsertOne(objeto);
+            await Context.GetCollection<UsuarioClaim>().InsertOneAsync(objeto);
         }
 
-        public IList<Claim> RetornarClaimsUsuario(Guid idUsuario)
+        public IList<Claim> GetClaimsUsuario(Guid idUsuario)
         {
             List<Claim> claimsList = null;
 
@@ -65,8 +65,10 @@ namespace Project.Persistence.Core.Repositories
                 .Find(r => r.IdUsuario == idUsuario && r.Tipo == claim.Type && r.Valor == claim.Value)
                 .ToListAsync();
 
-            resultado
-                .ForEach(r => Context.GetCollection<UsuarioClaim>().FindOneAndDelete(x => x.Id == r.Id));
+            foreach (var item in resultado)
+            {
+                await Context.GetCollection<UsuarioClaim>().FindOneAndDeleteAsync(x => x.Id == item.Id);
+            }
         }
 
         #endregion

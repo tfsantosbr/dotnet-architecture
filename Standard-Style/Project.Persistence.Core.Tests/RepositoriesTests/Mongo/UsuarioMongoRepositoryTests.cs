@@ -17,7 +17,7 @@ namespace Project.Persistence.Publicacoes.Tests.RepositoriesTests
 
             rep.Create(new Usuario
             {
-                Id = Guid.NewGuid(),
+                Id = new Guid("3038d24c-1bde-4f31-8777-bcbce4865af1"),
                 CreationDate = DateTime.Now,
                 Email = "teste1@gmail.com",
                 EmailConfirmed = true,

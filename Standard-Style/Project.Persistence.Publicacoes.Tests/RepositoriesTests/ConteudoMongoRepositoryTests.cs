@@ -8,12 +8,12 @@ using Project.Persistence.Publicacoes.Repositories;
 namespace Project.Persistence.Publicacoes.Tests.RepositoriesTests
 {
     [TestClass]
-    public class ConteudoRepositoryTests
+    public class ConteudoMongoRepositoryTests
     {
         [TestMethod]
-        public void ConteudoRepositoryTests_Insert()
+        public void ConteudoMongoRepositoryTests_Insert()
         {
-            IConteudoRepository rep = new ConteudoRepository(new PublicacoesContext());
+            IConteudoRepository rep = new ConteudoMongoRepository(new PublicacoesMongoContext());
             var entity = new Conteudo
             {
                 Id = Guid.NewGuid(),
