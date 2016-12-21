@@ -12,7 +12,7 @@ namespace Project.API.Base.Controllers
     /// </summary>
 
     public abstract class BaseApiController<TDomain, TEntity, TKey> : ApiController
-        where TKey : IFormattable, IComparable
+        where TKey : IComparable
         where TEntity : IdentityEntityBase<TKey>
         where TDomain : IDomainBase<TEntity>, IDomainBaseAsync<TEntity>
     {

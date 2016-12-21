@@ -12,7 +12,7 @@ namespace Project.API.Base.Controllers
     /// <typeparam name="TPutModel">Put View Model</typeparam>
 
     public interface IGenericBaseApiControllerAsync<TKey, TPostModel, TPutModel>
-        where TKey : IFormattable, IComparable
+        where TKey : IComparable
     {
         IHttpActionResult Get();
 

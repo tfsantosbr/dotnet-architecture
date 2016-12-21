@@ -3,7 +3,7 @@
 namespace Project.API.Base.Models
 {
     public interface IIdentityModelBase<TKey>
-        where TKey : IFormattable, IComparable
+        where TKey : IComparable
     {
         TKey Id { get; set; }
     }

@@ -3,11 +3,11 @@
 namespace Project.API.Base.Models
 {
     public class IdentityModelBase<TKey> : IIdentityModelBase<TKey>
-        where TKey : struct, IComparable
+        where TKey : IComparable
     {
         /// <summary>
         ///     ID
         /// </summary>
-        public TKey? Id { get; set; }
+        public TKey Id { get; set; }
     }
 }

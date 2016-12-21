@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace Project.Models.Core.Entities.Base
 {
     public class IdentityEntityBase<TKey> : EntityBase, IIdentityEntityBase<TKey>
-        where TKey : IFormattable, IComparable
+        where TKey : IComparable
     {
         /// <summary>
         ///     ID
