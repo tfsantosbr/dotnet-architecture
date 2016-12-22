@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Project.Domain.Core.Domains.Base;
 using Project.Domain.Core.Interfaces;
@@ -35,12 +34,12 @@ namespace Project.Domain.Core.Domains
             await Repository.CreateAsync(token);
         }
 
-        public async Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(string id)
         {
             return await DeleteAsync(id, null);
         }
 
-        public async Task<bool> DeleteAsync(Guid id, string browser)
+        public async Task<bool> DeleteAsync(string id, string browser)
         {
             var refreshToken = await ReadAsync(r => r.Id == id && r.Browser == browser);
 

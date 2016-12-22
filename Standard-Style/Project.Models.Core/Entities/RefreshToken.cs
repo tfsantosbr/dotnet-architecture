@@ -11,7 +11,7 @@ namespace Project.Models.Core.Entities
         ///     ID
         /// </summary>
         [Key, Column(Order = 0)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         ///     BROWSER

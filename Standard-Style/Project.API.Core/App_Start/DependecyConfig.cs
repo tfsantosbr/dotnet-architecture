@@ -1,4 +1,7 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Data.Entity;
+using System.Web.Http;
+using AutoMapper;
 using Microsoft.AspNet.Identity;
 using Owin;
 using Project.API.Base.MapperAdapters;
@@ -13,8 +16,6 @@ using Project.Persistence.Core.Repositories;
 using SimpleInjector;
 using SimpleInjector.Extensions.ExecutionContextScoping;
 using SimpleInjector.Integration.WebApi;
-using System.Data.Entity;
-using System.Web.Http;
 
 namespace Project.API.Core
 {
@@ -59,18 +60,18 @@ namespace Project.API.Core
             #region - REPOSITORIES -
             container.Register<IClientRepository, ClientRepository>(Lifestyle.Scoped);
             container.Register<IRefreshTokenRepository, RefreshTokenRepository>(Lifestyle.Scoped);
-            container.Register<IUsuarioRepository, UsuarioRepository>(Lifestyle.Scoped);
+            container.Register<IUsuarioRepository<Guid>, UsuarioRepository>(Lifestyle.Scoped);
             #endregion
 
             #region - DOMAINS -
             var registration = Lifestyle.Scoped.CreateRegistration<UsuarioDomain>(container);
             container.AddRegistration(typeof(IUsuarioDomain), registration);
-            container.AddRegistration(typeof(IUserStore<Usuario, long>), registration);
+            container.AddRegistration(typeof(IUserStore<Usuario, Guid>), registration);
 
-            container.Register<UserManager<Usuario, long>>(Lifestyle.Scoped);
+            container.Register<UserManager<Usuario, Guid>>(Lifestyle.Scoped);
             container.Register<IRefreshTokenDomain, RefreshTokenDomain>(Lifestyle.Scoped);
             container.Register<IClientDomain, ClientDomain>(Lifestyle.Scoped);
-            container.Register<IAccountDomain, AccountDomain>(Lifestyle.Scoped);
+            container.Register<IAccountDomain<Guid>, AccountDomain>(Lifestyle.Scoped);
             #endregion
         }
     }
