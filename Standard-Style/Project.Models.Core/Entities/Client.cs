@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Project.Models.Core.Entities.Base;
 
 namespace Project.Models.Core.Entities
@@ -6,8 +8,16 @@ namespace Project.Models.Core.Entities
     /// <summary>
     ///     CLIENT
     /// </summary>
-    public class Client : IdentityEntityBase<string>
+    public class Client : EntityBase
     {
+        /// <summary>
+        ///     CODE
+        /// </summary>
+        [Required]
+        [Index(IsUnique = true)]
+        [MaxLength(50)]
+        public String Id { get; set; }
+
         /// <summary>
         ///     SECRET
         /// </summary>

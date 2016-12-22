@@ -8,21 +8,21 @@ using Project.Models.Core.Entities;
 
 namespace Project.Domain.Core.Interfaces
 {
-    public interface IAccountDomain<Tkey> : IDomainBase<Usuario>, IDomainBaseAsync<Usuario>
-        where Tkey : IComparable
+    public interface IAccountDomain<TKey> : IDomainBase<Usuario>, IDomainBaseAsync<Usuario>
+        where TKey : struct, IComparable
     {
         Task<IdentityResult> CreateAsync(Usuario user, string password);
         Task<Usuario> FindAsync(string userName, string password);
 
-        Task<IdentityResult> ResetPasswordAsync(Tkey userId, string token, string newPassword);
+        Task<IdentityResult> ResetPasswordAsync(TKey userId, string token, string newPassword);
 
         Task<IEnumerable<Claim>> GetClaimsByUsernameAsync(string userName);
 
-        Task<IdentityResult> ConfirmEmailAsync(Tkey userId, string token);
+        Task<IdentityResult> ConfirmEmailAsync(TKey userId, string token);
 
         Task EnviarSolicitacaoRedefinicaoSenha(string email);
         Task EnviarSolicitacaoAtivacaoConta(Usuario usuario);
-        Task EnviarNotificacaoAtivacaoConta(Tkey id);
-        Task EnviarNotificacaoRedefinicaoSenha(Tkey id);
+        Task EnviarNotificacaoAtivacaoConta(TKey id);
+        Task EnviarNotificacaoRedefinicaoSenha(TKey id);
     }
 }

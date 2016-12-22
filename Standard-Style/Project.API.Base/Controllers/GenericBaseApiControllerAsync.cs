@@ -25,7 +25,7 @@ namespace Project.API.Base.Controllers
     public class GenericBaseApiControllerAsync
         <TKey, TDomain, TEntity, TModel, TGetModel, TListItemModel, TPostModel, TPutModel> :
             BaseApiController<TDomain, TEntity, TKey>, IGenericBaseApiControllerAsync<TKey, TPostModel, TPutModel>
-        where TKey : IComparable
+        where TKey : struct, IComparable
         where TDomain : IDomainBase<TEntity>, IDomainBaseAsync<TEntity>
         where TEntity : IdentityEntityBase<TKey>
         where TModel : IIdentityModelBase<TKey>
@@ -57,7 +57,7 @@ namespace Project.API.Base.Controllers
         [NullParametersFilter]
         public virtual async Task<IHttpActionResult> Get(TKey id)
         {
-            var domainModel = await Domain.ReadAsync(x => x.Id.Equals(id));
+            var domainModel = await Domain.ReadAsync(x => (object)x.Id == (object)id);
 
             if (domainModel == null)
                 return NotFound();
@@ -83,7 +83,7 @@ namespace Project.API.Base.Controllers
         {
             var domailModel = MapperAdapter.Adapt<TPutModel, TEntity>(viewModel);
 
-            domailModel.Id = id.Value;
+            domailModel.Id = id;
             await Domain.UpdateAsync(domailModel);
 
             return Ok();
@@ -94,7 +94,7 @@ namespace Project.API.Base.Controllers
         {
             var domainModel = Activator.CreateInstance<TEntity>();
 
-            domainModel.Id = id.Value;
+            domainModel.Id = id;
             await Domain.DeleteAsync(domainModel);
 
             return Ok();
