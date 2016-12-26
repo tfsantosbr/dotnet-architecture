@@ -1,4 +1,5 @@
-﻿using Project.Domain.Core.Domains.Base;
+﻿using System;
+using Project.Domain.Core.Domains.Base;
 using Project.Domain.Universidade.Interfaces;
 using Project.Models.Universidade.Entities;
 using Project.Persistence.Universidade.Interfaces;
@@ -9,7 +10,7 @@ namespace Project.Domain.Universidade.Domains
     ///     PROFESSOR DOMAIN
     /// </summary>
 
-    public class ProfessorDomain : DomainBase<Professor, IProfessorRepository<Professor>>, IProfessorDomain<Professor>
+    public class ProfessorDomain : DomainBase<Guid, Professor, IProfessorRepository<Professor>>, IProfessorDomain<Professor>
     {
         #region - CONSTRUCTORS -
 
