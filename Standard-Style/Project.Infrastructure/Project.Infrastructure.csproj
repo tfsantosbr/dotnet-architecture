@@ -50,13 +50,9 @@
   <ItemGroup>
     <Compile Include="Contexts\CustomHistoryContext.cs" />
     <Compile Include="Contexts\ResourceContext.cs" />
-    <Compile Include="Migrations\ResourceMigrations\201612201719567_Initial.cs" />
-    <Compile Include="Migrations\ResourceMigrations\201612201719567_Initial.Designer.cs">
-      <DependentUpon>201612201719567_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\ResourceMigrations\201612211256377_Conteudo_Update.cs" />
-    <Compile Include="Migrations\ResourceMigrations\201612211256377_Conteudo_Update.Designer.cs">
-      <DependentUpon>201612211256377_Conteudo_Update.cs</DependentUpon>
+    <Compile Include="Migrations\ResourceMigrations\201612220117055_Initial.cs" />
+    <Compile Include="Migrations\ResourceMigrations\201612220117055_Initial.Designer.cs">
+      <DependentUpon>201612220117055_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ResourceMigrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,11 +84,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\ResourceMigrations\201612201719567_Initial.resx">
-      <DependentUpon>201612201719567_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ResourceMigrations\201612211256377_Conteudo_Update.resx">
-      <DependentUpon>201612211256377_Conteudo_Update.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ResourceMigrations\201612220117055_Initial.resx">
+      <DependentUpon>201612220117055_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

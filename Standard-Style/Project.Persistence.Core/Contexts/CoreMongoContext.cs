@@ -13,7 +13,7 @@ namespace Project.Persistence.Core.Contexts
         {
         }
 
-        public CoreMongoContext(string connectionString)
+        protected CoreMongoContext(string connectionString)
             : base(connectionString)
         {
         }

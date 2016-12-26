@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Owin;
 using Project.API.Base.MapperAdapters;
 using Project.API.Core.Mappers;
+using Project.Configurations;
 using Project.Domain.Core.Domains;
 using Project.Domain.Core.Interfaces;
 using Project.Models.Core.Entities;
@@ -52,18 +53,33 @@ namespace Project.API.Core
             container.Register<IMapperAdapter, AutoMapperAdapter>();
             #endregion
 
-            #region - CONTEXTS -
-            container.Register<DbContext, CoreContext>(Lifestyle.Scoped);
-            container.Register<MongoContextBase, CoreMongoContext>(Lifestyle.Scoped);
-            #endregion
+            #region - PERSISTENCE -
 
-            #region - REPOSITORIES -
-            container.Register<IClientRepository, ClientRepository>(Lifestyle.Scoped);
-            container.Register<IRefreshTokenRepository, RefreshTokenRepository>(Lifestyle.Scoped);
-            container.Register<IUsuarioRepository<Guid>, UsuarioRepository>(Lifestyle.Scoped);
+            if (GlobalSettings.DATABASE == DatabaseType.SqlServer)
+            {
+                // context
+                container.Register<DbContext, CoreContext>(Lifestyle.Scoped);
+
+                // repositories
+                container.Register<IClientRepository, ClientRepository>(Lifestyle.Scoped);
+                container.Register<IRefreshTokenRepository, RefreshTokenRepository>(Lifestyle.Scoped);
+                container.Register<IUsuarioRepository<Guid>, UsuarioRepository>(Lifestyle.Scoped);
+            }
+            else if (GlobalSettings.DATABASE == DatabaseType.Mongo)
+            {
+                // context
+                container.Register<MongoContextBase, CoreMongoContext>(Lifestyle.Scoped);
+
+                // repositories
+                container.Register<IClientRepository, ClientMongoRepository>(Lifestyle.Scoped);
+                container.Register<IRefreshTokenRepository, RefreshTokenMongoRepository>(Lifestyle.Scoped);
+                container.Register<IUsuarioRepository<Guid>, UsuarioMongoRepository>(Lifestyle.Scoped);
+            }
+
             #endregion
 
             #region - DOMAINS -
+
             var registration = Lifestyle.Scoped.CreateRegistration<UsuarioDomain>(container);
             container.AddRegistration(typeof(IUsuarioDomain), registration);
             container.AddRegistration(typeof(IUserStore<Usuario, Guid>), registration);
@@ -72,6 +88,7 @@ namespace Project.API.Core
             container.Register<IRefreshTokenDomain, RefreshTokenDomain>(Lifestyle.Scoped);
             container.Register<IClientDomain, ClientDomain>(Lifestyle.Scoped);
             container.Register<IAccountDomain<Guid>, AccountDomain>(Lifestyle.Scoped);
+
             #endregion
         }
     }

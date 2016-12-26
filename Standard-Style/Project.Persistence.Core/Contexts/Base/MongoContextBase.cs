@@ -19,7 +19,7 @@ namespace Project.Persistence.Core.Contexts.Base
         {
         }
 
-        public MongoContextBase(string connectionString)
+        protected MongoContextBase(string connectionString)
         {
             var url = MongoUrl.Create(connectionString);
 
