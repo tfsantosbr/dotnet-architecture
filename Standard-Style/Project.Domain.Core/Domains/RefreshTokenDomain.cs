@@ -7,7 +7,7 @@ using Project.Persistence.Core.Interfaces;
 
 namespace Project.Domain.Core.Domains
 {
-    public class RefreshTokenDomain : DomainBase<RefreshToken, IRefreshTokenRepository>, IRefreshTokenDomain
+    public class RefreshTokenDomain : DomainBase<string, RefreshToken, IRefreshTokenRepository>, IRefreshTokenDomain
     {
         #region - CONSTRUCTORS -
 
@@ -28,7 +28,8 @@ namespace Project.Domain.Core.Domains
 
             if (existingToken != null)
             {
-                await Repository.DeleteAsync(existingToken);
+                await Repository.DeleteAsync(
+                    r => r.Subject == token.Subject && r.ClientId == token.ClientId && r.Browser == token.Browser);
             }
 
             await Repository.CreateAsync(token);
@@ -46,7 +47,7 @@ namespace Project.Domain.Core.Domains
             if (refreshToken == null)
                 return false;
 
-            await Repository.DeleteAsync(refreshToken);
+            await Repository.DeleteAsync(r => r.Id == refreshToken.Id && r.Browser == refreshToken.Browser);
 
             return true;
         }

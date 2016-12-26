@@ -17,9 +17,7 @@ namespace Project.Persistence.Core.Interfaces.Base
 
         Task CreateAsync(TEntity obj);
 
-        Task UpdateAsync(TEntity obj);
-
-        Task DeleteAsync(TEntity obj);
+        Task UpdateAsync(Expression<Func<TEntity, bool>> predicate, TEntity obj);
 
         Task DeleteAsync(Expression<Func<TEntity, bool>> predicate);
 

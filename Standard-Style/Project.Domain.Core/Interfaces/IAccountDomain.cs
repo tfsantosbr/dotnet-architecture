@@ -9,7 +9,7 @@ using Project.Models.Core.Entities;
 namespace Project.Domain.Core.Interfaces
 {
     public interface IAccountDomain<TKey> : IDomainBase<Usuario>, IDomainBaseAsync<Usuario>
-        where TKey : struct, IComparable
+        where TKey : IComparable
     {
         Task<IdentityResult> CreateAsync(Usuario user, string password);
         Task<Usuario> FindAsync(string userName, string password);

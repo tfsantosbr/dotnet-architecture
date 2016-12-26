@@ -11,16 +11,16 @@ namespace Project.Domain.Core.Interfaces.Base
     /// </summary>
     /// <typeparam name="TEntity">EntityBase Type</typeparam>
 
-    public interface IDomainBaseAsync<TEntity>
-        where TEntity : IEntityBase, IRowVersion
+    public interface IDomainBaseAsync<TKey, TEntity>
+        where TKey : IComparable
+        where TEntity : IdentityEntityBase<TKey>
     {
         Task CreateAsync(TEntity obj);
         Task CreateAsync(IEnumerable<TEntity> objectList);
 
-        Task UpdateAsync(TEntity obj);
+        Task UpdateAsync(Expression<Func<TEntity, bool>> predicate, TEntity obj);
         Task UpdateAsync(IEnumerable<TEntity> objectList);
 
-        Task DeleteAsync(TEntity obj);
         Task DeleteAsync(IEnumerable<TEntity> objectList);
         Task DeleteAsync(Expression<Func<TEntity, bool>> predicate);
 

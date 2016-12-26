@@ -13,7 +13,7 @@ using Project.Resources.Core.Messages;
 
 namespace Project.Domain.Core.Domains
 {
-    public class UsuarioDomain : DomainBase<Usuario, IUsuarioRepository<Guid>>,
+    public class UsuarioDomain : DomainBase<Guid, Usuario, IUsuarioRepository<Guid>>,
         IUsuarioDomain,
         IUserPasswordStore<Usuario, Guid>,
         IUserSecurityStampStore<Usuario, Guid>,
@@ -40,9 +40,9 @@ namespace Project.Domain.Core.Domains
             await base.CreateAsync(usuario);
         }
 
-        public new async Task DeleteAsync(Usuario usuario)
+        public async Task DeleteAsync(Usuario usuario)
         {
-            await base.DeleteAsync(usuario);
+            await base.DeleteAsync(x => x.Id == usuario.Id);
         }
 
         public Task<Usuario> FindByIdAsync(Guid id)
@@ -65,9 +65,9 @@ namespace Project.Domain.Core.Domains
             return System.Threading.Tasks.Task.FromResult(usuario);
         }
 
-        public new async Task UpdateAsync(Usuario usuario)
+        public async Task UpdateAsync(Usuario usuario)
         {
-            await base.UpdateAsync(usuario);
+            await base.UpdateAsync(x => x.Id == usuario.Id, usuario);
         }
 
         #endregion
@@ -134,7 +134,7 @@ namespace Project.Domain.Core.Domains
         public async Task SetEmailAsync(Usuario usuario, string email)
         {
             usuario.Email = email;
-            await base.UpdateAsync(usuario);
+            await base.UpdateAsync(x => x.Id == usuario.Id, usuario);
         }
 
         public async Task SetEmailConfirmedAsync(Usuario usuario, bool confirmed)
@@ -143,7 +143,7 @@ namespace Project.Domain.Core.Domains
                 throw new BusinessException(IDENTITY_MESSAGES.ALREADY_CONFIRMED_ACCOUNT);
 
             usuario.EmailConfirmed = confirmed;
-            await base.UpdateAsync(usuario);
+            await base.UpdateAsync(x => x.Id == usuario.Id, usuario);
         }
 
         #endregion

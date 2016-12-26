@@ -62,20 +62,15 @@ namespace Project.Persistence.Core.Repositories.Base
             Context.GetCollection<TEntity>().InsertOne(obj);
         }
 
-        public new virtual void Update(TEntity obj)
+        public virtual void Update(Expression<Func<TEntity, bool>> predicate, TEntity obj)
         {
             base.Update(obj);
-            Context.GetCollection<TEntity>().ReplaceOne(r => r.Equals(obj), obj);
-        }
-
-        public virtual void Delete(TEntity obj)
-        {
-            Context.GetCollection<TEntity>().DeleteOne(r => r.Equals(obj));
+            Context.GetCollection<TEntity>().ReplaceOne(predicate, obj);
         }
 
         public virtual void Delete(Expression<Func<TEntity, bool>> predicate)
         {
-            Context.GetCollection<TEntity>().DeleteMany(predicate);
+            Context.GetCollection<TEntity>().(predicate);
         }
 
         #endregion
@@ -88,15 +83,10 @@ namespace Project.Persistence.Core.Repositories.Base
             await Context.GetCollection<TEntity>().InsertOneAsync(obj);
         }
 
-        public virtual async Task UpdateAsync(TEntity obj)
+        public virtual async Task UpdateAsync(Expression<Func<TEntity, bool>> predicate, TEntity obj)
         {
             base.Update(obj);
-            await Context.GetCollection<TEntity>().ReplaceOneAsync(r => r.Equals(obj), obj);
-        }
-
-        public virtual async Task DeleteAsync(TEntity obj)
-        {
-            await Context.GetCollection<TEntity>().DeleteOneAsync(r => r.Equals(obj));
+            await Context.GetCollection<TEntity>().ReplaceOneAsync(predicate, obj);
         }
 
         public virtual async Task DeleteAsync(Expression<Func<TEntity, bool>> predicate)

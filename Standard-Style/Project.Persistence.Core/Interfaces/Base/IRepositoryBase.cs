@@ -17,9 +17,7 @@ namespace Project.Persistence.Core.Interfaces.Base
 
         void Create(TEntity obj);
 
-        void Update(TEntity obj);
-
-        void Delete(TEntity obj);
+        void Update(Expression<Func<TEntity, bool>> predicate, TEntity obj);
 
         void Delete(Expression<Func<TEntity, bool>> predicate);
 

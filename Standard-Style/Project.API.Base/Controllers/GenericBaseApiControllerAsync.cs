@@ -25,7 +25,7 @@ namespace Project.API.Base.Controllers
     public class GenericBaseApiControllerAsync
         <TKey, TDomain, TEntity, TModel, TGetModel, TListItemModel, TPostModel, TPutModel> :
             BaseApiController<TDomain, TEntity, TKey>, IGenericBaseApiControllerAsync<TKey, TPostModel, TPutModel>
-        where TKey : struct, IComparable
+        where TKey : IComparable
         where TDomain : IDomainBase<TEntity>, IDomainBaseAsync<TEntity>
         where TEntity : IdentityEntityBase<TKey>
         where TModel : IIdentityModelBase<TKey>

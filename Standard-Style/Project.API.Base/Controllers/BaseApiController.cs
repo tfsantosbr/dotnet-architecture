@@ -12,9 +12,9 @@ namespace Project.API.Base.Controllers
     /// </summary>
 
     public abstract class BaseApiController<TDomain, TEntity, TKey> : ApiController
-        where TKey : struct, IComparable
+        where TKey : IComparable
         where TEntity : IdentityEntityBase<TKey>
-        where TDomain : IDomainBase<TEntity>, IDomainBaseAsync<TEntity>
+        where TDomain : IDomainBase<TKey, TEntity>, IDomainBaseAsync<TKey, TEntity>
     {
         #region - PROPERTIES -
         protected readonly IMapperAdapter MapperAdapter;

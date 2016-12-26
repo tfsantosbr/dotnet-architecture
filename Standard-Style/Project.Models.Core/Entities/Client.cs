@@ -8,7 +8,7 @@ namespace Project.Models.Core.Entities
     /// <summary>
     ///     CLIENT
     /// </summary>
-    public class Client : EntityBase
+    public class Client : IdentityEntityBase<string>
     {
         /// <summary>
         ///     CODE
@@ -16,7 +16,7 @@ namespace Project.Models.Core.Entities
         [Required]
         [Index(IsUnique = true)]
         [MaxLength(50)]
-        public String Id { get; set; }
+        public override String Id { get; set; }
 
         /// <summary>
         ///     SECRET

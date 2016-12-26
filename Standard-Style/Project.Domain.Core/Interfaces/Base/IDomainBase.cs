@@ -10,16 +10,16 @@ namespace Project.Domain.Core.Interfaces.Base
     /// </summary>
     /// <typeparam name="TEntity">EntityBase Type</typeparam>
 
-    public interface IDomainBase<TEntity>
-        where TEntity : IEntityBase, IRowVersion
+    public interface IDomainBase<TKey, TEntity>
+        where TKey : IComparable
+        where TEntity : IdentityEntityBase<TKey>
     {
         void Create(TEntity obj);
         void Create(IEnumerable<TEntity> objectList);
 
-        void Update(TEntity obj);
+        void Update(Expression<Func<TEntity, bool>> predicate, TEntity obj);
         void Update(IEnumerable<TEntity> objectList);
 
-        void Delete(TEntity obj);
         void Delete(IEnumerable<TEntity> objectList);
         void Delete(Expression<Func<TEntity, bool>> predicate);
 

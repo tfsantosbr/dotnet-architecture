@@ -11,7 +11,7 @@ namespace Project.API.Base.Controllers
     /// <typeparam name="TPutModel">Put View Model</typeparam>
 
     public interface IGenericApiBaseController<TKey, TPostModel, TPutModel>
-        where TKey : struct, IComparable
+        where TKey : IComparable
     {
         IHttpActionResult Get();
 
@@ -19,8 +19,8 @@ namespace Project.API.Base.Controllers
 
         IHttpActionResult Post([FromBody] TPostModel viewModel);
 
-        IHttpActionResult Put(TKey? id, [FromBody] TPutModel viewModel);
+        IHttpActionResult Put(TKey id, [FromBody] TPutModel viewModel);
 
-        IHttpActionResult Delete(TKey? id);
+        IHttpActionResult Delete(TKey id);
     }
 }

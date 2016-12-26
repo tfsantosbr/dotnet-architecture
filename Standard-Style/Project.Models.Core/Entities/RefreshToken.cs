@@ -5,13 +5,13 @@ using Project.Models.Core.Entities.Base;
 
 namespace Project.Models.Core.Entities
 {
-    public class RefreshToken : EntityBase
+    public class RefreshToken : IdentityEntityBase<string>
     {
         /// <summary>
         ///     ID
         /// </summary>
         [Key, Column(Order = 0)]
-        public string Id { get; set; }
+        public override string Id { get; set; }
 
         /// <summary>
         ///     BROWSER

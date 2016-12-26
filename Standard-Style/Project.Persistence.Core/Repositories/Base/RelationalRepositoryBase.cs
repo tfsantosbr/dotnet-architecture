@@ -68,15 +68,9 @@ namespace Project.Persistence.Core.Repositories.Base
             Save();
         }
 
-        public new virtual void Update(TEntity obj)
+        public virtual void Update(Expression<Func<TEntity, bool>> predicate, TEntity obj)
         {
-            UpdateBase(obj);
-            Save();
-        }
-
-        public virtual void Delete(TEntity obj)
-        {
-            DeleteBase(obj);
+            UpdateBase(predicate, obj);
             Save();
         }
 
@@ -96,15 +90,9 @@ namespace Project.Persistence.Core.Repositories.Base
             await SaveAsync();
         }
 
-        public virtual async Task UpdateAsync(TEntity obj)
+        public virtual async Task UpdateAsync(Expression<Func<TEntity, bool>> predicate, TEntity obj)
         {
-            UpdateBase(obj);
-            await SaveAsync();
-        }
-
-        public virtual async Task DeleteAsync(TEntity obj)
-        {
-            DeleteBase(obj);
+            UpdateBase(predicate, obj);
             await SaveAsync();
         }
 
@@ -130,17 +118,12 @@ namespace Project.Persistence.Core.Repositories.Base
             Context.Set<TEntity>().Add(obj);
         }
 
-        private void UpdateBase(TEntity obj)
+        private void UpdateBase(Expression<Func<TEntity, bool>> predicate, TEntity obj)
         {
             base.Update(obj);
 
             Context.Entry(obj).State = EntityState.Modified;
             Context.Entry(obj).Property(p => p.CreationDate).IsModified = false;
-        }
-
-        private void DeleteBase(TEntity obj)
-        {
-            Context.Entry(obj).State = EntityState.Deleted;
         }
 
         private void DeleteBase(Expression<Func<TEntity, bool>> predicate)

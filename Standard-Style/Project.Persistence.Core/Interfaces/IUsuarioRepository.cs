@@ -8,7 +8,7 @@ using Project.Persistence.Core.Interfaces.Base;
 namespace Project.Persistence.Core.Interfaces
 {
     public interface IUsuarioRepository<TKey> : IRepositoryBase<Usuario>, IRepositoryBaseAsync<Usuario>
-        where TKey : struct, IComparable
+        where TKey : IComparable
     {
         #region - Senha -
         string RetornaSenha(TKey idUsuario);

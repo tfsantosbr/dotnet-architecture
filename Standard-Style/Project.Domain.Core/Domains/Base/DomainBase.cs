@@ -18,8 +18,9 @@ namespace Project.Domain.Core.Domains.Base
     /// <typeparam name="TEntity">EntityBase Type</typeparam>
     /// <typeparam name="TRepository">RepositoryBase Type</typeparam>
 
-    public abstract class DomainBase<TEntity, TRepository> : IDomainBase<TEntity>, IDomainBaseAsync<TEntity>
-        where TEntity : EntityBase
+    public abstract class DomainBase<TKey, TEntity, TRepository> : IDomainBase<TKey, TEntity>, IDomainBaseAsync<TKey, TEntity>
+        where TKey : IComparable
+        where TEntity : IdentityEntityBase<TKey>
         where TRepository : IRepositoryBase<TEntity>, IRepositoryBaseAsync<TEntity>
     {
         #region - PROPERTIES -
@@ -179,9 +180,9 @@ namespace Project.Domain.Core.Domains.Base
 
         #region - UPDATE -
 
-        public virtual void Update(TEntity obj)
+        public virtual void Update(Expression<Func<TEntity, bool>> predicate, TEntity obj)
         {
-            Repository.Update(obj);
+            Repository.Update(predicate, obj);
         }
 
         public virtual void Update(IEnumerable<TEntity> objectList)
@@ -197,9 +198,9 @@ namespace Project.Domain.Core.Domains.Base
 
         }
 
-        public virtual async Task UpdateAsync(TEntity obj)
+        public virtual async Task UpdateAsync(Expression<Func<TEntity, bool>> predicate, TEntity obj)
         {
-            await Repository.UpdateAsync(obj);
+            await Repository.UpdateAsync(predicate, obj);
         }
 
         public virtual async Task UpdateAsync(IEnumerable<TEntity> objectList)
@@ -278,11 +279,6 @@ namespace Project.Domain.Core.Domains.Base
 
         #region - DELETE -
 
-        public virtual void Delete(TEntity obj)
-        {
-            Repository.Delete(obj);
-        }
-
         public virtual void Delete(IEnumerable<TEntity> objectList)
         {
             new NotImplementedException();
@@ -298,11 +294,6 @@ namespace Project.Domain.Core.Domains.Base
         public virtual void Delete(Expression<Func<TEntity, bool>> predicate)
         {
             Repository.Delete(predicate);
-        }
-
-        public virtual async Task DeleteAsync(TEntity obj)
-        {
-            await Repository.DeleteAsync(obj);
         }
 
         public virtual async Task DeleteAsync(IEnumerable<TEntity> objectList)
