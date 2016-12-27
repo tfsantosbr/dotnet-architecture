@@ -18,9 +18,8 @@ namespace Project.Domain.Core.Domains.Base
     /// <typeparam name="TEntity">EntityBase Type</typeparam>
     /// <typeparam name="TRepository">RepositoryBase Type</typeparam>
 
-    public abstract class DomainBase<TKey, TEntity, TRepository> : IDomainBase<TEntity>, IDomainBaseAsync<TEntity>
-        where TKey : IComparable
-        where TEntity : IdentityEntityBase<TKey>
+    public abstract class DomainBase<TEntity, TRepository> : IDomainBase<TEntity>, IDomainBaseAsync<TEntity>
+        where TEntity : EntityBase
         where TRepository : IRepositoryBase<TEntity>, IRepositoryBaseAsync<TEntity>
     {
         #region - PROPERTIES -
@@ -63,14 +62,12 @@ namespace Project.Domain.Core.Domains.Base
 
         public virtual async Task<TEntity> ReadAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await Task.FromResult<TEntity>(null);
-            //todo implementar 
-            //var obj = await Repository.ReadAsync(key);
+            var obj = await Repository.SingleOrDefaultAsync(predicate);
 
-            //if (obj != null && VisibleRecordses == VisibleRecords.Active && obj.ExclusionDate != null)
-            //    throw new InactiveRecordException();
+            if (obj != null && VisibleRecordses == VisibleRecords.Active && obj.ExclusionDate != null)
+                throw new InactiveRecordException();
 
-            //return obj;
+            return obj;
         }
 
         #endregion

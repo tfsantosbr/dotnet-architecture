@@ -18,7 +18,7 @@ using Project.Resources.Core.Templates;
 
 namespace Project.Domain.Core.Domains
 {
-    public class AccountDomain : DomainBase<Guid, Usuario, IUsuarioRepository<Guid>>, IAccountDomain<Guid>
+    public class AccountDomain : DomainBase<Usuario, IUsuarioRepository<Guid>>, IAccountDomain<Guid>
     {
         #region - PROPERTIES -
         private readonly UserManager<Usuario, Guid> _userManager;

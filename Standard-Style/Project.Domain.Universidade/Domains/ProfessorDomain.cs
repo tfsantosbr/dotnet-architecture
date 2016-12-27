@@ -10,7 +10,7 @@ namespace Project.Domain.Universidade.Domains
     ///     PROFESSOR DOMAIN
     /// </summary>
 
-    public class ProfessorDomain : DomainBase<Guid, Professor, IProfessorRepository<Professor>>, IProfessorDomain<Professor>
+    public class ProfessorDomain : DomainBase<Professor, IProfessorRepository<Professor>>, IProfessorDomain<Professor>
     {
         #region - CONSTRUCTORS -
 

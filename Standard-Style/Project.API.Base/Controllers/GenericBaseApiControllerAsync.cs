@@ -57,7 +57,7 @@ namespace Project.API.Base.Controllers
         [NullParametersFilter]
         public virtual async Task<IHttpActionResult> Get(TKey id)
         {
-            var domainModel = await Domain.ReadAsync(x => (object)x.Id == (object)id);
+            var domainModel = await Domain.ReadAsync(x => x.Id.Equals(id));
 
             if (domainModel == null)
                 return NotFound();
@@ -81,10 +81,10 @@ namespace Project.API.Base.Controllers
         [NullParametersFilter, ModelStateFilter]
         public virtual async Task<IHttpActionResult> Put(TKey id, [FromBody] TPutModel viewModel)
         {
-            var domailModel = MapperAdapter.Adapt<TPutModel, TEntity>(viewModel);
+            var domainModel = MapperAdapter.Adapt<TPutModel, TEntity>(viewModel);
 
-            domailModel.Id = id;
-            await Domain.UpdateAsync(domailModel);
+            domainModel.Id = id;
+            await Domain.UpdateAsync(x => x.Id.Equals(id), domainModel);
 
             return Ok();
         }
@@ -92,10 +92,7 @@ namespace Project.API.Base.Controllers
         [NullParametersFilter]
         public virtual async Task<IHttpActionResult> Delete(TKey id)
         {
-            var domainModel = Activator.CreateInstance<TEntity>();
-
-            domainModel.Id = id;
-            await Domain.DeleteAsync(domainModel);
+            await Domain.DeleteAsync(x => x.Id.Equals(id));
 
             return Ok();
         }

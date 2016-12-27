@@ -10,7 +10,7 @@ namespace Project.Domain.Universidade.Domains
     ///     ESTUDANTE DOMAIN
     /// </summary>
 
-    public class EstudanteDomain : DomainBase<Guid, Estudante, IEstudanteRepository>, IEstudanteDomain
+    public class EstudanteDomain : DomainBase<Estudante, IEstudanteRepository>, IEstudanteDomain
     {
         #region - CONSTRUCTORS -
 

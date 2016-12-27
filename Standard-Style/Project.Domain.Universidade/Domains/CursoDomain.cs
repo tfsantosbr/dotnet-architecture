@@ -10,7 +10,7 @@ namespace Project.Domain.Universidade.Domains
     ///     CURSO DOMAIN
     /// </summary>
 
-    public class CursoDomain : DomainBase<Guid, Curso, ICursoRepository<Curso>>, ICursoDomain<Curso>
+    public class CursoDomain : DomainBase<Curso, ICursoRepository<Curso>>, ICursoDomain<Curso>
     {
         #region - CONSTRUCTORS -
 

@@ -26,7 +26,7 @@ namespace Project.API.Base.Controllers
             BaseApiController<TDomain, TEntity, TKey>, IGenericApiBaseController<TKey, TPostModel, TPutModel>, IDisposable
         where TKey : IComparable
         where TEntity : IdentityEntityBase<TKey>
-        where TDomain : IDomainBase<TKey, TEntity>, IDomainBaseAsync<TKey, TEntity>
+        where TDomain : IDomainBase<TEntity>, IDomainBaseAsync<TEntity>
         where TModel : IIdentityModelBase<TKey>
         where TGetModel : TModel
         where TListItemModel : TModel
@@ -77,10 +77,10 @@ namespace Project.API.Base.Controllers
         [NullParametersFilter, ModelStateFilter]
         public virtual IHttpActionResult Put(TKey id, [FromBody] TPutModel viewModel)
         {
-            var domailModel = MapperAdapter.Adapt<TPutModel, TEntity>(viewModel);
+            var domainModel = MapperAdapter.Adapt<TPutModel, TEntity>(viewModel);
 
-            domailModel.Id = id;
-            Domain.Update();
+            domainModel.Id = id;
+            Domain.Update(x => x.Id.Equals(id), domainModel);
 
             return Ok();
         }
@@ -91,7 +91,7 @@ namespace Project.API.Base.Controllers
             var domainModel = Activator.CreateInstance<TEntity>();
             domainModel.Id = id;
 
-            Domain.Delete(x => x.Id.CompareTo(id) >= 0);
+            Domain.Delete(x => x.Id.Equals(id));
 
             return Ok();
         }

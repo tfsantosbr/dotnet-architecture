@@ -13,7 +13,7 @@ using Project.Resources.Core.Messages;
 
 namespace Project.Domain.Core.Domains
 {
-    public class UsuarioDomain : DomainBase<Guid, Usuario, IUsuarioRepository<Guid>>,
+    public class UsuarioDomain : DomainBase<Usuario, IUsuarioRepository<Guid>>,
         IUsuarioDomain,
         IUserPasswordStore<Usuario, Guid>,
         IUserSecurityStampStore<Usuario, Guid>,

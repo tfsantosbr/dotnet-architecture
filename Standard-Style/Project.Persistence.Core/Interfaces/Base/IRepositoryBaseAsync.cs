@@ -25,7 +25,7 @@ namespace Project.Persistence.Core.Interfaces.Base
 
         #region - READ METHODS -
 
-        // todo criar os metodos assincronos de read
+        Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
 
         #endregion
     }

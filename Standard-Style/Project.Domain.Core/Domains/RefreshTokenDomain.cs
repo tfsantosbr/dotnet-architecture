@@ -7,7 +7,7 @@ using Project.Persistence.Core.Interfaces;
 
 namespace Project.Domain.Core.Domains
 {
-    public class RefreshTokenDomain : DomainBase<string, RefreshToken, IRefreshTokenRepository>, IRefreshTokenDomain
+    public class RefreshTokenDomain : DomainBase<RefreshToken, IRefreshTokenRepository>, IRefreshTokenDomain
     {
         #region - CONSTRUCTORS -
 

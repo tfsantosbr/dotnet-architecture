@@ -56,6 +56,15 @@ namespace Project.Persistence.Core.Repositories.Base
 
         #endregion
 
+        #region - ASYNC -
+
+        public virtual async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await Context.Set<TEntity>().SingleOrDefaultAsync(predicate);
+        }
+
+        #endregion
+
         #endregion
 
         #region - WRITE METHODS -

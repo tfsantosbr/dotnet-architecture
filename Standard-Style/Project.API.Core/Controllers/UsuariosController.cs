@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
-using System.Web.Http;
 using Project.API.Base.Controllers;
-using Project.API.Base.Filters;
 using Project.API.Base.MapperAdapters;
 using Project.API.Core.Models.Usuario;
 using Project.Domain.Core.Interfaces;
@@ -24,11 +21,11 @@ namespace Project.API.Core.Controllers
 
         #region - MAIN METHODS -
 
-        [Authorize, NullParametersFilter]
-        public override async Task<IHttpActionResult> Get(Guid id)
-        {
-            return await base.Get(id);
-        }
+        //[Authorize, NullParametersFilter]
+        //public override async Task<IHttpActionResult> Get(Guid id)
+        //{
+        //    return await base.Get(id);
+        //}
 
         #endregion
     }

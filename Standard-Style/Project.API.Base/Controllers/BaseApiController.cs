@@ -14,7 +14,7 @@ namespace Project.API.Base.Controllers
     public abstract class BaseApiController<TDomain, TEntity, TKey> : ApiController
         where TKey : IComparable
         where TEntity : IdentityEntityBase<TKey>
-        where TDomain : IDomainBase<TKey, TEntity>, IDomainBaseAsync<TKey, TEntity>
+        where TDomain : IDomainBase<TEntity>, IDomainBaseAsync<TEntity>
     {
         #region - PROPERTIES -
         protected readonly IMapperAdapter MapperAdapter;

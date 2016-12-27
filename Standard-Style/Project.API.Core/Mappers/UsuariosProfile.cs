@@ -14,6 +14,9 @@ namespace Project.API.Core.Mappers
             CreateMap<UsuarioPostModel, Usuario>()
                 .ForMember(o => o.UserName, d => d.MapFrom(e => e.Email))
                 .ForMember(o => o.Senha, d => d.MapFrom(e => e.Senha));
+            CreateMap<UsuarioPutModel, Usuario>()
+                .ForMember(o => o.UserName, d => d.MapFrom(e => e.Email))
+                .ForMember(o => o.Senha, d => d.MapFrom(e => e.Senha));
         }
     }
 }

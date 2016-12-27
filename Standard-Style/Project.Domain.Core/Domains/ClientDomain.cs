@@ -5,7 +5,7 @@ using Project.Persistence.Core.Interfaces;
 
 namespace Project.Domain.Core.Domains
 {
-    public class ClientDomain : DomainBase<string, Client, IClientRepository>, IClientDomain
+    public class ClientDomain : DomainBase<Client, IClientRepository>, IClientDomain
     {
         #region - CONSTRUCTORS -
 
