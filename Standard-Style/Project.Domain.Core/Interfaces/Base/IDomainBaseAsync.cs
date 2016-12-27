@@ -11,9 +11,8 @@ namespace Project.Domain.Core.Interfaces.Base
     /// </summary>
     /// <typeparam name="TEntity">EntityBase Type</typeparam>
 
-    public interface IDomainBaseAsync<TKey, TEntity>
-        where TKey : IComparable
-        where TEntity : IdentityEntityBase<TKey>
+    public interface IDomainBaseAsync<TEntity>
+        where TEntity : EntityBase
     {
         Task CreateAsync(TEntity obj);
         Task CreateAsync(IEnumerable<TEntity> objectList);

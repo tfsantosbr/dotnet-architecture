@@ -18,7 +18,7 @@ namespace Project.Domain.Core.Domains.Base
     /// <typeparam name="TEntity">EntityBase Type</typeparam>
     /// <typeparam name="TRepository">RepositoryBase Type</typeparam>
 
-    public abstract class DomainBase<TKey, TEntity, TRepository> : IDomainBase<TKey, TEntity>, IDomainBaseAsync<TKey, TEntity>
+    public abstract class DomainBase<TKey, TEntity, TRepository> : IDomainBase<TEntity>, IDomainBaseAsync<TEntity>
         where TKey : IComparable
         where TEntity : IdentityEntityBase<TKey>
         where TRepository : IRepositoryBase<TEntity>, IRepositoryBaseAsync<TEntity>

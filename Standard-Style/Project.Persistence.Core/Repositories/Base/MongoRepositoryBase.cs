@@ -70,7 +70,7 @@ namespace Project.Persistence.Core.Repositories.Base
 
         public virtual void Delete(Expression<Func<TEntity, bool>> predicate)
         {
-            Context.GetCollection<TEntity>().(predicate);
+            Context.GetCollection<TEntity>().DeleteOne(predicate);
         }
 
         #endregion

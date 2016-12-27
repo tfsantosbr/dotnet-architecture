@@ -10,9 +10,8 @@ namespace Project.Domain.Core.Interfaces.Base
     /// </summary>
     /// <typeparam name="TEntity">EntityBase Type</typeparam>
 
-    public interface IDomainBase<TKey, TEntity>
-        where TKey : IComparable
-        where TEntity : IdentityEntityBase<TKey>
+    public interface IDomainBase<TEntity>
+        where TEntity : EntityBase
     {
         void Create(TEntity obj);
         void Create(IEnumerable<TEntity> objectList);
