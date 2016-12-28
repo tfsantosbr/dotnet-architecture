@@ -1,6 +1,6 @@
-﻿using Project.Domain.Core.Interfaces.Base;
+﻿using System.Threading.Tasks;
+using Project.Domain.Core.Interfaces.Base;
 using Project.Models.Core.Entities;
-using System.Threading.Tasks;
 
 namespace Project.Domain.Core.Interfaces
 {

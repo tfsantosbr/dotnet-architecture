@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Project.Models.Core.Entities.Base;
 
@@ -7,7 +8,7 @@ namespace Project.Models.Universidade.Entities
     /// <summary>
     ///     CURSO
     /// </summary>
-    public class Curso : IdentityEntityBase<short>
+    public class Curso : IdentityEntityBase<Guid>
     {
         #region - PROPERTIES -
 

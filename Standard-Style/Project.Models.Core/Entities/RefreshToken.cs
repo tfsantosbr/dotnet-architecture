@@ -34,7 +34,6 @@ namespace Project.Models.Core.Entities
         [MaxLength(50)]
         public string ClientId { get; set; }
 
-
         /// <summary>
         ///     ISSUEDUTC
         /// </summary>

@@ -3,8 +3,8 @@
 namespace Project.API.Base.Models
 {
     public interface IIdentityModelBase<TKey>
-        where TKey : struct, IComparable
+        where TKey : IComparable
     {
-        TKey? Id { get; set; }
+        TKey Id { get; set; }
     }
 }

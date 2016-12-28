@@ -1,7 +1,7 @@
-﻿using Project.Models.Universidade.Entities;
+﻿using System.Data.Entity;
+using Project.Models.Universidade.Entities;
 using Project.Persistence.Core.Repositories.Base;
 using Project.Persistence.Universidade.Interfaces;
-using System.Data.Entity;
 
 namespace Project.Persistence.Universidade.Repositories
 {
@@ -9,7 +9,7 @@ namespace Project.Persistence.Universidade.Repositories
     ///     CURSO REPOSITORY
     /// </summary>
 
-    public class CursoRepository : RepositoryBase<Curso>, ICursoRepository<Curso>
+    public class CursoRepository : RelationalRepositoryBase<Curso>, ICursoRepository<Curso>
     {
         public CursoRepository(DbContext context)
             : base(context)

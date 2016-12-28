@@ -6,6 +6,7 @@ namespace Project.Configurations
     public static class GlobalSettings
     {
         public static string APPLICATION_NAME => ConfigurationManager.AppSettings["APPLICATION_NAME"];
+        public static string DATABASE => ConfigurationManager.AppSettings["DATABASE"];
 
         public static double TOKEN_EXPIRATION_TIMEOUT
             => Convert.ToDouble(ConfigurationManager.AppSettings["TOKEN_EXPIRATION_TIMEOUT"]);
@@ -22,5 +23,11 @@ namespace Project.Configurations
 
         public static bool EMAIL_SMTP_ENABLE_SSL
             => Convert.ToBoolean(ConfigurationManager.AppSettings["EMAIL_SMTP_ENABLE_SSL"]);
+    }
+
+    public static class DatabaseType
+    {
+        public static string SqlServer => "SqlServer";
+        public static string Mongo => "Mongo";
     }
 }

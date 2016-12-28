@@ -1,16 +1,14 @@
-﻿using Project.API.Base.Controllers;
-using Project.API.Base.Filters;
+﻿using System;
+using Project.API.Base.Controllers;
 using Project.API.Base.MapperAdapters;
 using Project.API.Core.Models.Usuario;
 using Project.Domain.Core.Interfaces;
 using Project.Models.Core.Entities;
-using System.Threading.Tasks;
-using System.Web.Http;
 
 namespace Project.API.Core.Controllers
 {
     public class UsuariosController : GenericBaseApiControllerAsync
-        <long, IUsuarioDomain, Usuario, UsuarioModel, UsuarioGetModel, UsuarioListItemModel, UsuarioPostModel, UsuarioPutModel>
+        <Guid, IUsuarioDomain, Usuario, UsuarioModel, UsuarioGetModel, UsuarioListItemModel, UsuarioPostModel, UsuarioPutModel>
     {
         #region - CONSTRUCTORS -
 
@@ -23,11 +21,11 @@ namespace Project.API.Core.Controllers
 
         #region - MAIN METHODS -
 
-        [Authorize, NullParametersFilter]
-        public override async Task<IHttpActionResult> Get(long id)
-        {
-            return await base.Get(id);
-        }
+        //[Authorize, NullParametersFilter]
+        //public override async Task<IHttpActionResult> Get(Guid id)
+        //{
+        //    return await base.Get(id);
+        //}
 
         #endregion
     }

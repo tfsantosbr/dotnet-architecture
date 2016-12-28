@@ -1,14 +1,14 @@
-﻿using Microsoft.Owin.Security.DataHandler.Serializer;
-using Microsoft.Owin.Security.Infrastructure;
-using Project.Domain.Core.Interfaces;
-using Project.Helpers.Security;
-using Project.Models.Core.Entities;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Configuration;
+using Microsoft.Owin.Security.DataHandler.Serializer;
+using Microsoft.Owin.Security.Infrastructure;
+using Project.Domain.Core.Interfaces;
+using Project.Helpers.Security;
+using Project.Models.Core.Entities;
 
 namespace Project.API.Core.Providers
 {
@@ -70,10 +70,9 @@ namespace Project.API.Core.Providers
 
                 // Grava o ticket na base de dados
                 var refreshTokenDomain = DependecyConfig.Container.GetInstance<IRefreshTokenDomain>();
-                var result = await refreshTokenDomain.CreateAsync(token);
+                await refreshTokenDomain.CreateAsync(token);
 
-                if (result)
-                    context.SetToken(refreshTokenId);
+                context.SetToken(refreshTokenId);
             }
             catch (Exception ex)
             {
@@ -99,7 +98,7 @@ namespace Project.API.Core.Providers
 
             var refreshTokenDomain = DependecyConfig.Container.GetInstance<IRefreshTokenDomain>();
             // busca o token na base de dados pelo id
-            var refreshToken = await refreshTokenDomain.ReadAsync(hashedTokenId, browser);
+            var refreshToken = await refreshTokenDomain.ReadAsync(x => x.Id == hashedTokenId && x.Browser == browser);
 
             // se o token for encontrado
             if (refreshToken != null)

@@ -1,19 +1,22 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Data.Entity;
+using System.Web.Http;
+using AutoMapper;
 using Microsoft.AspNet.Identity;
 using Owin;
 using Project.API.Base.MapperAdapters;
 using Project.API.Core.Mappers;
+using Project.Configurations;
 using Project.Domain.Core.Domains;
 using Project.Domain.Core.Interfaces;
 using Project.Models.Core.Entities;
 using Project.Persistence.Core.Contexts;
+using Project.Persistence.Core.Contexts.Base;
 using Project.Persistence.Core.Interfaces;
 using Project.Persistence.Core.Repositories;
 using SimpleInjector;
 using SimpleInjector.Extensions.ExecutionContextScoping;
 using SimpleInjector.Integration.WebApi;
-using System.Data.Entity;
-using System.Web.Http;
 
 namespace Project.API.Core
 {
@@ -50,25 +53,42 @@ namespace Project.API.Core
             container.Register<IMapperAdapter, AutoMapperAdapter>();
             #endregion
 
-            #region - CONTEXTS -
-            container.Register<DbContext, CoreContext>(Lifestyle.Scoped);
-            #endregion
+            #region - PERSISTENCE -
 
-            #region - REPOSITORIES -
-            container.Register<IClientRepository, ClientRepository>(Lifestyle.Scoped);
-            container.Register<IRefreshTokenRepository, RefreshTokenRepository>(Lifestyle.Scoped);
-            container.Register<IUsuarioRepository, UsuarioRepository>(Lifestyle.Scoped);
+            if (GlobalSettings.DATABASE == DatabaseType.SqlServer)
+            {
+                // context
+                container.Register<DbContext, CoreContext>(Lifestyle.Scoped);
+
+                // repositories
+                container.Register<IClientRepository, ClientRepository>(Lifestyle.Scoped);
+                container.Register<IRefreshTokenRepository, RefreshTokenRepository>(Lifestyle.Scoped);
+                container.Register<IUsuarioRepository<Guid>, UsuarioRepository>(Lifestyle.Scoped);
+            }
+            else if (GlobalSettings.DATABASE == DatabaseType.Mongo)
+            {
+                // context
+                container.Register<MongoContextBase, CoreMongoContext>(Lifestyle.Scoped);
+
+                // repositories
+                container.Register<IClientRepository, ClientMongoRepository>(Lifestyle.Scoped);
+                container.Register<IRefreshTokenRepository, RefreshTokenMongoRepository>(Lifestyle.Scoped);
+                container.Register<IUsuarioRepository<Guid>, UsuarioMongoRepository>(Lifestyle.Scoped);
+            }
+
             #endregion
 
             #region - DOMAINS -
+
             var registration = Lifestyle.Scoped.CreateRegistration<UsuarioDomain>(container);
             container.AddRegistration(typeof(IUsuarioDomain), registration);
-            container.AddRegistration(typeof(IUserStore<Usuario, long>), registration);
+            container.AddRegistration(typeof(IUserStore<Usuario, Guid>), registration);
 
-            container.Register<UserManager<Usuario, long>>(Lifestyle.Scoped);
+            container.Register<UserManager<Usuario, Guid>>(Lifestyle.Scoped);
             container.Register<IRefreshTokenDomain, RefreshTokenDomain>(Lifestyle.Scoped);
             container.Register<IClientDomain, ClientDomain>(Lifestyle.Scoped);
-            container.Register<IAccountDomain, AccountDomain>(Lifestyle.Scoped);
+            container.Register<IAccountDomain<Guid>, AccountDomain>(Lifestyle.Scoped);
+
             #endregion
         }
     }

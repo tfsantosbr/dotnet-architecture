@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Project.Models.Core.Entities.Base;
 
@@ -11,27 +12,24 @@ namespace Project.Domain.Core.Interfaces.Base
     /// <typeparam name="TEntity">EntityBase Type</typeparam>
 
     public interface IDomainBaseAsync<TEntity>
-        where TEntity : IEntityBase, IRowVersion
+        where TEntity : EntityBase
     {
-        Task<bool> CreateAsync(TEntity obj);
-        Task<bool> CreateAsync(IEnumerable<TEntity> objectList);
+        Task CreateAsync(TEntity obj);
+        Task CreateAsync(IEnumerable<TEntity> objectList);
 
-        Task<bool> UpdateAsync(TEntity obj);
-        Task<bool> UpdateAsync(IEnumerable<TEntity> objectList);
+        Task UpdateAsync(Expression<Func<TEntity, bool>> predicate, TEntity obj);
+        Task UpdateAsync(IEnumerable<TEntity> objectList);
 
-        Task<bool> DeleteAsync(TEntity obj);
-        Task<bool> DeleteAsync(IEnumerable<TEntity> objectList);
-        Task<bool> DeleteAsync(Func<TEntity, bool> predicate);
+        Task DeleteAsync(IEnumerable<TEntity> objectList);
+        Task DeleteAsync(Expression<Func<TEntity, bool>> predicate);
 
-        Task<bool> ActiveAsync(params object[] key);
-        Task<bool> ActiveAsync(Func<TEntity, bool> predicate);
+        Task ActiveAsync(Expression<Func<TEntity, bool>> predicate);
 
-        Task<bool> InactiveAsync(params object[] key);
-        Task<bool> InactiveAsync(Func<TEntity, bool> predicate);
+        Task InactiveAsync(Expression<Func<TEntity, bool>> predicate);
 
-        Task<TEntity> ReadAsync(params object[] key);
+        Task<TEntity> ReadAsync(Expression<Func<TEntity, bool>> predicate);
 
         Task<IEnumerable<TEntity>> ListAsync();
-        Task<IEnumerable<TEntity>> ListAsync(Func<TEntity, bool> predicate);
+        Task<IEnumerable<TEntity>> ListAsync(Expression<Func<TEntity, bool>> predicate);
     }
 }

@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System;
+using System.Web.Http;
+using Microsoft.AspNet.Identity;
 using Project.API.Base.MapperAdapters;
 using Project.Domain.Core.Interfaces.Base;
 using Project.Models.Core.Entities.Base;
-using System;
-using System.Web.Http;
 
 namespace Project.API.Base.Controllers
 {
@@ -12,7 +12,7 @@ namespace Project.API.Base.Controllers
     /// </summary>
 
     public abstract class BaseApiController<TDomain, TEntity, TKey> : ApiController
-        where TKey : struct, IComparable
+        where TKey : IComparable
         where TEntity : IdentityEntityBase<TKey>
         where TDomain : IDomainBase<TEntity>, IDomainBaseAsync<TEntity>
     {

@@ -1,7 +1,7 @@
 ﻿using Project.Models.Publicacoes.Entities;
+using Project.Persistence.Core.Contexts.Base;
 using Project.Persistence.Core.Repositories.Base;
 using Project.Persistence.Publicacoes.Interfaces;
-using System.Data.Entity;
 
 namespace Project.Persistence.Publicacoes.Repositories
 {
@@ -9,9 +9,9 @@ namespace Project.Persistence.Publicacoes.Repositories
     ///     CONTEUDO REPOSITORY
     /// </summary>
 
-    public class ConteudoRepository : RepositoryBase<Conteudo>, IConteudoRepository
+    public class ConteudoMongoRepository : MongoRepositoryBase<Conteudo>, IConteudoRepository
     {
-        public ConteudoRepository(DbContext context)
+        public ConteudoMongoRepository(MongoContextBase context)
             : base(context)
         {
         }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Project.Models.Core.Entities;
 using Project.Models.Core.Entities.Base;
@@ -6,7 +7,7 @@ using Project.Resources.Core.Messages;
 
 namespace Project.Models.Publicacoes.Entities
 {
-    public class Conteudo : IdentityEntityBase<int>
+    public class Conteudo : IdentityEntityBase<Guid>
     {
         #region - PROPERTIES -
 
@@ -17,9 +18,9 @@ namespace Project.Models.Publicacoes.Entities
         public string Corpo { get; set; }
 
         [Required]
-        public long IdAutor { get; set; }
+        public Guid IdAutor { get; set; }
 
-        public long? IdAuditor { get; set; }
+        public Guid? IdAuditor { get; set; }
 
         [Required]
         public ConteudoStatus Status { get; set; }
@@ -39,14 +40,19 @@ namespace Project.Models.Publicacoes.Entities
 
     public enum ConteudoStatus : byte
     {
-        [Display(Description = "ACTIVE", ResourceType = typeof (STATUS_RESOURCES))] Active = 0,
+        [Display(Description = "ACTIVE", ResourceType = typeof(STATUS_RESOURCES))]
+        Active = 0,
 
-        [Display(Description = "INACTIVE", ResourceType = typeof (STATUS_RESOURCES))] Inactive = 1,
+        [Display(Description = "INACTIVE", ResourceType = typeof(STATUS_RESOURCES))]
+        Inactive = 1,
 
-        [Display(Description = "APPROVED", ResourceType = typeof (STATUS_RESOURCES))] Approved = 2,
+        [Display(Description = "APPROVED", ResourceType = typeof(STATUS_RESOURCES))]
+        Approved = 2,
 
-        [Display(Description = "DISAPPROVED", ResourceType = typeof (STATUS_RESOURCES))] Disapproved = 3,
+        [Display(Description = "DISAPPROVED", ResourceType = typeof(STATUS_RESOURCES))]
+        Disapproved = 3,
 
-        [Display(Description = "EVALUATION", ResourceType = typeof (STATUS_RESOURCES))] Evaluation = 4
+        [Display(Description = "EVALUATION", ResourceType = typeof(STATUS_RESOURCES))]
+        Evaluation = 4
     }
 }

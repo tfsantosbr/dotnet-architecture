@@ -15,13 +15,15 @@ namespace Project.Persistence.Core.Interfaces.Base
     {
         #region - WRITE METHODS -
 
-        Task<int> SaveAsync();
+        Task CreateAsync(TEntity obj);
+
+        Task UpdateAsync(Expression<Func<TEntity, bool>> predicate, TEntity obj);
+
+        Task DeleteAsync(Expression<Func<TEntity, bool>> predicate);
 
         #endregion
 
         #region - READ METHODS -
-
-        Task<TEntity> ReadAsync(params object[] key);
 
         Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
 

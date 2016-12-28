@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System;
+using Microsoft.AspNet.Identity;
 using Project.Models.Core.Entities.Base;
 
 namespace Project.Models.Core.Entities
@@ -6,7 +7,7 @@ namespace Project.Models.Core.Entities
     /// <summary>
     ///     USER DOMAIN MODEL
     /// </summary>
-    public class Usuario : IdentityEntityBase<long>, IUser<long>
+    public class Usuario : IdentityEntityBase<Guid>, IUser<Guid>
     {
         #region - PROPERTIES -
 

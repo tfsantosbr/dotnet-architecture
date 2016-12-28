@@ -1,13 +1,14 @@
-﻿using Project.Domain.Core.Interfaces.Base;
-using Project.Models.Core.Entities.Base;
-using Project.Models.Core.Exceptions;
-using Project.Persistence.Core.Interfaces.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Project.Domain.Core.Interfaces.Base;
+using Project.Models.Core.Entities.Base;
+using Project.Models.Core.Exceptions;
+using Project.Persistence.Core.Interfaces.Base;
 
 namespace Project.Domain.Core.Domains.Base
 {
@@ -49,9 +50,9 @@ namespace Project.Domain.Core.Domains.Base
 
         #region - READ -
 
-        public virtual TEntity Read(params object[] key)
+        public virtual TEntity Read(Expression<Func<TEntity, bool>> predicate)
         {
-            var obj = Repository.Read(key);
+            var obj = Repository.SingleOrDefault(predicate);
 
             if (obj != null && VisibleRecordses == VisibleRecords.Active && obj.ExclusionDate != null)
                 throw new InactiveRecordException();
@@ -59,9 +60,9 @@ namespace Project.Domain.Core.Domains.Base
             return obj;
         }
 
-        public virtual async Task<TEntity> ReadAsync(params object[] key)
+        public virtual async Task<TEntity> ReadAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            var obj = await Repository.ReadAsync(key);
+            var obj = await Repository.SingleOrDefaultAsync(predicate);
 
             if (obj != null && VisibleRecordses == VisibleRecords.Active && obj.ExclusionDate != null)
                 throw new InactiveRecordException();
@@ -78,7 +79,7 @@ namespace Project.Domain.Core.Domains.Base
             return List(null);
         }
 
-        public virtual IEnumerable<TEntity> List(Func<TEntity, bool> predicate)
+        public virtual IEnumerable<TEntity> List(Expression<Func<TEntity, bool>> predicate)
         {
             IQueryable<TEntity> query;
 
@@ -109,7 +110,7 @@ namespace Project.Domain.Core.Domains.Base
             return await ListAsync(null);
         }
 
-        public virtual async Task<IEnumerable<TEntity>> ListAsync(Func<TEntity, bool> predicate)
+        public virtual async Task<IEnumerable<TEntity>> ListAsync(Expression<Func<TEntity, bool>> predicate)
         {
             IQueryable<TEntity> query;
 
@@ -142,214 +143,171 @@ namespace Project.Domain.Core.Domains.Base
 
         #region - CREATE -
 
-        public virtual bool Create(TEntity obj)
+        public virtual void Create(TEntity obj)
         {
             Repository.Create(obj);
-            return Repository.Save() > 0;
         }
 
-        public virtual bool Create(IEnumerable<TEntity> objectList)
+        public virtual void Create(IEnumerable<TEntity> objectList)
         {
-            foreach (var obj in objectList)
-            {
-                Repository.Create(obj);
-            }
-
-            return Repository.Save() > 0;
+            throw new NotImplementedException();
+            // todo implementar
+            //foreach (var obj in objectList)
+            //{
+            //    Repository.Create(obj);
+            //}
         }
 
-        public virtual async Task<bool> CreateAsync(TEntity obj)
+        public virtual async Task CreateAsync(TEntity obj)
         {
-            Repository.Create(obj);
-            return await Repository.SaveAsync() > 0;
+            await Repository.CreateAsync(obj);
         }
 
-        public virtual async Task<bool> CreateAsync(IEnumerable<TEntity> objectList)
+        public virtual async Task CreateAsync(IEnumerable<TEntity> objectList)
         {
-            foreach (var obj in objectList)
-            {
-                Repository.Create(obj);
-            }
-
-            return await Repository.SaveAsync() > 0;
+            await Task.Yield();
+            // todo implementar
+            //foreach (var obj in objectList)
+            //{
+            //    Repository.Create(obj);
+            //}
         }
 
         #endregion
 
         #region - UPDATE -
 
-        public virtual bool Update(TEntity obj)
+        public virtual void Update(Expression<Func<TEntity, bool>> predicate, TEntity obj)
         {
-            Repository.Update(obj);
-            return Repository.Save() > 0;
+            Repository.Update(predicate, obj);
         }
 
-        public virtual bool Update(IEnumerable<TEntity> objectList)
+        public virtual void Update(IEnumerable<TEntity> objectList)
         {
-            foreach (var obj in objectList)
-            {
-                obj.ModificationDate = DateTime.Now;
+            throw new NotImplementedException();
+            // todo implementar
+            //foreach (var obj in objectList)
+            //{
+            //    obj.ModificationDate = DateTime.Now;
 
-                Repository.Update(obj);
-            }
+            //    Repository.Update(obj);
+            //}
 
-            return Repository.Save() > 0;
         }
 
-        public virtual async Task<bool> UpdateAsync(TEntity obj)
+        public virtual async Task UpdateAsync(Expression<Func<TEntity, bool>> predicate, TEntity obj)
         {
-            Repository.Update(obj);
-            return await Repository.SaveAsync() > 0;
+            await Repository.UpdateAsync(predicate, obj);
         }
 
-        public virtual async Task<bool> UpdateAsync(IEnumerable<TEntity> objectList)
+        public virtual async Task UpdateAsync(IEnumerable<TEntity> objectList)
         {
-            foreach (var obj in objectList)
-            {
-                obj.ModificationDate = DateTime.Now;
+            await Task.Yield();
+            // todo implementar
+            //foreach (var obj in objectList)
+            //{
+            //    obj.ModificationDate = DateTime.Now;
 
-                Repository.Update(obj);
-            }
-
-            return await Repository.SaveAsync() > 0;
+            //    Repository.Update(obj);
+            //}
         }
 
         #endregion
 
         #region - ACTIVE -
 
-        public virtual bool Active(params object[] key)
+        public virtual void Active(Expression<Func<TEntity, bool>> predicate)
         {
-            var obj = Repository.Read(key);
-            obj.ExclusionDate = null;
-            Repository.Update(obj);
+            new NotImplementedException();
+            //todo implementar
+            //foreach (var obj in Repository.Query(predicate).ToList())
+            //{
+            //    obj.ExclusionDate = null;
+            //    Repository.Update(obj);
+            //}
 
-            return Repository.Save() > 0;
+            //return Repository.Save() > 0;
         }
 
-        public virtual bool Active(Func<TEntity, bool> predicate)
+        public virtual async Task ActiveAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            foreach (var obj in Repository.Query(predicate).ToList())
-            {
-                obj.ExclusionDate = null;
-                Repository.Update(obj);
-            }
+            await Task.Yield();
+            //todo implementar
+            //foreach (var obj in Repository.Query(predicate).ToList())
+            //{
+            //    obj.ExclusionDate = null;
+            //    Repository.Update(obj);
+            //}
 
-            return Repository.Save() > 0;
-        }
-
-        public virtual async Task<bool> ActiveAsync(params object[] key)
-        {
-            var obj = Repository.Read(key);
-            obj.ExclusionDate = null;
-            Repository.Update(obj);
-
-            return await Repository.SaveAsync() > 0;
-        }
-
-        public virtual async Task<bool> ActiveAsync(Func<TEntity, bool> predicate)
-        {
-            foreach (var obj in Repository.Query(predicate).ToList())
-            {
-                obj.ExclusionDate = null;
-                Repository.Update(obj);
-            }
-
-            return await Repository.SaveAsync() > 0;
+            //return await Repository.SaveAsync() > 0;
         }
 
         #endregion
 
         #region - INACTIVE -
 
-        public virtual bool Inactive(params object[] key)
+        public virtual void Inactive(Expression<Func<TEntity, bool>> predicate)
         {
-            var obj = Repository.Read(key);
-            obj.ExclusionDate = DateTime.Now;
-            Repository.Update(obj);
+            new NotImplementedException();
+            //todo implementar
+            //foreach (var obj in Repository.Query(predicate).ToList())
+            //{
+            //    obj.ExclusionDate = DateTime.Now;
+            //    Repository.Update(obj);
+            //}
 
-            return Repository.Save() > 0;
+            //return Repository.Save() > 0;
         }
 
-        public virtual bool Inactive(Func<TEntity, bool> predicate)
+        public virtual async Task InactiveAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            foreach (var obj in Repository.Query(predicate).ToList())
-            {
-                obj.ExclusionDate = DateTime.Now;
-                Repository.Update(obj);
-            }
+            await Task.Yield();
+            //todo implementar
+            //foreach (var obj in Repository.Query(predicate).ToList())
+            //{
+            //    obj.ExclusionDate = DateTime.Now;
+            //    Repository.Update(obj);
+            //}
 
-            return Repository.Save() > 0;
-        }
-
-        public virtual async Task<bool> InactiveAsync(params object[] key)
-        {
-            var obj = Repository.Read(key);
-            obj.ExclusionDate = DateTime.Now;
-            Repository.Update(obj);
-
-            return await Repository.SaveAsync() > 0;
-        }
-
-        public virtual async Task<bool> InactiveAsync(Func<TEntity, bool> predicate)
-        {
-            foreach (var obj in Repository.Query(predicate).ToList())
-            {
-                obj.ExclusionDate = DateTime.Now;
-                Repository.Update(obj);
-            }
-
-            return await Repository.SaveAsync() > 0;
+            //return await Repository.SaveAsync() > 0;
         }
 
         #endregion
 
         #region - DELETE -
 
-        public virtual bool Delete(TEntity obj)
+        public virtual void Delete(IEnumerable<TEntity> objectList)
         {
-            Repository.Delete(obj);
+            new NotImplementedException();
+            //todo implementar
+            //foreach (var obj in objectList)
+            //{
+            //    Repository.Delete(obj);
+            //}
 
-            return Repository.Save() > 0;
+            //return Repository.Save() > 0;
         }
 
-        public virtual bool Delete(IEnumerable<TEntity> objectList)
-        {
-            foreach (var obj in objectList)
-            {
-                Repository.Delete(obj);
-            }
-
-            return Repository.Save() > 0;
-        }
-
-        public virtual bool Delete(Func<TEntity, bool> predicate)
+        public virtual void Delete(Expression<Func<TEntity, bool>> predicate)
         {
             Repository.Delete(predicate);
-            return Repository.Save() > 0;
         }
 
-        public virtual async Task<bool> DeleteAsync(TEntity obj)
+        public virtual async Task DeleteAsync(IEnumerable<TEntity> objectList)
         {
-            Repository.Delete(obj);
+            await Task.Yield();
+            //todo implementar
+            //foreach (var obj in objectList)
+            //{
+            //    Repository.Delete(obj);
+            //}
 
-            return await Repository.SaveAsync() > 0;
+            //return await Repository.SaveAsync() > 0;
         }
 
-        public virtual async Task<bool> DeleteAsync(IEnumerable<TEntity> objectList)
+        public virtual async Task DeleteAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            foreach (var obj in objectList)
-            {
-                Repository.Delete(obj);
-            }
-
-            return await Repository.SaveAsync() > 0;
-        }
-
-        public virtual async Task<bool> DeleteAsync(Func<TEntity, bool> predicate)
-        {
-            Repository.Delete(predicate);
-            return await Repository.SaveAsync() > 0;
+            await Repository.DeleteAsync(predicate);
         }
 
         #endregion
@@ -357,31 +315,6 @@ namespace Project.Domain.Core.Domains.Base
         #endregion
 
         #endregion
-
-        //#region - AUXILIARY METHODS -
-
-        //#region - DISPOSE -
-
-        //~DomainBase()
-        //{
-        //    Dispose(false);
-        //}
-
-        //public virtual void Dispose()
-        //{
-        //    Dispose(true);
-        //    GC.SuppressFinalize(this);
-        //}
-
-        //protected virtual void Dispose(bool disposing)
-        //{
-        //    if (!disposing) return;
-        //    //Repository?.Dispose();
-        //}
-
-        //#endregion
-
-        //#endregion
     }
 
     /// <summary>

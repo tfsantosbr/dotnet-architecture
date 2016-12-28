@@ -1,21 +1,23 @@
-﻿using Project.Models.Core.Entities;
-using Project.Persistence.Core.Interfaces.Base;
+﻿using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Project.Models.Core.Entities;
+using Project.Persistence.Core.Interfaces.Base;
 
 namespace Project.Persistence.Core.Interfaces
 {
-    public interface IUsuarioRepository : IRepositoryBase<Usuario>, IRepositoryBaseAsync<Usuario>
+    public interface IUsuarioRepository<TKey> : IRepositoryBase<Usuario>, IRepositoryBaseAsync<Usuario>
+        where TKey : IComparable
     {
         #region - Senha -
-        string RetornaSenha(long idUsuario);
+        string RetornaSenha(TKey idUsuario);
         #endregion
 
         #region - Claims -
-        void AdicionarClaims(Claim claim, long idUsuario);
-        IList<Claim> RetornarClaimsUsuario(long idUsuario);
-        Task RemoveClaimAsync(long idUsuario, Claim claim);
+        Task AddClaimAsync(Claim claim, TKey idUsuario);
+        IList<Claim> GetClaimsUsuario(TKey idUsuario);
+        Task RemoveClaimAsync(TKey idUsuario, Claim claim);
         #endregion
     }
 }

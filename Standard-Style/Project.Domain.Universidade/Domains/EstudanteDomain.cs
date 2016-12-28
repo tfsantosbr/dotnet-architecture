@@ -1,4 +1,5 @@
-﻿using Project.Domain.Core.Domains.Base;
+﻿using System;
+using Project.Domain.Core.Domains.Base;
 using Project.Domain.Universidade.Interfaces;
 using Project.Models.Universidade.Entities;
 using Project.Persistence.Universidade.Interfaces;

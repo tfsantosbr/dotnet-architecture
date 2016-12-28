@@ -50,9 +50,9 @@
   <ItemGroup>
     <Compile Include="Contexts\CustomHistoryContext.cs" />
     <Compile Include="Contexts\ResourceContext.cs" />
-    <Compile Include="Migrations\ResourceMigrations\201610051433406_inicial.cs" />
-    <Compile Include="Migrations\ResourceMigrations\201610051433406_inicial.Designer.cs">
-      <DependentUpon>201610051433406_inicial.cs</DependentUpon>
+    <Compile Include="Migrations\ResourceMigrations\201612220117055_Initial.cs" />
+    <Compile Include="Migrations\ResourceMigrations\201612220117055_Initial.Designer.cs">
+      <DependentUpon>201612220117055_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ResourceMigrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,8 +84,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\ResourceMigrations\201610051433406_inicial.resx">
-      <DependentUpon>201610051433406_inicial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ResourceMigrations\201612220117055_Initial.resx">
+      <DependentUpon>201612220117055_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

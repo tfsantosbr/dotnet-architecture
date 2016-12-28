@@ -1,11 +1,12 @@
-﻿using Microsoft.Owin.Security;
+﻿using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using Project.Domain.Core.Interfaces;
 using Project.Helpers.Security;
 using Project.Models.Core.Entities;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace Project.API.Core.Providers
 {
@@ -34,7 +35,7 @@ namespace Project.API.Core.Providers
 
             // Busca a aplicação cliente na base de dados pelo ID
             var clientDomain = DependecyConfig.Container.GetInstance<IClientDomain>();
-            var client = clientDomain.Read(context.ClientId);
+            var client = clientDomain.Read(x => x.Id == context.ClientId);
 
             // Se a aplicação cliente não estiver cadastrada
             if (client == null)
@@ -97,7 +98,7 @@ namespace Project.API.Core.Providers
             // we’ll generate set of claims for this user along with authentication properties which contains the client 
             // id and userName, those properties are needed for the next steps.
 
-            var domain = DependecyConfig.Container.GetInstance<IAccountDomain>();
+            var domain = DependecyConfig.Container.GetInstance<IAccountDomain<Guid>>();
             var usuario = await domain.FindAsync(context.UserName, context.Password);
 
             if (usuario == null)
@@ -148,7 +149,7 @@ namespace Project.API.Core.Providers
             var newIdentity = new ClaimsIdentity(context.Options.AuthenticationType);
 
 
-            var domain = DependecyConfig.Container.GetInstance<IAccountDomain>();
+            var domain = DependecyConfig.Container.GetInstance<IAccountDomain<Guid>>();
             var claimsCollection = await domain.GetClaimsByUsernameAsync(context.Ticket.Identity.Name);
             if (claimsCollection != null)
                 newIdentity.AddClaims(claimsCollection);
