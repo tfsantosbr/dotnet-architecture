@@ -1,4 +1,4 @@
-﻿namespace Project.UnitOfWork.Core
+﻿namespace Project.UnitOfWork.Contexts
 {
     public interface IUnitOfWorkFactory
     {

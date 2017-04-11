@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Project.UnitOfWork.Services;
+using System;
 
-namespace Project.UnitOfWork.Core
+namespace Project.UnitOfWork.Contexts
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -36,7 +37,7 @@ namespace Project.UnitOfWork.Core
             _disposed = true;
         }
 
-        public TRepository GetRepository<TRepository>()
+        public TRepository GetRepository<TRepository>() where TRepository : IRepository
         {
             throw new NotImplementedException();
         }

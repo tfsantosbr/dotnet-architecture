@@ -1,6 +1,11 @@
-﻿namespace Project.UnitOfWork.Services
+﻿using Project.UnitOfWork.Entities;
+
+namespace Project.UnitOfWork.Services
 {
-    internal interface IRepository<TEntity>
+    public interface IRepository { }
+
+    public interface IRepository<TEntity, in TIdentity> : IRepository
+        where TEntity : Entity<TIdentity>
     {
         void Add(TEntity entity);
 

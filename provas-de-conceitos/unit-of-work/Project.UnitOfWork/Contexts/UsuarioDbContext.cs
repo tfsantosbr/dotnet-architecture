@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Project.UnitOfWork.Core
+namespace Project.UnitOfWork.Contexts
 {
     public class UsuarioDbContext : IDisposable
     {

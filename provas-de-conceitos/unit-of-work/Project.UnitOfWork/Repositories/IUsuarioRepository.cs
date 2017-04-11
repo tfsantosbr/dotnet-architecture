@@ -2,7 +2,7 @@
 
 namespace Project.UnitOfWork.Services
 {
-    internal interface IUsuarioRepository : IRepository<Usuario>
+    internal interface IUsuarioRepository : IRepository<Usuario, int>
     {
     }
 }

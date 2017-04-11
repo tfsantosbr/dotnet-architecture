@@ -1,8 +1,7 @@
 ﻿namespace Project.UnitOfWork.Entities
 {
-    public class Usuario
+    public class Usuario : Entity<int>
     {
-        public int Id { get; set; } // TODO: Mover para base entity
         public string Nome { get; set; }
         public UsuarioStatus Status { get; set; }
     }
