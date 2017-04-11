@@ -4,7 +4,7 @@ using System;
 
 namespace Project.UnitOfWork.Services
 {
-    public class UsuarioService
+    public class UsuarioService : IUsuarioService
     {
         public readonly IUnitOfWorkFactory _unitOfWorkFactory;
 
