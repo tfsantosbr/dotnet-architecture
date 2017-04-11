@@ -1,7 +1,9 @@
-﻿namespace Project.UnitOfWork.Entities
+﻿using System;
+
+namespace Project.UnitOfWork.Entities
 {
-    public class Entity<TIdentity> // TODO: Adicionar constrains para o tipo de Id
+    public class Entity<TIdentifier> where TIdentifier : IConvertible
     {
-        public TIdentity Id { get; set; }
+        public TIdentifier Id { get; set; }
     }
 }
