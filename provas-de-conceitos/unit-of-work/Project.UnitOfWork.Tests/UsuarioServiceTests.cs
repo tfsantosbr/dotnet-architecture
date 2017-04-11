@@ -17,13 +17,23 @@ namespace Project.UnitOfWork.Tests
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void UsuarioServiceTests_AdicionarUsuario_AdicionarComSucesso()
         {
             // Arrange
-            var usuario = new Usuario { Id = 1, Nome = "Tiago" };
+            var usuario = new Usuario { Id = 1, Nome = "Tiago", Status = UsuarioStatus.Ativo };
 
             // Act
             var result = _service.Add(usuario);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void UsuarioServiceTests_ChangeStatus_ComSucesso()
+        {
+            // Arrange & Act
+            var result = _service.ChangeStatus(1, UsuarioStatus.Inativo);
 
             // Assert
             Assert.IsTrue(result);

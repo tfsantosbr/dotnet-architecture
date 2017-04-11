@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\UnitOfWork.cs" />
     <Compile Include="Core\UnitOfWorkFactory.cs" />
+    <Compile Include="Core\UsuarioDbContext.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepository.cs" />
