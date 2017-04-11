@@ -2,8 +2,7 @@
 
 namespace Project.UnitOfWork.Services
 {
-    internal interface IUsuarioRepository
+    internal interface IUsuarioRepository : IRepository<Usuario>
     {
-        void Add(Usuario entity); // TODO: Mover para o GenericRepository
     }
 }
