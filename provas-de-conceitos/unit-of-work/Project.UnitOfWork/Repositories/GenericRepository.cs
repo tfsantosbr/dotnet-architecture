@@ -1,6 +1,5 @@
 ﻿using Project.UnitOfWork.Core;
 using Project.UnitOfWork.Entities;
-using Project.UnitOfWork.Services;
 using System;
 using System.Data.Entity;
 
@@ -10,12 +9,12 @@ namespace Project.UnitOfWork.Repositories
         where TEntity : Entity<TIdentifier>
         where TIdentifier : IConvertible
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private IDbSet<TEntity> DbSet => _unitOfWork.GetDbSet<TEntity>();
+        private readonly IUnitOfWorkContextAware _unitOfWorkContextAware;
+        private IDbSet<TEntity> DbSet => _unitOfWorkContextAware.GetDbSet<TEntity>();
 
-        protected GenericRepository(IUnitOfWork unitOfWork)
+        protected GenericRepository(IUnitOfWorkContextAware unitOfWorkContextAware)
         {
-            _unitOfWork = unitOfWork;
+            _unitOfWorkContextAware = unitOfWorkContextAware;
         }
 
         public void Add(TEntity entity)

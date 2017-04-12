@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\IResolver.cs" />
+    <Compile Include="Core\IUnitOfWorkContextAware.cs" />
     <Compile Include="Core\Resolver.cs" />
     <Compile Include="Core\UnitOfWork.cs" />
     <Compile Include="Core\UnitOfWorkFactory.cs" />
