@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace Project.UnitOfWork.Core
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWorkContextAware
     {
         private bool _disposed;
         private readonly UsuarioDbContext _context;

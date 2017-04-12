@@ -3,7 +3,7 @@ using System.Data.Entity;
 
 namespace Project.UnitOfWork.Core
 {
-    public interface IUnitOfWorkContextAware
+    public interface IUnitOfWorkContextAware : IUnitOfWork
     {
         IDbSet<TEntity> GetDbSet<TEntity>() where TEntity : Entity;
     }
