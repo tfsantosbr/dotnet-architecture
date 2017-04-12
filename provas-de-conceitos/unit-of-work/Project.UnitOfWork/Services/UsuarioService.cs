@@ -1,5 +1,6 @@
-﻿using Project.UnitOfWork.Contexts;
+﻿using Project.UnitOfWork.Core;
 using Project.UnitOfWork.Entities;
+using Project.UnitOfWork.Repositories;
 using System;
 
 namespace Project.UnitOfWork.Services

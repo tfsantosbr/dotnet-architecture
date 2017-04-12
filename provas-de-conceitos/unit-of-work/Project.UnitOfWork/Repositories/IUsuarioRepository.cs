@@ -1,8 +1,8 @@
 ﻿using Project.UnitOfWork.Entities;
 
-namespace Project.UnitOfWork.Services
+namespace Project.UnitOfWork.Repositories
 {
-    internal interface IUsuarioRepository : IRepository<Usuario, int>
+    public interface IUsuarioRepository : IRepository<Usuario, int>
     {
     }
 }

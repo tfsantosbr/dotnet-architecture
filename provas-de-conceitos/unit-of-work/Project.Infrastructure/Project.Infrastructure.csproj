@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CD1E9325-23A2-4CEE-A985-188145385137}</ProjectGuid>
+    <ProjectGuid>{FAE213E6-7127-4C46-8D97-13CB92A5BEAB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Project.UnitOfWork</RootNamespace>
-    <AssemblyName>Project.UnitOfWork</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>Project.Infrastructure</RootNamespace>
+    <AssemblyName>Project.Infrastructure</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -36,9 +36,6 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector, Version=4.0.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleInjector.4.0.0\lib\net45\SimpleInjector.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -50,26 +47,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\IResolver.cs" />
-    <Compile Include="Core\Resolver.cs" />
-    <Compile Include="Core\UnitOfWork.cs" />
-    <Compile Include="Core\UnitOfWorkFactory.cs" />
-    <Compile Include="Contexts\UsuarioDbContext.cs" />
-    <Compile Include="Entities\Entity.cs" />
-    <Compile Include="Entities\Usuario.cs" />
+    <Compile Include="Context\InfraContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\GenericRepository.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="Repositories\UsuarioRepository.cs" />
-    <Compile Include="Core\IUnitOfWork.cs" />
-    <Compile Include="Core\IUnitOfWorkFactory.cs" />
-    <Compile Include="Repositories\IUsuarioRepository.cs" />
-    <Compile Include="Services\IUsuarioService.cs" />
-    <Compile Include="Services\UsuarioService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Project.UnitOfWork\Project.UnitOfWork.csproj">
+      <Project>{cd1e9325-23a2-4cee-a985-188145385137}</Project>
+      <Name>Project.UnitOfWork</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,6 +1,5 @@
-﻿using Project.UnitOfWork.Contexts;
+﻿using Project.UnitOfWork.Core;
 using Project.UnitOfWork.Entities;
-using Project.UnitOfWork.Services;
 
 namespace Project.UnitOfWork.Repositories
 {

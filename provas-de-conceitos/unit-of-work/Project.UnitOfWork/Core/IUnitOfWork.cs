@@ -1,9 +1,9 @@
 ﻿using Project.UnitOfWork.Entities;
-using Project.UnitOfWork.Services;
+using Project.UnitOfWork.Repositories;
 using System;
 using System.Data.Entity;
 
-namespace Project.UnitOfWork.Contexts
+namespace Project.UnitOfWork.Core
 {
     public interface IUnitOfWork : IDisposable
     {

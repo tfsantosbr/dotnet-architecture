@@ -1,20 +1,20 @@
-﻿using System;
+﻿using Project.UnitOfWork.Contexts;
 
-namespace Project.UnitOfWork.Contexts
+namespace Project.UnitOfWork.Core
 {
     public class UnitOfWorkFactory : IUnitOfWorkFactory
     {
-        private readonly IServiceProvider _provider;
+        private readonly IResolver _resolver;
 
-        public UnitOfWorkFactory(IServiceProvider provider)
+        public UnitOfWorkFactory(IResolver resolver)
         {
-            _provider = provider;
+            _resolver = resolver;
         }
 
         public IUnitOfWork Create()
         {
             // TODO: Remover acoplamento
-            return new UnitOfWork(new UsuarioDbContext(), _provider);
+            return new UnitOfWork(new UsuarioDbContext(), _resolver);
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Project.UnitOfWork.Contexts;
+using Project.UnitOfWork.Core;
 using Project.UnitOfWork.Entities;
+using Project.UnitOfWork.Repositories;
 using Project.UnitOfWork.Services;
 using SimpleInjector;
+using System;
 
-namespace Project.UnitOfWork.Tests
+namespace Project.UnitOfWorkTests
 {
     [TestClass]
     public class UsuarioServiceTests
@@ -13,9 +15,18 @@ namespace Project.UnitOfWork.Tests
 
         public UsuarioServiceTests()
         {
-            var provider = new Container();
-            var unitOfWorkFactory = new UnitOfWorkFactory(provider);
-            _service = new UsuarioService(unitOfWorkFactory);
+            var container = new Container();
+
+            container.Register<IServiceProvider, Container>(Lifestyle.Transient);
+            container.Register<IUnitOfWork, Project.UnitOfWork.Core.UnitOfWork>(Lifestyle.Transient);
+            container.Register<IUnitOfWorkFactory, UnitOfWorkFactory>(Lifestyle.Transient);
+            container.Register(typeof(IRepository), typeof(IRepository), Lifestyle.Transient);
+            container.Register<IUsuarioRepository, UsuarioRepository>(Lifestyle.Transient);
+            container.Register<IUsuarioService, UsuarioService>(Lifestyle.Transient);
+
+            //container.Verify();
+
+            _service = container.GetInstance<IUsuarioService>();
         }
 
         [TestMethod]

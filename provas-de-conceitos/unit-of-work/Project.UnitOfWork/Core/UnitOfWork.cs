@@ -1,25 +1,26 @@
-﻿using Project.UnitOfWork.Entities;
-using Project.UnitOfWork.Services;
+﻿using Project.UnitOfWork.Contexts;
+using Project.UnitOfWork.Entities;
+using Project.UnitOfWork.Repositories;
 using System;
 using System.Data.Entity;
 
-namespace Project.UnitOfWork.Contexts
+namespace Project.UnitOfWork.Core
 {
     public class UnitOfWork : IUnitOfWork
     {
         private bool _disposed;
         private readonly UsuarioDbContext _context;
-        private readonly IServiceProvider _provider;
+        private readonly IResolver _resolver;
 
-        public UnitOfWork(UsuarioDbContext context, IServiceProvider provider)
+        public UnitOfWork(UsuarioDbContext context, IResolver resolver)
         {
             _context = context;
-            _provider = provider;
+            _resolver = resolver;
         }
 
         public TRepository GetRepository<TRepository>() where TRepository : IRepository
         {
-            return (TRepository)_provider.GetService(typeof(TRepository));
+            return _resolver.Resolve<TRepository>(typeof(TRepository));
         }
 
         public int Commit()
