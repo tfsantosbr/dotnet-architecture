@@ -1,5 +1,7 @@
-﻿using Project.UnitOfWork.Services;
+﻿using Project.UnitOfWork.Entities;
+using Project.UnitOfWork.Services;
 using System;
+using System.Data.Entity;
 
 namespace Project.UnitOfWork.Contexts
 {
@@ -11,6 +13,11 @@ namespace Project.UnitOfWork.Contexts
         public UnitOfWork(UsuarioDbContext context)
         {
             _context = context;
+        }
+
+        public TRepository GetRepository<TRepository>() where TRepository : IRepository
+        {
+            throw new NotImplementedException();
         }
 
         public int Commit()
@@ -37,9 +44,9 @@ namespace Project.UnitOfWork.Contexts
             _disposed = true;
         }
 
-        public TRepository GetRepository<TRepository>() where TRepository : IRepository
+        public IDbSet<TEntity> GetDbSet<TEntity>() where TEntity : Entity
         {
-            throw new NotImplementedException();
+            return _context.Set<TEntity>();
         }
     }
 }

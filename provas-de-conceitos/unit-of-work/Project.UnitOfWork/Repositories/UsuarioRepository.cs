@@ -1,19 +1,14 @@
-﻿using Project.UnitOfWork.Entities;
+﻿using Project.UnitOfWork.Contexts;
+using Project.UnitOfWork.Entities;
 using Project.UnitOfWork.Services;
-using System;
 
 namespace Project.UnitOfWork.Repositories
 {
-    public class UsuarioRepository : IUsuarioRepository
+    public class UsuarioRepository : GenericRepository<Usuario, int>, IUsuarioRepository
     {
-        public void Add(Usuario entity) // TODO: mover para classe RepositoryBase
+        public UsuarioRepository(IUnitOfWork unitOfWork)
+            : base(unitOfWork)
         {
-            throw new NotImplementedException();
-        }
-
-        public Usuario Get(int id) // TODO: mover para classe RepositoryBase
-        {
-            throw new NotImplementedException();
         }
     }
 }
