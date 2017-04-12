@@ -2,6 +2,7 @@
 using Project.UnitOfWork.Contexts;
 using Project.UnitOfWork.Entities;
 using Project.UnitOfWork.Services;
+using SimpleInjector;
 
 namespace Project.UnitOfWork.Tests
 {
@@ -12,7 +13,8 @@ namespace Project.UnitOfWork.Tests
 
         public UsuarioServiceTests()
         {
-            var unitOfWorkFactory = new UnitOfWorkFactory();
+            var provider = new Container();
+            var unitOfWorkFactory = new UnitOfWorkFactory(provider);
             _service = new UsuarioService(unitOfWorkFactory);
         }
 

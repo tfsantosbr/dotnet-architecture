@@ -9,15 +9,17 @@ namespace Project.UnitOfWork.Contexts
     {
         private bool _disposed;
         private readonly UsuarioDbContext _context;
+        private readonly IServiceProvider _provider;
 
-        public UnitOfWork(UsuarioDbContext context)
+        public UnitOfWork(UsuarioDbContext context, IServiceProvider provider)
         {
             _context = context;
+            _provider = provider;
         }
 
         public TRepository GetRepository<TRepository>() where TRepository : IRepository
         {
-            throw new NotImplementedException();
+            return (TRepository)_provider.GetService(typeof(TRepository));
         }
 
         public int Commit()
