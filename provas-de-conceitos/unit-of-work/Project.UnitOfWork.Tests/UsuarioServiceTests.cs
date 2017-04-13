@@ -4,7 +4,6 @@ using Project.UnitOfWork.Entities;
 using Project.UnitOfWork.Repositories;
 using Project.UnitOfWork.Services;
 using SimpleInjector;
-using System;
 
 namespace Project.UnitOfWorkTests
 {
@@ -17,10 +16,13 @@ namespace Project.UnitOfWorkTests
         {
             var container = new Container();
 
-            container.Register<IServiceProvider, Container>(Lifestyle.Transient);
-            container.Register<IUnitOfWork, Project.UnitOfWork.Core.UnitOfWork>(Lifestyle.Transient);
+            container.Register<IResolver, Resolver>(Lifestyle.Transient);
+
             container.Register<IUnitOfWorkFactory, UnitOfWorkFactory>(Lifestyle.Transient);
-            container.Register(typeof(IRepository), typeof(IRepository), Lifestyle.Transient);
+            container.Register<IUnitOfWorkContextAware, Project.UnitOfWork.Core.UnitOfWork>(Lifestyle.Transient);
+
+            container.Register(typeof(IRepository<,>), new[] { typeof(IRepository<,>).Assembly });
+
             container.Register<IUsuarioRepository, UsuarioRepository>(Lifestyle.Transient);
             container.Register<IUsuarioService, UsuarioService>(Lifestyle.Transient);
 
