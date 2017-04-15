@@ -2,6 +2,8 @@
 using Project.Domain.Services;
 using Project.RestfulApi.Models.Usuarios;
 using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -26,8 +28,30 @@ namespace Project.RestfulApi.Controllers
         [Route("")]
         public async Task<IHttpActionResult> Get([FromUri]UsuarioFilterModel model)
         {
-            await Task.Yield();
-            throw new NotImplementedException();
+            // valida a model
+
+            // retorna as entidades
+            var entityList = await _service.Find();
+
+            // verifica se retornou alguma entidade
+            if (entityList == null)
+                return NotFound();
+
+            var modelList = new List<UsuarioListItemModel>();
+            foreach (var entity in entityList)
+            {
+                // converte para a model
+                var modelItem = new UsuarioListItemModel
+                {
+                    Nome = entity.Nome,
+                    Status = entity.Status
+                };
+
+                // adiciona na lista de models
+                modelList.Add(modelItem);
+            }
+
+            return Content(HttpStatusCode.PartialContent, modelList);
         }
 
         [Route("{id}")]
@@ -74,7 +98,11 @@ namespace Project.RestfulApi.Controllers
             };
 
             // cria entidade
-            await _service.Create(entity);
+            var result = await _service.Create(entity);
+
+            // valida se a entidade foi criada
+            if (result == null)
+                return Content(HttpStatusCode.Forbidden, "O recurso não pôde ser criado por um motivo desconhecido. Comunique o administrador do sistema.");
 
             // retorna resultado
             return Created($"{Request.RequestUri.AbsoluteUri}/{entity.Id}", model);
@@ -83,15 +111,49 @@ namespace Project.RestfulApi.Controllers
         [Route("{id}")]
         public async Task<IHttpActionResult> Put(Guid? id, [FromBody]UsuarioUpdateModel model)
         {
-            await Task.Yield();
-            throw new NotImplementedException();
+            // valida id
+            if (!id.HasValue)
+                return BadRequest("Id inválido ou não informado");
+
+            // valida model
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            // pega a entidade pelo id
+            var entity = await _service.GetById(id.Value);
+
+            // verifica se a entidade existe
+            if (entity == null)
+                return NotFound();
+
+            // atualiza valores entidade
+            entity.Nome = model.Nome;
+            entity.Email = model.Email;
+            entity.Sobrenome = model.Sobrenome;
+
+            // atualiza a entidade no banco
+            await _service.Update(entity);
+
+            // retorna resultado
+            return Ok(model);
         }
 
         [Route("{id}")]
         public async Task<IHttpActionResult> Delete(Guid? id)
         {
-            await Task.Yield();
-            throw new NotImplementedException();
+            // valida id
+            if (!id.HasValue)
+                return BadRequest("Id inválido ou não informado");
+
+            // deleta entidade
+            var result = await _service.Delete(id.Value);
+
+            // verifica se foi deletado com sucesso
+            if (!result)
+                return NotFound();
+
+            // retorna confirmação do delete
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // TODO: API Patch Method
