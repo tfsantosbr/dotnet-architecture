@@ -4,6 +4,7 @@ using Project.RestfulApi.Models.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -37,6 +38,7 @@ namespace Project.RestfulApi.Controllers
             if (entityList == null || entityList.Count == 0)
                 return NotFound();
 
+
             var modelList = new List<UsuarioListItemModel>();
             foreach (var entity in entityList)
             {
@@ -52,7 +54,16 @@ namespace Project.RestfulApi.Controllers
                 modelList.Add(modelItem);
             }
 
-            return Content(HttpStatusCode.PartialContent, modelList);
+            // adiciona os headers de paginação
+
+            var response = Request.CreateResponse(HttpStatusCode.PartialContent, modelList);
+
+            response.Headers.Add("Total-Count", "150");
+            response.Headers.Add("Pagination-Pages", "15");
+            response.Headers.Add("Pagination-Offset", "0");
+            response.Headers.Add("Pagination-Limit", "10");
+
+            return ResponseMessage(response);
         }
 
         [Route("{id}")]
@@ -99,11 +110,10 @@ namespace Project.RestfulApi.Controllers
             };
 
             // cria entidade
-            var result = await _service.Create(entity);
+            await _service.Create(entity);
 
-            // valida se a entidade foi criada
-            if (result == null)
-                return Content(HttpStatusCode.Forbidden, "O recurso não pôde ser criado por um motivo desconhecido. Comunique o administrador do sistema.");
+            // atribui o Id da entidade criada para a model
+            model.Id = entity.Id;
 
             // retorna resultado
             return Created($"{Request.RequestUri.AbsoluteUri}/{entity.Id}", model);

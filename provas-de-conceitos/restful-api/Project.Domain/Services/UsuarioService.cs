@@ -14,13 +14,11 @@ namespace Project.Domain.Services
 
         #region Main Methods
 
-        public async Task<Guid?> Create(Usuario entity)
+        public async Task Create(Usuario entity)
         {
             await Task.Yield();
 
             _usuariosList.Add(entity);
-
-            return entity.Id;
         }
 
         public async Task<Usuario> GetById(Guid id)
