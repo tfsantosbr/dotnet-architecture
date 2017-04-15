@@ -34,7 +34,7 @@ namespace Project.RestfulApi.Controllers
             var entityList = await _service.Find();
 
             // verifica se retornou alguma entidade
-            if (entityList == null)
+            if (entityList == null || entityList.Count == 0)
                 return NotFound();
 
             var modelList = new List<UsuarioListItemModel>();
@@ -43,6 +43,7 @@ namespace Project.RestfulApi.Controllers
                 // converte para a model
                 var modelItem = new UsuarioListItemModel
                 {
+                    Id = entity.Id,
                     Nome = entity.Nome,
                     Status = entity.Status
                 };
