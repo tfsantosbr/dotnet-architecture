@@ -11,15 +11,14 @@ namespace Project.UnitOfWorkTests
     public class UsuarioServiceTests
     {
         public readonly IUsuarioService _service;
+        public readonly Container container = new Container();
 
         public UsuarioServiceTests()
         {
-            var container = new Container();
-
             container.Register<IResolver, Resolver>(Lifestyle.Transient);
 
             container.Register<IUnitOfWorkFactory, UnitOfWorkFactory>(Lifestyle.Transient);
-            container.Register<IUnitOfWorkContextAware, Project.UnitOfWork.Core.UnitOfWork>(Lifestyle.Transient);
+            //container.Register<IUnitOfWorkContextAware, Project.UnitOfWork.Core.UnitOfWork>(Lifestyle.Transient);
 
             container.Register(typeof(IRepository<,>), new[] { typeof(IRepository<,>).Assembly });
 
@@ -34,14 +33,15 @@ namespace Project.UnitOfWorkTests
         [TestMethod]
         public void UsuarioServiceTests_AdicionarUsuario_AdicionarComSucesso()
         {
-            // Arrange
-            var usuario = new Usuario { Id = 1, Nome = "Tiago", Status = UsuarioStatus.Ativo };
+            var unitOfWorkFactory = new UnitOfWorkFactory(new Resolver(container));
 
-            // Act
-            var result = _service.Add(usuario);
+            using (var unitOfWork = unitOfWorkFactory.Create())
+            {
+                var usuarioRepository = new UsuarioRepository(unitOfWork);
+                usuarioRepository.Add(new Usuario { Nome = "Roberto", Status = UsuarioStatus.Ativo });
 
-            // Assert
-            Assert.IsTrue(result);
+                var result = unitOfWork.Commit();
+            }
         }
 
         [TestMethod]

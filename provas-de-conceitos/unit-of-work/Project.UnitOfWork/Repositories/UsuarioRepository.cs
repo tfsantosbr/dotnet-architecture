@@ -5,8 +5,8 @@ namespace Project.UnitOfWork.Repositories
 {
     public class UsuarioRepository : GenericRepository<Usuario, int>, IUsuarioRepository
     {
-        public UsuarioRepository(IUnitOfWorkContextAware unitOfWorkContextAware)
-            : base(unitOfWorkContextAware)
+        public UsuarioRepository(IUnitOfWork unitOfWork)
+            : base(unitOfWork)
         {
         }
     }
