@@ -4,6 +4,9 @@
     {
         public string Nome { get; set; }
         public UsuarioStatus Status { get; set; }
+
+        public int? PaisId { get; set; }
+        public virtual Pais Pais { get; set; }
     }
 
     public enum UsuarioStatus

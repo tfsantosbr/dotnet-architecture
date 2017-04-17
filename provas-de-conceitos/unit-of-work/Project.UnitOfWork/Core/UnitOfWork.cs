@@ -20,7 +20,9 @@ namespace Project.UnitOfWork.Core
 
         public TRepository GetRepository<TRepository>() where TRepository : IRepository
         {
-            return _resolver.Resolve<TRepository>(typeof(TRepository));
+            var repository = _resolver.Resolve<TRepository>(typeof(TRepository));
+            
+            return repository;
         }
 
         public int Commit()

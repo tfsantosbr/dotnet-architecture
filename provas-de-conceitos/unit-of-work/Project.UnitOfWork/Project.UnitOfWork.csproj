@@ -56,10 +56,13 @@
     <Compile Include="Core\UnitOfWorkFactory.cs" />
     <Compile Include="Contexts\UsuarioDbContext.cs" />
     <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\Pais.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\IPaisRepository.cs" />
+    <Compile Include="Repositories\PaisRepository.cs" />
     <Compile Include="Repositories\UsuarioRepository.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\IUnitOfWorkFactory.cs" />

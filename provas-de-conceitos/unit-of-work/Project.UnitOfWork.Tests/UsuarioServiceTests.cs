@@ -18,9 +18,9 @@ namespace Project.UnitOfWorkTests
             container.Register<IResolver, Resolver>(Lifestyle.Transient);
 
             container.Register<IUnitOfWorkFactory, UnitOfWorkFactory>(Lifestyle.Transient);
-            //container.Register<IUnitOfWorkContextAware, Project.UnitOfWork.Core.UnitOfWork>(Lifestyle.Transient);
+            container.Register<IUnitOfWork, Project.UnitOfWork.Core.UnitOfWork>(Lifestyle.Transient);
 
-            container.Register(typeof(IRepository<,>), new[] { typeof(IRepository<,>).Assembly });
+            container.Register(typeof(IRepository<,>), new[] { typeof(GenericRepository<,>).Assembly });
 
             container.Register<IUsuarioRepository, UsuarioRepository>(Lifestyle.Transient);
             container.Register<IUsuarioService, UsuarioService>(Lifestyle.Transient);
@@ -33,25 +33,27 @@ namespace Project.UnitOfWorkTests
         [TestMethod]
         public void UsuarioServiceTests_AdicionarUsuario_AdicionarComSucesso()
         {
+            _service.Add(new Usuario { Nome = "teste", Status = UsuarioStatus.Ativo });
+        }
+
+        [TestMethod]
+        public void UnitOfWorkMultipleRepositoriesTest()
+        {
             var unitOfWorkFactory = new UnitOfWorkFactory(new Resolver(container));
 
             using (var unitOfWork = unitOfWorkFactory.Create())
             {
+                var paisRepository = new PaisRepository(unitOfWork);
                 var usuarioRepository = new UsuarioRepository(unitOfWork);
-                usuarioRepository.Add(new Usuario { Nome = "Roberto", Status = UsuarioStatus.Ativo });
+
+                var pais = new Pais { Nome = "Turquia" };
+                paisRepository.Add(pais);
+
+                var usuario = new Usuario { PaisId = pais.Id, Nome = "Regiscleiton", Status = UsuarioStatus.Inativo };
+                usuarioRepository.Add(usuario);
 
                 var result = unitOfWork.Commit();
             }
-        }
-
-        [TestMethod]
-        public void UsuarioServiceTests_ChangeStatus_ComSucesso()
-        {
-            // Arrange & Act
-            var result = _service.ChangeStatus(1, UsuarioStatus.Inativo);
-
-            // Assert
-            Assert.IsTrue(result);
         }
     }
 }
