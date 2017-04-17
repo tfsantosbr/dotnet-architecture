@@ -50,8 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\IResolver.cs" />
-    <Compile Include="Core\Resolver.cs" />
     <Compile Include="Core\UnitOfWork.cs" />
     <Compile Include="Core\UnitOfWorkFactory.cs" />
     <Compile Include="Contexts\UsuarioDbContext.cs" />

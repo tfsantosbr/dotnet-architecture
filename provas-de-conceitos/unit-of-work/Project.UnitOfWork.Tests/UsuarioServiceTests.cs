@@ -15,8 +15,6 @@ namespace Project.UnitOfWorkTests
 
         public UsuarioServiceTests()
         {
-            container.Register<IResolver, Resolver>(Lifestyle.Transient);
-
             container.Register<IUnitOfWorkFactory, UnitOfWorkFactory>(Lifestyle.Transient);
             container.Register<IUnitOfWork, Project.UnitOfWork.Core.UnitOfWork>(Lifestyle.Transient);
 
@@ -39,17 +37,17 @@ namespace Project.UnitOfWorkTests
         [TestMethod]
         public void UnitOfWorkMultipleRepositoriesTest()
         {
-            var unitOfWorkFactory = new UnitOfWorkFactory(new Resolver(container));
+            var unitOfWorkFactory = new UnitOfWorkFactory();
 
             using (var unitOfWork = unitOfWorkFactory.Create())
             {
                 var paisRepository = new PaisRepository(unitOfWork);
                 var usuarioRepository = new UsuarioRepository(unitOfWork);
 
-                var pais = new Pais { Nome = "Turquia" };
+                var pais = new Pais { Nome = "Nova Iorque" };
                 paisRepository.Add(pais);
 
-                var usuario = new Usuario { PaisId = pais.Id, Nome = "Regiscleiton", Status = UsuarioStatus.Inativo };
+                var usuario = new Usuario { PaisId = pais.Id, Nome = "Arovaldo", Status = UsuarioStatus.Inativo };
                 usuarioRepository.Add(usuario);
 
                 var result = unitOfWork.Commit();

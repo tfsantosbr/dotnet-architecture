@@ -10,18 +10,15 @@ namespace Project.UnitOfWork.Core
     {
         private bool _disposed;
         private readonly UsuarioDbContext _context;
-        private readonly IResolver _resolver;
 
-        public UnitOfWork(UsuarioDbContext context, IResolver resolver)
+        public UnitOfWork(UsuarioDbContext context)
         {
             _context = context;
-            _resolver = resolver;
         }
 
         public TRepository GetRepository<TRepository>() where TRepository : IRepository
         {
-            var repository = _resolver.Resolve<TRepository>(typeof(TRepository));
-            
+            var repository = Activator.CreateInstance<TRepository>();
             return repository;
         }
 
