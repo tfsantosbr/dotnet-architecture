@@ -9,28 +9,31 @@ namespace Project.UnitOfWorkProject.Core
     public class UnitOfWork : IUnitOfWork
     {
         private bool _disposed;
-        private readonly DbContext _context;
+        private readonly DbContext context;
+        private readonly IServiceProvider container;
 
-        public UnitOfWork(DbContext context)
+        public UnitOfWork(DbContext context, IServiceProvider container)
         {
-            _context = context;
+            this.context = context;
+            this.container = container;
         }
 
         public TRepository GetRepository<TRepository>() where TRepository : IRepository
         {
-            var repository = Activator.CreateInstance<TRepository>();
+            var repository = (TRepository)container.GetService(typeof(TRepository));
+
             //repository.SetUnitOfWork(this);
             return repository;
         }
 
         public int Commit()
         {
-            return _context.SaveChanges();
+            return context.SaveChanges();
         }
 
         public async Task<int> CommitAsync()
         {
-            return await _context.SaveChangesAsync();
+            return await context.SaveChangesAsync();
         }
 
         public void Dispose()
@@ -45,7 +48,7 @@ namespace Project.UnitOfWorkProject.Core
             {
                 if (disposing)
                 {
-                    _context.Dispose();
+                    context.Dispose();
                 }
             }
 
@@ -54,7 +57,7 @@ namespace Project.UnitOfWorkProject.Core
 
         public IDbSet<TEntity> GetDbSet<TEntity>() where TEntity : Entity
         {
-            return _context.Set<TEntity>();
+            return context.Set<TEntity>();
         }
 
 

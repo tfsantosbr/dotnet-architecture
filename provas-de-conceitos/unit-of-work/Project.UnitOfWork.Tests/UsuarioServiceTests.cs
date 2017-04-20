@@ -1,7 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Project.UnitOfWorkProject.Core;
-using Project.UnitOfWorkProject.Entities;
-using Project.UnitOfWorkProject.Repositories;
 
 namespace Project.UnitOfWorkProjectTests
 {
@@ -11,21 +8,21 @@ namespace Project.UnitOfWorkProjectTests
         [TestMethod]
         public void UnitOfWorkMultipleRepositoriesTest()
         {
-            var unitOfWorkFactory = new UnitOfWorkFactory();
+            //var unitOfWorkFactory = new UnitOfWorkFactory();
 
-            using (var unitOfWork = unitOfWorkFactory.Create())
-            {
-                var paisRepository = new PaisRepository(unitOfWork);
-                var usuarioRepository = new UsuarioRepository(unitOfWork);
+            //using (var unitOfWork = unitOfWorkFactory.Create())
+            //{
+            //    var paisRepository = new PaisRepository(unitOfWork);
+            //    var usuarioRepository = new UsuarioRepository(unitOfWork);
 
-                var pais = new Pais { Nome = "Nova Iorque 2" };
-                paisRepository.Add(pais);
+            //    var pais = new Pais { Nome = "Nova Iorque 2" };
+            //    paisRepository.Add(pais);
 
-                var usuario = new Usuario { PaisId = pais.Id, Nome = "Arovaldo 2", Status = UsuarioStatus.Inativo };
-                usuarioRepository.Add(usuario);
+            //    var usuario = new Usuario { PaisId = pais.Id, Nome = "Arovaldo 2", Status = UsuarioStatus.Inativo };
+            //    usuarioRepository.Add(usuario);
 
-                var result = unitOfWork.Commit();
-            }
+            //    var result = unitOfWork.Commit();
+            //}
         }
     }
 }

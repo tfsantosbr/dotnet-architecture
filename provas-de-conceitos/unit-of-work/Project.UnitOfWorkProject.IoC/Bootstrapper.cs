@@ -3,6 +3,7 @@ using Project.UnitOfWorkProject.Core;
 using Project.UnitOfWorkProject.Repositories;
 using Project.UnitOfWorkProject.Services;
 using SimpleInjector;
+using System;
 using System.Data.Entity;
 
 namespace Project.UnitOfWorkProject.IoC
@@ -12,6 +13,7 @@ namespace Project.UnitOfWorkProject.IoC
         public static void Bootstrap(Container container)
         {
             container.Register<DbContext, UsuarioDbContext>(Lifestyle.Scoped);
+            container.RegisterSingleton<IServiceProvider, Container>();
             container.RegisterSingleton<IUnitOfWorkFactory, UnitOfWorkFactory>();
             container.Register<IUnitOfWork, UnitOfWork>(Lifestyle.Scoped);
 
