@@ -7,8 +7,8 @@
     <ProjectGuid>{CD1E9325-23A2-4CEE-A985-188145385137}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Project.UnitOfWork</RootNamespace>
-    <AssemblyName>Project.UnitOfWork</AssemblyName>
+    <RootNamespace>Project.UnitOfWorkProject</RootNamespace>
+    <AssemblyName>Project.UnitOfWorkProject</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

@@ -56,9 +56,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Project.UnitOfWork\Project.UnitOfWork.csproj">
+    <ProjectReference Include="..\Project.UnitOfWork\Project.UnitOfWorkProject.csproj">
       <Project>{cd1e9325-23a2-4cee-a985-188145385137}</Project>
-      <Name>Project.UnitOfWork</Name>
+      <Name>Project.UnitOfWorkProject</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

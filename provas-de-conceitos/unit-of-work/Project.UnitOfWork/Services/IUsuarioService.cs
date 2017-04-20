@@ -1,6 +1,6 @@
-﻿using Project.UnitOfWork.Entities;
+﻿using Project.UnitOfWorkProject.Entities;
 
-namespace Project.UnitOfWork.Services
+namespace Project.UnitOfWorkProject.Services
 {
     public interface IUsuarioService
     {

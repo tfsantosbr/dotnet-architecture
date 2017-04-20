@@ -1,6 +1,6 @@
-﻿using Project.UnitOfWork.Contexts;
+﻿using Project.UnitOfWorkProject.Contexts;
 
-namespace Project.UnitOfWork.Core
+namespace Project.UnitOfWorkProject.Core
 {
     public class UnitOfWorkFactory : IUnitOfWorkFactory
     {

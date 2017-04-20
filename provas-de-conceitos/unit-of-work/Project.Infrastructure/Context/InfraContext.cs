@@ -1,4 +1,4 @@
-﻿using Project.UnitOfWork.Entities;
+﻿using Project.UnitOfWorkProject.Entities;
 using System.Data.Entity;
 
 namespace Project.Infrastructure.Context

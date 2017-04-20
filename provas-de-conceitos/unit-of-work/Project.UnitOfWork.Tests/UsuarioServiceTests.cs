@@ -1,29 +1,30 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Project.UnitOfWork.Core;
-using Project.UnitOfWork.Entities;
-using Project.UnitOfWork.Repositories;
-using Project.UnitOfWork.Services;
+using Project.UnitOfWorkProject.Core;
+using Project.UnitOfWorkProject.Entities;
+using Project.UnitOfWorkProject.Repositories;
+using Project.UnitOfWorkProject.Services;
 using SimpleInjector;
 
-namespace Project.UnitOfWorkTests
+namespace Project.UnitOfWorkProjectTests
 {
     [TestClass]
     public class UsuarioServiceTests
     {
         public readonly IUsuarioService _service;
-        public readonly Container container = new Container();
 
         public UsuarioServiceTests()
         {
+            var container = new Container();
+
             container.Register<IUnitOfWorkFactory, UnitOfWorkFactory>(Lifestyle.Transient);
-            container.Register<IUnitOfWork, Project.UnitOfWork.Core.UnitOfWork>(Lifestyle.Transient);
+            container.Register<IUnitOfWork, UnitOfWork>(Lifestyle.Transient);
 
             container.Register(typeof(IRepository<,>), new[] { typeof(GenericRepository<,>).Assembly });
 
             container.Register<IUsuarioRepository, UsuarioRepository>(Lifestyle.Transient);
             container.Register<IUsuarioService, UsuarioService>(Lifestyle.Transient);
 
-            //container.Verify();
+            container.Verify();
 
             _service = container.GetInstance<IUsuarioService>();
         }

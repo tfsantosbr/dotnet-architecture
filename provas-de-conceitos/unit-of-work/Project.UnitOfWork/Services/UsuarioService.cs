@@ -1,9 +1,9 @@
-﻿using Project.UnitOfWork.Core;
-using Project.UnitOfWork.Entities;
-using Project.UnitOfWork.Repositories;
+﻿using Project.UnitOfWorkProject.Core;
+using Project.UnitOfWorkProject.Entities;
+using Project.UnitOfWorkProject.Repositories;
 using System;
 
-namespace Project.UnitOfWork.Services
+namespace Project.UnitOfWorkProject.Services
 {
     public class UsuarioService : IUsuarioService
     {
