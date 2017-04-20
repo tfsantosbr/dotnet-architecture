@@ -1,10 +1,10 @@
 ﻿using Project.UnitOfWorkProject.Entities;
+using System.Threading.Tasks;
 
 namespace Project.UnitOfWorkProject.Services
 {
     public interface IUsuarioService
     {
-        bool Add(Usuario entity); // TODO: Mover para IService
-        bool ChangeStatus(int id, UsuarioStatus status);
+        Task<bool> AddAsync(Usuario entity);
     }
 }

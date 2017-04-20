@@ -2,6 +2,7 @@
 using Project.UnitOfWorkProject.Entities;
 using Project.UnitOfWorkProject.Repositories;
 using System;
+using System.Threading.Tasks;
 
 namespace Project.UnitOfWorkProject.Services
 {
@@ -20,7 +21,7 @@ namespace Project.UnitOfWorkProject.Services
 
         // Main Methods
 
-        public bool Add(Usuario entity)
+        public async Task<bool> AddAsync(Usuario entity)
         {
             try
             {
@@ -30,7 +31,7 @@ namespace Project.UnitOfWorkProject.Services
 
                     usuarioRepository.Add(entity);
 
-                    var result = unitOfWork.Commit();
+                    var result = await unitOfWork.CommitAsync();
 
                     return result > 0;
                 }
@@ -41,26 +42,26 @@ namespace Project.UnitOfWorkProject.Services
             }
         }
 
-        public bool ChangeStatus(int id, UsuarioStatus status)
-        {
-            try
-            {
-                using (var unitOfWork = _unitOfWorkFactory.Create())
-                {
-                    var usuarioRepository = unitOfWork.GetRepository<IUsuarioRepository>();
+        //public async Task<bool> ChangeStatus(int id, UsuarioStatus status)
+        //{
+        //    try
+        //    {
+        //        using (var unitOfWork = _unitOfWorkFactory.Create())
+        //        {
+        //            var usuarioRepository = unitOfWork.GetRepository<IUsuarioRepository>();
 
-                    var usuario = usuarioRepository.Get(id);
-                    usuario.Status = status;
+        //            var usuario = usuarioRepository.Get(id);
+        //            usuario.Status = status;
 
-                    var result = unitOfWork.Commit();
+        //            var result = unitOfWork.Commit();
 
-                    return result > 0;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //            return result > 0;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
     }
 }

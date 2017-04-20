@@ -1,8 +1,8 @@
-﻿using Project.UnitOfWorkProject.Contexts;
-using Project.UnitOfWorkProject.Entities;
+﻿using Project.UnitOfWorkProject.Entities;
 using Project.UnitOfWorkProject.Repositories;
 using System;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace Project.UnitOfWorkProject.Core
 {
@@ -28,6 +28,11 @@ namespace Project.UnitOfWorkProject.Core
             return _context.SaveChanges();
         }
 
+        public async Task<int> CommitAsync()
+        {
+            return await _context.SaveChangesAsync();
+        }
+
         public void Dispose()
         {
             Dispose(true);
@@ -51,5 +56,7 @@ namespace Project.UnitOfWorkProject.Core
         {
             return _context.Set<TEntity>();
         }
+
+
     }
 }

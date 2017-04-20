@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json.Serialization;
 using System.Linq;
+using System.Net.Http.Formatting;
 using System.Web.Http;
 
 namespace Project.UnitOfWorkProject.WebApi
@@ -10,6 +10,8 @@ namespace Project.UnitOfWorkProject.WebApi
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
+            jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             // Web API routes
             config.MapHttpAttributeRoutes();

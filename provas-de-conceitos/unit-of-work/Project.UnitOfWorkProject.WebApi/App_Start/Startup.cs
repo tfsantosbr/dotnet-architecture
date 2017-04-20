@@ -1,7 +1,8 @@
-﻿using Newtonsoft.Json.Serialization;
-using Owin;
-using System.Linq;
-using System.Net.Http.Formatting;
+﻿using Owin;
+using Project.UnitOfWorkProject.IoC;
+using SimpleInjector;
+using SimpleInjector.Integration.WebApi;
+using SimpleInjector.Lifestyles;
 using System.Web.Http;
 
 namespace Project.UnitOfWorkProject.WebApi
@@ -15,8 +16,26 @@ namespace Project.UnitOfWorkProject.WebApi
             WebApiConfig.Register(config);
             app.UseWebApi(config);
 
-            var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
-            jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+            // simple injector container configuration
+
+            var container = new Container();
+            container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
+
+            Bootstrapper.Bootstrap(container);
+            container.Verify();
+
+            // simple injector OWIN configuration 
+
+            app.Use(async (context, next) =>
+            {
+                using (AsyncScopedLifestyle.BeginScope(container))
+                {
+                    await next();
+                }
+            });
+
+            config.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
         }
     }
 }

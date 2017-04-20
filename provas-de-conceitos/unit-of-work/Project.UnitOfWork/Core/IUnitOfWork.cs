@@ -2,6 +2,7 @@
 using Project.UnitOfWorkProject.Repositories;
 using System;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace Project.UnitOfWorkProject.Core
 {
@@ -11,5 +12,6 @@ namespace Project.UnitOfWorkProject.Core
         IDbSet<TEntity> GetDbSet<TEntity>() where TEntity : Entity;
 
         int Commit();
+        Task<int> CommitAsync();
     }
 }

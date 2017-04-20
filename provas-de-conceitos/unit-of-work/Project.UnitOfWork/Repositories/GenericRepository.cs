@@ -21,10 +21,5 @@ namespace Project.UnitOfWorkProject.Repositories
         {
             DbSet.Add(entity);
         }
-
-        public TEntity Get(TIdentifier id)
-        {
-            return DbSet.Find(id);
-        }
     }
 }

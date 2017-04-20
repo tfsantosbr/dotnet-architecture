@@ -13,7 +13,5 @@ namespace Project.UnitOfWorkProject.Repositories
         where TIdentifier : IConvertible
     {
         void Add(TEntity entity);
-
-        TEntity Get(TIdentifier id);
     }
 }
