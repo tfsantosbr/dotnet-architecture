@@ -3,7 +3,10 @@ using System;
 
 namespace Project.UnitOfWorkProject.Repositories
 {
-    public interface IRepository { }
+    public interface IRepository
+    {
+        //void SetUnitOfWork(IUnitOfWork unitOfWork);
+    }
 
     public interface IRepository<TEntity, in TIdentifier> : IRepository
         where TEntity : Entity<TIdentifier>

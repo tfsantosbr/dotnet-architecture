@@ -9,9 +9,9 @@ namespace Project.UnitOfWorkProject.Core
     public class UnitOfWork : IUnitOfWork
     {
         private bool _disposed;
-        private readonly UsuarioDbContext _context;
+        private readonly DbContext _context;
 
-        public UnitOfWork(UsuarioDbContext context)
+        public UnitOfWork(DbContext context)
         {
             _context = context;
         }
@@ -19,6 +19,7 @@ namespace Project.UnitOfWorkProject.Core
         public TRepository GetRepository<TRepository>() where TRepository : IRepository
         {
             var repository = Activator.CreateInstance<TRepository>();
+            //repository.SetUnitOfWork(this);
             return repository;
         }
 
