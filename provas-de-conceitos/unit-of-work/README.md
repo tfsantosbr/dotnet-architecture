@@ -4,7 +4,7 @@ Projeto de uma prova de conceito do [Unit Of Work][ref-1], um pattern que possib
 
 ## Autores
 
-* **Tiago Felipe dos Santos** - [Github](https://github.com/taigosantos) - [Linkedin](https://www.linkedin.com/in/tiago-santos-36b25341/) - [E-mail](taigobrasil@gmail.com)
+* **Tiago Felipe dos Santos** - [Github](https://github.com/taigosantos) - [Linkedin](https://www.linkedin.com/in/tiago-santos-36b25341/) - [E-mail](mailto:taigobrasil@gmail.com)
 
 ## Tecnologias de Desenvolvimento
 
