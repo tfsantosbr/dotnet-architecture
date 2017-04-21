@@ -1,6 +1,6 @@
 # Unit of Work (Prova de Conceito)
 
-Projeto de uma prova de conceito do pattern Unit of Work, construído com a tecnologia.
+Projeto de uma prova de conceito do pattern [Unit Of Work][ref-1], um pattern que possibilita o compartilhamento de um mesmo contexto em comum do [Entity Framework][tec-3] em diversos repositórios.
 
 ## Tecnologias de Desenvolvimento
 
