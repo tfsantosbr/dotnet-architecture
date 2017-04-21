@@ -10,13 +10,13 @@ namespace Project.UnitOfWorkProject.Services
     {
         // Properties
 
-        public readonly IUnitOfWorkFactory _unitOfWorkFactory;
+        private readonly Func<IUnitOfWorkContextAware> unitOfWorkFactory;
 
         // Constructos
 
-        public UsuarioService(IUnitOfWorkFactory unitOfWorkFactory)
+        public UsuarioService(Func<IUnitOfWorkContextAware> unitOfWorkFactory)
         {
-            _unitOfWorkFactory = unitOfWorkFactory;
+            this.unitOfWorkFactory = unitOfWorkFactory;
         }
 
         // Main Methods
@@ -25,7 +25,7 @@ namespace Project.UnitOfWorkProject.Services
         {
             try
             {
-                using (var unitOfWork = _unitOfWorkFactory.Create())
+                using (var unitOfWork = unitOfWorkFactory.Invoke())
                 {
                     var usuarioRepository = unitOfWork.GetRepository<IUsuarioRepository>();
 

@@ -54,7 +54,6 @@
     <Compile Include="Core\IUnitOfWorkContextAware.cs" />
     <Compile Include="Core\Resolver.cs" />
     <Compile Include="Core\UnitOfWork.cs" />
-    <Compile Include="Core\UnitOfWorkFactory.cs" />
     <Compile Include="Contexts\UsuarioDbContext.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Pais.cs" />
@@ -66,7 +65,6 @@
     <Compile Include="Repositories\PaisRepository.cs" />
     <Compile Include="Repositories\UsuarioRepository.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
-    <Compile Include="Core\IUnitOfWorkFactory.cs" />
     <Compile Include="Repositories\IUsuarioRepository.cs" />
     <Compile Include="Services\IUsuarioService.cs" />
     <Compile Include="Services\UsuarioService.cs" />
