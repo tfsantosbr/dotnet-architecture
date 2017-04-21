@@ -13,8 +13,8 @@ Projeto de uma prova de conceito do [Unit Of Work][ref-1], um pattern que possib
 [tec-3]: https://github.com/aspnet/EntityFramework6
 [tec-4]: https://simpleinjector.org
 
-* [.NET Framrwork 4.6.x][tec-1]
-* [.NET Framrwork C# 7.x][tec-2]
+* [.NET Framework 4.6.x][tec-1]
+* [.NET Framework C# 7.x][tec-2]
 * [Entity Framework 6.x][tec-3]
 * [Simple Injector 4.x][tec-4]
 
