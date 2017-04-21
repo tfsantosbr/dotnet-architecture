@@ -42,5 +42,5 @@ Projeto de uma prova de conceito do [Unit Of Work][ref-1], um pattern que possib
 
 ## Considerações
 
-* O artigo [Abstract Factories are a code smell][ref-1] dis que a utilização de abstract factories não é uma boa prática de programação, sendo assim foi substituída a classe `IUnitOfWorkFactory` pela dependência `Func<IUnitofWorkContextAware>`.
+* O artigo [Abstract Factories are a code smell][ref-1] diz que a utilização de abstract factories não é uma boa prática de programação, sendo assim foi substituída a classe `IUnitOfWorkFactory` pela dependência `Func<IUnitofWorkContextAware>`.
 * Ao invés de _Ninject_ utilizada no tutorial [Unit Of Work - PARTE 1][ref-2] e [Unit Of Work - PARTE 2][ref-3], foi usada a tecnologia [Simple Injector][tec-4].
