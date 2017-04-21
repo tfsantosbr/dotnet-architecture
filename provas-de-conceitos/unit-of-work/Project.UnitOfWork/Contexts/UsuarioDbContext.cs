@@ -1,5 +1,6 @@
 ﻿using Project.UnitOfWorkProject.Entities;
 using System.Data.Entity;
+using System.Diagnostics;
 
 namespace Project.UnitOfWorkProject.Contexts
 {
@@ -10,6 +11,8 @@ namespace Project.UnitOfWorkProject.Contexts
         public UsuarioDbContext()
             : base("Default")
         {
+            Debug.Print("[Contexto] Started...");
+
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = false;
         }
@@ -25,5 +28,14 @@ namespace Project.UnitOfWorkProject.Contexts
         }
 
         #endregion
+
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+                Debug.Print("[Contexto] Disposed!");
+
+            base.Dispose(disposing);
+        }
     }
 }

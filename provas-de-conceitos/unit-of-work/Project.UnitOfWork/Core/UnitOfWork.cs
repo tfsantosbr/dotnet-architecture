@@ -2,6 +2,7 @@
 using Project.UnitOfWorkProject.Repositories;
 using System;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Project.UnitOfWorkProject.Core
@@ -14,6 +15,8 @@ namespace Project.UnitOfWorkProject.Core
 
         public UnitOfWork(DbContext context, IResolver resolver)
         {
+            Debug.Print("[UnitOfWork] Started...");
+
             this.context = context;
             this.resolver = resolver;
         }
@@ -43,6 +46,8 @@ namespace Project.UnitOfWorkProject.Core
 
         public void Dispose()
         {
+            Debug.Print("[UnitOfWork] Disposed!");
+
             Dispose(true);
             GC.SuppressFinalize(this);
         }
