@@ -2,11 +2,11 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Project.UnitOfWorkProject.Tests")]
+[assembly: AssemblyTitle("Project.UnitOfWorkProjectProject.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Project.UnitOfWorkProject.Tests")]
+[assembly: AssemblyProduct("Project.UnitOfWorkProjectProject.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

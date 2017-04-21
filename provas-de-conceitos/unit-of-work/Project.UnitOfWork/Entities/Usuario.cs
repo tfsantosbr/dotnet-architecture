@@ -1,4 +1,4 @@
-﻿namespace Project.UnitOfWorkProject.Entities
+﻿namespace Project.UnitOfWorkProjectProject.Entities
 {
     public class Usuario : Entity<int>
     {

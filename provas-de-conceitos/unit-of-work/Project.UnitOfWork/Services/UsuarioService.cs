@@ -1,10 +1,10 @@
-﻿using Project.UnitOfWorkProject.Core;
-using Project.UnitOfWorkProject.Entities;
-using Project.UnitOfWorkProject.Repositories;
+﻿using Project.UnitOfWorkProjectProject.Core;
+using Project.UnitOfWorkProjectProject.Entities;
+using Project.UnitOfWorkProjectProject.Repositories;
 using System;
 using System.Threading.Tasks;
 
-namespace Project.UnitOfWorkProject.Services
+namespace Project.UnitOfWorkProjectProject.Services
 {
     public class UsuarioService : IUsuarioService
     {

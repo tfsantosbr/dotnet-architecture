@@ -1,15 +1,12 @@
-﻿using Project.UnitOfWorkProject.Entities;
-using Project.UnitOfWorkProject.Repositories;
+﻿using Project.UnitOfWorkProjectProject.Repositories;
 using System;
-using System.Data.Entity;
 using System.Threading.Tasks;
 
-namespace Project.UnitOfWorkProject.Core
+namespace Project.UnitOfWorkProjectProject.Core
 {
     public interface IUnitOfWork : IDisposable
     {
         TRepository GetRepository<TRepository>() where TRepository : IRepository;
-        IDbSet<TEntity> GetDbSet<TEntity>() where TEntity : Entity;
 
         int Commit();
         Task<int> CommitAsync();

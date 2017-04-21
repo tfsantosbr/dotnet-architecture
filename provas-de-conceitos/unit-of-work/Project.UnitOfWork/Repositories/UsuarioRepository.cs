@@ -1,12 +1,12 @@
 ﻿using Project.UnitOfWorkProject.Core;
-using Project.UnitOfWorkProject.Entities;
+using Project.UnitOfWorkProjectProject.Entities;
 
-namespace Project.UnitOfWorkProject.Repositories
+namespace Project.UnitOfWorkProjectProject.Repositories
 {
     public class UsuarioRepository : GenericRepository<Usuario, int>, IUsuarioRepository
     {
-        public UsuarioRepository(IUnitOfWork unitOfWork)
-            : base(unitOfWork)
+        public UsuarioRepository(IUnitOfWorkContextAware unitOfWorkContextAware)
+            : base(unitOfWorkContextAware)
         {
         }
     }

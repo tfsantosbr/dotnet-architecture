@@ -1,7 +1,7 @@
-﻿using Project.UnitOfWorkProject.Entities;
+﻿using Project.UnitOfWorkProjectProject.Entities;
 using System.Threading.Tasks;
 
-namespace Project.UnitOfWorkProject.Services
+namespace Project.UnitOfWorkProjectProject.Services
 {
     public interface IUsuarioService
     {

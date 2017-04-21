@@ -1,9 +1,9 @@
-﻿using Project.UnitOfWorkProject.Entities;
-using Project.UnitOfWorkProject.Services;
+﻿using Project.UnitOfWorkProjectProject.Entities;
+using Project.UnitOfWorkProjectProject.Services;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace Project.UnitOfWorkProject.WebApi.Controllers
+namespace Project.UnitOfWorkProjectProject.WebApi.Controllers
 {
     public class UsuariosController : ApiController
     {

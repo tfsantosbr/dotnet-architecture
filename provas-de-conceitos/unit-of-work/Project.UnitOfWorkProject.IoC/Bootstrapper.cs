@@ -1,12 +1,12 @@
-﻿using Project.UnitOfWorkProject.Contexts;
-using Project.UnitOfWorkProject.Core;
-using Project.UnitOfWorkProject.Repositories;
-using Project.UnitOfWorkProject.Services;
+﻿using Project.UnitOfWorkProjectProject.Contexts;
+using Project.UnitOfWorkProjectProject.Core;
+using Project.UnitOfWorkProjectProject.Repositories;
+using Project.UnitOfWorkProjectProject.Services;
 using SimpleInjector;
 using System;
 using System.Data.Entity;
 
-namespace Project.UnitOfWorkProject.IoC
+namespace Project.UnitOfWorkProjectProject.IoC
 {
     public class Bootstrapper
     {

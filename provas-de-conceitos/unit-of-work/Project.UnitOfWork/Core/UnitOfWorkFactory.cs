@@ -1,21 +1,20 @@
-﻿using Project.UnitOfWorkProject.Contexts;
-using System;
+﻿using Project.UnitOfWorkProjectProject.Contexts;
 
-namespace Project.UnitOfWorkProject.Core
+namespace Project.UnitOfWorkProjectProject.Core
 {
     public class UnitOfWorkFactory : IUnitOfWorkFactory
     {
-        public readonly IServiceProvider container;
+        public readonly IResolver resolver;
 
-        public UnitOfWorkFactory(IServiceProvider container)
+        public UnitOfWorkFactory(IResolver resolver)
         {
-            this.container = container;
+            this.resolver = resolver;
         }
 
         public IUnitOfWork Create()
         {
             // TODO: Remover acoplamento
-            return new UnitOfWork(new UsuarioDbContext(), container);
+            return new UnitOfWork(new UsuarioDbContext(), resolver);
         }
     }
 }

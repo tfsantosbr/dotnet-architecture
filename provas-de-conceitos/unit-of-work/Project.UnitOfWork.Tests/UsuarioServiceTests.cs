@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Project.UnitOfWorkProjectTests
+namespace Project.UnitOfWorkProjectProjectTests
 {
     [TestClass]
     public class UsuarioServiceTests

@@ -1,11 +1,11 @@
 ﻿using Owin;
-using Project.UnitOfWorkProject.IoC;
+using Project.UnitOfWorkProjectProject.IoC;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 using SimpleInjector.Lifestyles;
 using System.Web.Http;
 
-namespace Project.UnitOfWorkProject.WebApi
+namespace Project.UnitOfWorkProjectProject.WebApi
 {
     public class Startup
     {

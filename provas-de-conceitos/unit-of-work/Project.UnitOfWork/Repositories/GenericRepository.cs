@@ -1,20 +1,20 @@
 ﻿using Project.UnitOfWorkProject.Core;
-using Project.UnitOfWorkProject.Entities;
+using Project.UnitOfWorkProjectProject.Entities;
 using System;
 using System.Data.Entity;
 
-namespace Project.UnitOfWorkProject.Repositories
+namespace Project.UnitOfWorkProjectProject.Repositories
 {
     public abstract class GenericRepository<TEntity, TIdentifier> : IRepository<TEntity, TIdentifier>
         where TEntity : Entity<TIdentifier>
         where TIdentifier : IConvertible
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private IDbSet<TEntity> DbSet => _unitOfWork.GetDbSet<TEntity>();
+        private readonly IUnitOfWorkContextAware unitOfWorkContextAware;
+        private IDbSet<TEntity> DbSet => unitOfWorkContextAware.GetDbSet<TEntity>();
 
-        protected GenericRepository(IUnitOfWork unitOfWork)
+        protected GenericRepository(IUnitOfWorkContextAware unitOfWorkContextAware)
         {
-            _unitOfWork = unitOfWork;
+            this.unitOfWorkContextAware = unitOfWorkContextAware;
         }
 
         public void Add(TEntity entity)

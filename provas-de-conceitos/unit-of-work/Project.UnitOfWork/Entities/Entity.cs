@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Project.UnitOfWorkProject.Entities
+namespace Project.UnitOfWorkProjectProject.Entities
 {
     public class Entity { }
 

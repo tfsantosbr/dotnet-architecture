@@ -1,7 +1,8 @@
-﻿using Project.UnitOfWork.Entities;
+﻿using Project.UnitOfWorkProjectProject.Core;
+using Project.UnitOfWorkProjectProject.Entities;
 using System.Data.Entity;
 
-namespace Project.UnitOfWork.Core
+namespace Project.UnitOfWorkProject.Core
 {
     public interface IUnitOfWorkContextAware : IUnitOfWork
     {

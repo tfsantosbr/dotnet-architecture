@@ -1,7 +1,7 @@
-﻿using Project.UnitOfWorkProject.Entities;
+﻿using Project.UnitOfWorkProjectProject.Entities;
 using System.Data.Entity;
 
-namespace Project.UnitOfWorkProject.Contexts
+namespace Project.UnitOfWorkProjectProject.Contexts
 {
     public class UsuarioDbContext : DbContext
     {

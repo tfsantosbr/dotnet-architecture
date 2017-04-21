@@ -1,27 +1,27 @@
-﻿using Project.UnitOfWorkProject.Entities;
-using Project.UnitOfWorkProject.Repositories;
+﻿using Project.UnitOfWorkProject.Core;
+using Project.UnitOfWorkProjectProject.Entities;
+using Project.UnitOfWorkProjectProject.Repositories;
 using System;
 using System.Data.Entity;
 using System.Threading.Tasks;
 
-namespace Project.UnitOfWorkProject.Core
+namespace Project.UnitOfWorkProjectProject.Core
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWorkContextAware
     {
         private bool _disposed;
         private readonly DbContext context;
-        private readonly IServiceProvider container;
+        private readonly IResolver resolver;
 
-        public UnitOfWork(DbContext context, IServiceProvider container)
+        public UnitOfWork(DbContext context, IResolver resolver)
         {
             this.context = context;
-            this.container = container;
+            this.resolver = resolver;
         }
 
         public TRepository GetRepository<TRepository>() where TRepository : IRepository
         {
-            var repository = (TRepository)container.GetService(typeof(TRepository));
-            return repository;
+            return resolver.Resolve<TRepository>(typeof(TRepository));
         }
 
         public IDbSet<TEntity> GetDbSet<TEntity>() where TEntity : Entity

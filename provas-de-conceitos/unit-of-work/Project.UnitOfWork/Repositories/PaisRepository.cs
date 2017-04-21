@@ -1,12 +1,12 @@
 ﻿using Project.UnitOfWorkProject.Core;
-using Project.UnitOfWorkProject.Entities;
+using Project.UnitOfWorkProjectProject.Entities;
 
-namespace Project.UnitOfWorkProject.Repositories
+namespace Project.UnitOfWorkProjectProject.Repositories
 {
     public class PaisRepository : GenericRepository<Pais, int>, IPaisRepository
     {
-        public PaisRepository(IUnitOfWork unitOfWork)
-            : base(unitOfWork)
+        public PaisRepository(IUnitOfWorkContextAware unitOfWorkContextAware)
+            : base(unitOfWorkContextAware)
         {
         }
     }
