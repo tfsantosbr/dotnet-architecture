@@ -9,10 +9,10 @@ namespace Project.UnitOfWorkProject.Repositories
         where TEntity : Entity<TIdentifier>
         where TIdentifier : IConvertible
     {
-        private readonly IUnitOfWorkContextAware unitOfWorkContextAware;
+        private IUnitOfWorkContextAware unitOfWorkContextAware;
         private IDbSet<TEntity> DbSet => unitOfWorkContextAware.GetDbSet<TEntity>();
 
-        protected GenericRepository(IUnitOfWorkContextAware unitOfWorkContextAware)
+        public void SetUnitOfWork(IUnitOfWorkContextAware unitOfWorkContextAware)
         {
             this.unitOfWorkContextAware = unitOfWorkContextAware;
         }
@@ -21,5 +21,6 @@ namespace Project.UnitOfWorkProject.Repositories
         {
             DbSet.Add(entity);
         }
+
     }
 }

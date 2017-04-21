@@ -1,11 +1,12 @@
-﻿using Project.UnitOfWorkProject.Entities;
+﻿using Project.UnitOfWorkProject.Core;
+using Project.UnitOfWorkProject.Entities;
 using System;
 
 namespace Project.UnitOfWorkProject.Repositories
 {
     public interface IRepository
     {
-        //void SetUnitOfWork(IUnitOfWork unitOfWork);
+        void SetUnitOfWork(IUnitOfWorkContextAware unitOfWorkContextAware);
     }
 
     public interface IRepository<TEntity, in TIdentifier> : IRepository

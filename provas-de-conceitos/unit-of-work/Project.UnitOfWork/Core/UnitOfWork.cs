@@ -1,5 +1,4 @@
-﻿using Project.UnitOfWorkProject.Core;
-using Project.UnitOfWorkProject.Entities;
+﻿using Project.UnitOfWorkProject.Entities;
 using Project.UnitOfWorkProject.Repositories;
 using System;
 using System.Data.Entity;
@@ -21,7 +20,10 @@ namespace Project.UnitOfWorkProject.Core
 
         public TRepository GetRepository<TRepository>() where TRepository : IRepository
         {
-            return resolver.Resolve<TRepository>(typeof(TRepository));
+            var repository = resolver.Resolve<TRepository>(typeof(TRepository));
+            repository.SetUnitOfWork(this);
+
+            return repository;
         }
 
         public IDbSet<TEntity> GetDbSet<TEntity>() where TEntity : Entity
