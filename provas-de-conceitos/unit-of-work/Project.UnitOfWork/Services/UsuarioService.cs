@@ -21,15 +21,26 @@ namespace Project.UnitOfWorkProject.Services
 
         // Main Methods
 
-        public async Task<bool> AddAsync(Usuario entity)
+        public async Task<bool> AddAsync(Usuario usuario)
         {
             try
             {
                 using (var unitOfWork = unitOfWorkFactory.Invoke())
                 {
+                    var paisRepository = unitOfWork.GetRepository<IPaisRepository>();
                     var usuarioRepository = unitOfWork.GetRepository<IUsuarioRepository>();
 
-                    usuarioRepository.Add(entity);
+                    // para teste do unit of work utilizando 2 repositórios no mesmo contexto
+
+                    // adiciona um pais para cada usuário cadastrado
+                    var pais = new Pais { Nome = "PaisTeste" + DateTime.Now.ToShortDateString() };
+                    paisRepository.Add(pais);
+
+                    // associa o pais cadatsrado ao usuario que será cadastrado
+                    usuario.PaisId = pais.Id;
+
+                    // adiciona o usuario com o pais
+                    usuarioRepository.Add(usuario);
 
                     var result = await unitOfWork.CommitAsync();
 
@@ -41,27 +52,5 @@ namespace Project.UnitOfWorkProject.Services
                 throw ex;
             }
         }
-
-        //public async Task<bool> ChangeStatus(int id, UsuarioStatus status)
-        //{
-        //    try
-        //    {
-        //        using (var unitOfWork = _unitOfWorkFactory.Create())
-        //        {
-        //            var usuarioRepository = unitOfWork.GetRepository<IUsuarioRepository>();
-
-        //            var usuario = usuarioRepository.Get(id);
-        //            usuario.Status = status;
-
-        //            var result = unitOfWork.Commit();
-
-        //            return result > 0;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
     }
 }
