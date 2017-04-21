@@ -1,6 +1,6 @@
-# (PoC) Unit of Work
+# Unit of Work (Prova de Conceito)
 
-Projeto de uma prova de conceito do pattern Unit of Work, construído com a tecnologia.
+Projeto de uma prova de conceito do pattern Unit of Work, construÃ­do com a tecnologia.
 
 ## Tecnologias de Desenvolvimento
 
@@ -15,7 +15,7 @@ Projeto de uma prova de conceito do pattern Unit of Work, construído com a tecno
 * [Simple Injector 4.x][tec-4]
 
 
-## Referências de Estudos
+## ReferÃªncias de Estudos
 
 [ref-1]: https://martinfowler.com/eaaCatalog/unitOfWork.html
 [ref-2]: https://www.youtube.com/watch?v=4nqL31Qti_M
@@ -26,20 +26,20 @@ Projeto de uma prova de conceito do pattern Unit of Work, construído com a tecno
 [ref-7]: http://mehdi.me/ambient-dbcontext-in-ef6
 [ref-8]: https://www.cuttingedge.it/blogs/steven/pivot/entry.php?id=100
 
-* [Unit Of Work][ref-1] - Descrição do Pattern.
-* [Unit Of Work - PARTE 1][ref-2] - Vídeo tutorial sobre Unit of Work (Parte 1).
-* [Unit Of Work - PARTE 2][ref-3] - Vídeo tutorial sobre Unit of Work (Parte 2).
-* [IoC e DI][ref-4] - Vídeo tutorial sobre injeção de dependência e inversão de controle.
-* [SOLID - Interface Segregation Principle][ref-5] - Vídeo tutorial sobre o princípio de segregação de interface.
-* [ScopedUnitOfWork][ref-6] - Repositório contendo um projeto completo sobre Scoped Context.
+* [Unit Of Work][ref-1] - DescriÃ§Ã£o do Pattern.
+* [Unit Of Work - PARTE 1][ref-2] - VÃ­deo tutorial sobre Unit of Work (Parte 1).
+* [Unit Of Work - PARTE 2][ref-3] - VÃ­deo tutorial sobre Unit of Work (Parte 2).
+* [IoC e DI][ref-4] - VÃ­deo tutorial sobre injeÃ§Ã£o de dependÃªncia e inversÃ£o de controle.
+* [SOLID - Interface Segregation Principle][ref-5] - VÃ­deo tutorial sobre o princÃ­pio de segregaÃ§Ã£o de interface.
+* [ScopedUnitOfWork][ref-6] - RepositÃ³rio contendo um projeto completo sobre Scoped Context.
 * [Managing DbContext the right way][ref-7] - Artigo descrevendo o modo correto de utilizar um contexto no Entity Framework
-* [Abstract Factories are a code smell][ref-8] - Artigo explicando que Abstract Factories são "code smell".
+* [Abstract Factories are a code smell][ref-8] - Artigo explicando que Abstract Factories sÃ£o "code smell".
 
 
-## Considerações
+## ConsideraÃ§Ãµes
 
-* O artigo [Abstract Factories are a code smell][ref-1] dis que a utilização de abstract factories não é uma boa prática de programação, sendo assim foi substituída a classe `IUnitOfWorkFactory` pela dependência `Func<IUnitofWorkContextAware>`.
-* Ao invés de _Ninject_ utilizada no tutorial [Unit Of Work - PARTE 1][ref-2] e [Unit Of Work - PARTE 2][ref-3], foi usada a tecnologia [Simple Injector][tec-4].
+* O artigo [Abstract Factories are a code smell][ref-1] dis que a utilizaÃ§Ã£o de abstract factories nÃ£o Ã© uma boa prÃ¡tica de programaÃ§Ã£o, sendo assim foi substituÃ­da a classe `IUnitOfWorkFactory` pela dependÃªncia `Func<IUnitofWorkContextAware>`.
+* Ao invÃ©s de _Ninject_ utilizada no tutorial [Unit Of Work - PARTE 1][ref-2] e [Unit Of Work - PARTE 2][ref-3], foi usada a tecnologia [Simple Injector][tec-4].
 
 ## Autores
 
