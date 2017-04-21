@@ -1,11 +1,11 @@
 ﻿using Project.UnitOfWorkProject.Core;
-using Project.UnitOfWorkProjectProject.Entities;
-using Project.UnitOfWorkProjectProject.Repositories;
+using Project.UnitOfWorkProject.Entities;
+using Project.UnitOfWorkProject.Repositories;
 using System;
 using System.Data.Entity;
 using System.Threading.Tasks;
 
-namespace Project.UnitOfWorkProjectProject.Core
+namespace Project.UnitOfWorkProject.Core
 {
     public class UnitOfWork : IUnitOfWorkContextAware
     {

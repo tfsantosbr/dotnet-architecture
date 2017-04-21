@@ -1,8 +1,8 @@
-﻿using Project.UnitOfWorkProjectProject.Repositories;
+﻿using Project.UnitOfWorkProject.Repositories;
 using System;
 using System.Threading.Tasks;
 
-namespace Project.UnitOfWorkProjectProject.Core
+namespace Project.UnitOfWorkProject.Core
 {
     public interface IUnitOfWork : IDisposable
     {

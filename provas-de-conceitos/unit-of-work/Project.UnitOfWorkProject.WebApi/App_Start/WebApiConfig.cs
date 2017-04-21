@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 
-namespace Project.UnitOfWorkProjectProject.WebApi
+namespace Project.UnitOfWorkProject.WebApi
 {
     public static class WebApiConfig
     {

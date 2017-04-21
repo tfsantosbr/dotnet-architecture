@@ -1,7 +1,7 @@
 ﻿using Project.UnitOfWorkProject.Core;
-using Project.UnitOfWorkProjectProject.Entities;
+using Project.UnitOfWorkProject.Entities;
 
-namespace Project.UnitOfWorkProjectProject.Repositories
+namespace Project.UnitOfWorkProject.Repositories
 {
     public class UsuarioRepository : GenericRepository<Usuario, int>, IUsuarioRepository
     {

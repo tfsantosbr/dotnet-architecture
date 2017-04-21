@@ -1,5 +1,5 @@
-﻿using Project.UnitOfWorkProjectProject.Core;
-using Project.UnitOfWorkProjectProject.Entities;
+﻿using Project.UnitOfWorkProject.Core;
+using Project.UnitOfWorkProject.Entities;
 using System.Data.Entity;
 
 namespace Project.UnitOfWorkProject.Core

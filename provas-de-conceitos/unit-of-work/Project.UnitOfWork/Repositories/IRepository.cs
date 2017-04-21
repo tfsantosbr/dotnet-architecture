@@ -1,7 +1,7 @@
-﻿using Project.UnitOfWorkProjectProject.Entities;
+﻿using Project.UnitOfWorkProject.Entities;
 using System;
 
-namespace Project.UnitOfWorkProjectProject.Repositories
+namespace Project.UnitOfWorkProject.Repositories
 {
     public interface IRepository
     {

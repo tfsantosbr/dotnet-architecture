@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Project.UnitOfWorkProjectProject.Entities
+namespace Project.UnitOfWorkProject.Entities
 {
     public class Pais : Entity<int>
     {

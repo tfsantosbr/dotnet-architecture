@@ -1,6 +1,6 @@
-﻿using Project.UnitOfWorkProjectProject.Entities;
+﻿using Project.UnitOfWorkProject.Entities;
 
-namespace Project.UnitOfWorkProjectProject.Repositories
+namespace Project.UnitOfWorkProject.Repositories
 {
     public interface IPaisRepository : IRepository<Pais, int>
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Project.UnitOfWorkProjectProject.Core
+namespace Project.UnitOfWorkProject.Core
 {
     public interface IResolver
     {
