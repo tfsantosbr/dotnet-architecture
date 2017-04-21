@@ -21,9 +21,12 @@ namespace Project.UnitOfWorkProject.Core
         public TRepository GetRepository<TRepository>() where TRepository : IRepository
         {
             var repository = (TRepository)container.GetService(typeof(TRepository));
-
-            //repository.SetUnitOfWork(this);
             return repository;
+        }
+
+        public IDbSet<TEntity> GetDbSet<TEntity>() where TEntity : Entity
+        {
+            return context.Set<TEntity>();
         }
 
         public int Commit()
@@ -53,11 +56,6 @@ namespace Project.UnitOfWorkProject.Core
             }
 
             _disposed = true;
-        }
-
-        public IDbSet<TEntity> GetDbSet<TEntity>() where TEntity : Entity
-        {
-            return context.Set<TEntity>();
         }
 
 
