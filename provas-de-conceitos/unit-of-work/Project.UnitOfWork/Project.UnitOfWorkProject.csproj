@@ -55,18 +55,18 @@
     <Compile Include="Core\Resolver.cs" />
     <Compile Include="Core\UnitOfWork.cs" />
     <Compile Include="Contexts\UsuarioDbContext.cs" />
-    <Compile Include="Entities\Entity.cs" />
-    <Compile Include="Entities\Pais.cs" />
+    <Compile Include="Entities\Base\Entity.cs" />
+    <Compile Include="Entities\Endereco.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\GenericRepository.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="Repositories\IPaisRepository.cs" />
-    <Compile Include="Repositories\PaisRepository.cs" />
+    <Compile Include="Repositories\Base\GenericRepository.cs" />
+    <Compile Include="Repositories\Base\IRepository.cs" />
+    <Compile Include="Repositories\Base\IEnderecoRepository.cs" />
+    <Compile Include="Repositories\EnderecoRepository.cs" />
     <Compile Include="Repositories\UsuarioRepository.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
-    <Compile Include="Repositories\IUsuarioRepository.cs" />
-    <Compile Include="Services\IUsuarioService.cs" />
+    <Compile Include="Repositories\Base\IUsuarioRepository.cs" />
+    <Compile Include="Services\Base\IUsuarioService.cs" />
     <Compile Include="Services\UsuarioService.cs" />
   </ItemGroup>
   <ItemGroup>

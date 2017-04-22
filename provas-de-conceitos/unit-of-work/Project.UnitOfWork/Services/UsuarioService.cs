@@ -12,7 +12,7 @@ namespace Project.UnitOfWorkProject.Services
 
         private readonly Func<IUnitOfWorkContextAware> unitOfWorkFactory;
 
-        // Constructos
+        // Constructors
 
         public UsuarioService(Func<IUnitOfWorkContextAware> unitOfWorkFactory)
         {
@@ -21,30 +21,21 @@ namespace Project.UnitOfWorkProject.Services
 
         // Main Methods
 
-        public async Task<bool> AddAsync(Usuario usuario)
+        public async Task<int?> AddAsync(Usuario usuario)
         {
             try
             {
                 using (var unitOfWork = unitOfWorkFactory.Invoke())
                 {
-                    var paisRepository = unitOfWork.GetRepository<IPaisRepository>();
                     var usuarioRepository = unitOfWork.GetRepository<IUsuarioRepository>();
-
-                    // para teste do unit of work utilizando 2 repositórios no mesmo contexto
-
-                    // adiciona um pais para cada usuário cadastrado
-                    var pais = new Pais { Nome = "PaisTeste" + DateTime.Now.ToShortDateString() };
-                    paisRepository.Add(pais);
-
-                    // associa o pais cadatsrado ao usuario que será cadastrado
-                    usuario.PaisId = pais.Id;
-
-                    // adiciona o usuario com o pais
                     usuarioRepository.Add(usuario);
 
                     var result = await unitOfWork.CommitAsync();
 
-                    return result > 0;
+                    if (result == 0)
+                        return null;
+
+                    return usuario.Id;
                 }
             }
             catch (Exception ex)

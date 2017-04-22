@@ -5,6 +5,6 @@ namespace Project.UnitOfWorkProject.Services
 {
     public interface IUsuarioService
     {
-        Task<bool> AddAsync(Usuario entity);
+        Task<int?> AddAsync(Usuario entity);
     }
 }

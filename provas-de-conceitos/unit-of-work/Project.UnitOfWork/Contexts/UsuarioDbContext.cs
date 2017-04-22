@@ -24,7 +24,7 @@ namespace Project.UnitOfWorkProject.Contexts
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuario>().ToTable(nameof(Usuario), "Core");
-            modelBuilder.Entity<Pais>().ToTable(nameof(Pais), "Core");
+            modelBuilder.Entity<Endereco>().ToTable(nameof(Endereco), "Core");
         }
 
         #endregion

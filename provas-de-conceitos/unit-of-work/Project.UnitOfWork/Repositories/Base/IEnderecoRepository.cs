@@ -2,7 +2,7 @@
 
 namespace Project.UnitOfWorkProject.Repositories
 {
-    public interface IPaisRepository : IRepository<Pais, int>
+    public interface IEnderecoRepository : IRepository<Endereco, int>
     {
     }
 }

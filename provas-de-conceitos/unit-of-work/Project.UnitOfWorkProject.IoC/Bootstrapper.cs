@@ -18,7 +18,7 @@ namespace Project.UnitOfWorkProject.IoC
 
             // repositories
             container.Register(typeof(IRepository<,>), new[] { typeof(GenericRepository<,>).Assembly }, Lifestyle.Scoped);
-            container.Register<IPaisRepository, PaisRepository>(Lifestyle.Scoped);
+            container.Register<IEnderecoRepository, EnderecoRepository>(Lifestyle.Scoped);
             container.Register<IUsuarioRepository, UsuarioRepository>(Lifestyle.Scoped);
 
             // services
