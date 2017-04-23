@@ -148,9 +148,12 @@
     <Compile Include="Base\BaseDatabaseTests.cs" />
     <Compile Include="Base\BaseTests.cs" />
     <Compile Include="Base\DatabaseSetup.cs" />
+    <Compile Include="Base\GenericSeedData.cs" />
+    <Compile Include="Base\ISeedData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoriesTests\EnderecoRepositoryTests\EnderecoRepositoryAddTests.cs" />
     <Compile Include="RepositoriesTests\UsuarioRepositoryTests\UsuarioRepositoryAddTests.cs" />
+    <Compile Include="RepositoriesTests\UsuarioRepositoryTests\UsuarioRepositorySeed\UsuarioSeedData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

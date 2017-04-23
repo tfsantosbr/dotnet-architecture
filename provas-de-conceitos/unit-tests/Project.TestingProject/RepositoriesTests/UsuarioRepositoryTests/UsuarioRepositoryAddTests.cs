@@ -1,8 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Project.TestingProject.Base;
-using Project.UnitOfWorkProject.Contexts;
-using Project.UnitOfWorkProject.Core;
+using Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests.UsuarioRepositorySeed;
 using Project.UnitOfWorkProject.Entities;
 using Project.UnitOfWorkProject.Repositories;
 using System;
@@ -18,20 +17,14 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
     {
         #region - PROPERTIES -
         public IUsuarioRepository repository;
+        public static GenericSeedData<Usuario> seedData = new UsuarioSeedData();
         #endregion
 
         #region - CLASS INITIALIZE -
         [ClassInitialize()]
         public static void ClassInitialize(TestContext context)
         {
-            using (var unitOfWorkContextAware = new UnitOfWork(new UsuarioDbContext(), null))
-            {
-                unitOfWorkContextAware.GetDbSet<Usuario>().Add(
-                    new Usuario { Nome = "Roberto", Email = "emailduplicado@email.com", Status = UsuarioStatus.Ativo }
-                    );
-
-                unitOfWorkContextAware.Commit();
-            }
+            seedData.SeedDatabase();
         }
         #endregion
 
@@ -102,11 +95,12 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
         public void ShouldRejectAUserWithEmailAlreadyRegistered()
         {
             // Arrange
+            var usuarioCadastrado = seedData.DataList.FirstOrDefault(x => x.Email != null);
 
             var usuario = new Usuario
             {
                 Nome = "Tiago",
-                Email = "emailduplicado@email.com",
+                Email = usuarioCadastrado.Email,
                 Status = UsuarioStatus.Ativo
             };
 
@@ -199,13 +193,7 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
         [ClassCleanup()]
         public static void ClassCleanup()
         {
-            using (var unitOfWorkContextAware = new UnitOfWork(new UsuarioDbContext(), null))
-            {
-                var usuarios = unitOfWorkContextAware.GetDbSet<Usuario>();
-
-                usuarios.ToList().ForEach(usuario => usuarios.Remove(usuario));
-                unitOfWorkContextAware.Commit();
-            }
+            seedData.EmptyDatabase();
         }
         #endregion
     }

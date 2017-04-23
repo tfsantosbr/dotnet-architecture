@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Configuration;
 
 namespace Project.TestingProject.Base
 {
@@ -11,8 +12,13 @@ namespace Project.TestingProject.Base
         {
             Console.WriteLine("AssemblyInit " + context.TestName);
 
-            var dbSetup = new DatabaseSetup();
-            dbSetup.WipeAndCreateDatabase();
+            var automaticDropAndCreateDatabase = Convert.ToBoolean(ConfigurationManager.AppSettings["AutomaticDropAndCreateDatabase"]);
+
+            if (automaticDropAndCreateDatabase)
+            {
+                var dbSetup = new DatabaseSetup();
+                dbSetup.WipeAndCreateDatabase();
+            }
         }
 
         [AssemblyCleanup()]
