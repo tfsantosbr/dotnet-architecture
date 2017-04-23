@@ -7,6 +7,7 @@ namespace Project.Infrastructure.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(Project.Infrastructure.Context.InfraContext context)

@@ -1,18 +1,22 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Project.TestingProject.Base;
 using Project.UnitOfWorkProject.Contexts;
 using Project.UnitOfWorkProject.Core;
 using Project.UnitOfWorkProject.Entities;
 using Project.UnitOfWorkProject.Repositories;
 using System;
+using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
+using System.Linq;
 
 namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
 {
     [TestClass]
-    public class UsuarioRepositoryAddTests : BaseDatabaseTests
+    public class UsuarioRepositoryAddTests : BaseDatabaseTests, IDisposable
     {
         #region - PROPERTIES -
-        public IUnitOfWorkContextAware unitOfWorkContextAware;
         public IUsuarioRepository repository;
         #endregion
 
@@ -20,14 +24,20 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
         [ClassInitialize()]
         public static void ClassInitialize(TestContext context)
         {
-            Console.WriteLine("UsuarioRepositoryAddTests Initialize");
+            using (var unitOfWorkContextAware = new UnitOfWork(new UsuarioDbContext(), null))
+            {
+                unitOfWorkContextAware.GetDbSet<Usuario>().Add(
+                    new Usuario { Nome = "Roberto", Email = "emailduplicado@email.com", Status = UsuarioStatus.Ativo }
+                    );
+
+                unitOfWorkContextAware.Commit();
+            }
         }
         #endregion
 
         #region - CONSTRUCTOR -
         public UsuarioRepositoryAddTests()
         {
-            unitOfWorkContextAware = new UnitOfWork(new UsuarioDbContext(), null);
             repository = new UsuarioRepository();
             repository.SetUnitOfWork(unitOfWorkContextAware);
         }
@@ -40,20 +50,19 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
         [TestMethod]
         public void ShouldCreateANewUserWhenNecessaryDataPassedCorrectly()
         {
-            Console.WriteLine("METHOD ShouldCreateANewUserWhenCorrectDataIsPassed");
-
-            var entity = new Usuario
+            // Arrange
+            var usuario = new Usuario
             {
                 Nome = "Tiago",
-                Email = "Santos",
                 Status = UsuarioStatus.Ativo
             };
 
-            // Arrange
-
             // Act
+            repository.Add(usuario);
+            var result = unitOfWorkContextAware.Commit();
 
             // Assert
+            result.Should().BeGreaterThan(0);
         }
 
         // Deve criar um novo usuário quando todos os dados forem passados corretamente
@@ -61,20 +70,30 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
         [TestMethod]
         public void ShouldCreateANewUserWhenAllDataPassedCorrectly()
         {
-            Console.WriteLine("METHOD ShouldCreateANewUserWhenAllDataPassedCorrectly");
-
-            var entity = new Usuario
+            // Arrange
+            var usuario = new Usuario
             {
                 Nome = "Tiago",
-                Email = "Santos",
-                Status = UsuarioStatus.Ativo
+                Email = "tiago@email.com",
+                Status = UsuarioStatus.Ativo,
+
+                Enderecos = new List<Endereco>
+                {
+                    new Endereco
+                    {
+                        Logradouro = "Felício Antonio Pepe",
+                        Bairro = "Vila Nova Savoia",
+                        Numero = "123"
+                    }
+                }
             };
 
-            // Arrange
-
             // Act
+            repository.Add(usuario);
+            var result = unitOfWorkContextAware.Commit();
 
             // Assert
+            result.Should().BeGreaterThan(0);
         }
 
         // Deve rejeitar um usuário com email já cadastrado
@@ -82,13 +101,26 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
         [TestMethod]
         public void ShouldRejectAUserWithEmailAlreadyRegistered()
         {
-            Console.WriteLine("METHOD ShouldRejectAUserWithEmailAlreadyRegistered");
-
             // Arrange
 
-            // Act
+            var usuario = new Usuario
+            {
+                Nome = "Tiago",
+                Email = "emailduplicado@email.com",
+                Status = UsuarioStatus.Ativo
+            };
 
-            // Assert
+            // Act & Assert
+
+            try
+            {
+                repository.Add(usuario);
+                unitOfWorkContextAware.Commit();
+            }
+            catch (DbUpdateException ex)
+            {
+                ex.InnerException.InnerException.Message.Should().Contain("duplicate key");
+            }
         }
 
         // Deve rejeitar um usuário sem nome
@@ -96,13 +128,34 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
         [TestMethod]
         public void ShouldRejectAUserWithoutName()
         {
-            Console.WriteLine("METHOD ShouldRejectAUserWithoutName");
-
             // Arrange
+
+            var isRequiredNameErrorRaised = false;
+            var usuario = new Usuario { };
 
             // Act
 
+            try
+            {
+                repository.Add(usuario);
+                unitOfWorkContextAware.Commit();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var item in ex.EntityValidationErrors)
+                {
+                    isRequiredNameErrorRaised = item.ValidationErrors.Any(x =>
+                        x.ErrorMessage.Contains("obrigatório") ||
+                        x.PropertyName == "Nome"
+                        );
+                    if (isRequiredNameErrorRaised)
+                        break;
+                }
+            }
+
             // Assert
+
+            isRequiredNameErrorRaised.Should().BeTrue();
         }
 
         // Deve rejeitar um usuário sem status
@@ -110,13 +163,34 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
         [TestMethod]
         public void ShouldRejectAUserWithoutStatus()
         {
-            Console.WriteLine("METHOD ShouldRejectAUserWithoutStatus");
-
             // Arrange
+
+            var isRequiredStatusErrorRaised = false;
+            var usuario = new Usuario { };
 
             // Act
 
+            try
+            {
+                repository.Add(usuario);
+                unitOfWorkContextAware.Commit();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var item in ex.EntityValidationErrors)
+                {
+                    isRequiredStatusErrorRaised = item.ValidationErrors.Any(x =>
+                        x.ErrorMessage.Contains("obrigatório") ||
+                        x.PropertyName == "Status"
+                        );
+                    if (isRequiredStatusErrorRaised)
+                        break;
+                }
+            }
+
             // Assert
+
+            isRequiredStatusErrorRaised.Should().BeTrue();
         }
 
         #endregion
@@ -125,9 +199,14 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
         [ClassCleanup()]
         public static void ClassCleanup()
         {
-            Console.WriteLine("UsuarioRepositoryAddTests Cleanup");
+            using (var unitOfWorkContextAware = new UnitOfWork(new UsuarioDbContext(), null))
+            {
+                var usuarios = unitOfWorkContextAware.GetDbSet<Usuario>();
+
+                usuarios.ToList().ForEach(usuario => usuarios.Remove(usuario));
+                unitOfWorkContextAware.Commit();
+            }
         }
         #endregion
     }
-
 }

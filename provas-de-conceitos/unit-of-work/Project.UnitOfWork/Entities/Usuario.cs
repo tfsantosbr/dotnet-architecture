@@ -14,7 +14,7 @@ namespace Project.UnitOfWorkProject.Entities
         public string Email { get; set; }
 
         [Required]
-        public UsuarioStatus Status { get; set; }
+        public UsuarioStatus? Status { get; set; }
 
         public virtual List<Endereco> Enderecos { get; set; }
     }

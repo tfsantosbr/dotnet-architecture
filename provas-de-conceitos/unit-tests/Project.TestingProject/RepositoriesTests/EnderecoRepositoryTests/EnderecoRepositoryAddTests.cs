@@ -92,6 +92,14 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
 
         #endregion
 
+        #region - DISPOSE -
+        public void Dispose()
+        {
+            repository = null;
+            unitOfWorkContextAware.Dispose();
+        }
+        #endregion
+
         #region - CLASS CLEANUP -
         [ClassCleanup()]
         public static void ClassCleanup()
