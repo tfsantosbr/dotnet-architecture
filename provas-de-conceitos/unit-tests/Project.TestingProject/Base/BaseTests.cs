@@ -10,6 +10,9 @@ namespace Project.TestingProject.Base
         public static void AssemblyInit(TestContext context)
         {
             Console.WriteLine("AssemblyInit " + context.TestName);
+
+            var dbSetup = new DatabaseSetup();
+            dbSetup.WipeAndCreateDatabase();
         }
 
         [AssemblyCleanup()]

@@ -8,7 +8,12 @@ namespace Project.Infrastructure.Context
         #region - CONSTRUCTORS -
 
         public InfraContext()
-            : base("Default")
+            : this("Default")
+        {
+        }
+
+        public InfraContext(string connectionString)
+            : base(connectionString)
         {
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = false;

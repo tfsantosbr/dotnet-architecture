@@ -1,8 +1,9 @@
 namespace Project.Infrastructure.Migrations
 {
+    using Project.Infrastructure.Context;
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Project.Infrastructure.Context.InfraContext>
+    public sealed class Configuration : DbMigrationsConfiguration<InfraContext>
     {
         public Configuration()
         {
@@ -10,7 +11,7 @@ namespace Project.Infrastructure.Migrations
             AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(Project.Infrastructure.Context.InfraContext context)
+        protected override void Seed(InfraContext context)
         {
         }
     }

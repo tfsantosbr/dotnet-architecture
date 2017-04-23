@@ -72,6 +72,7 @@
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Console, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Console.4.0.0\lib\net46\System.Console.dll</HintPath>
     </Reference>
@@ -146,6 +147,7 @@
   <ItemGroup>
     <Compile Include="Base\BaseDatabaseTests.cs" />
     <Compile Include="Base\BaseTests.cs" />
+    <Compile Include="Base\DatabaseSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoriesTests\EnderecoRepositoryTests\EnderecoRepositoryAddTests.cs" />
     <Compile Include="RepositoriesTests\UsuarioRepositoryTests\UsuarioRepositoryAddTests.cs" />
@@ -155,6 +157,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\unit-of-work\Project.Infrastructure\Project.Infrastructure.csproj">
+      <Project>{fae213e6-7127-4c46-8d97-13cb92a5beab}</Project>
+      <Name>Project.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\unit-of-work\Project.UnitOfWorkProject.IoC\Project.UnitOfWorkProject.IoC.csproj">
       <Project>{9175df6e-3703-405a-a5ef-05cf752071f5}</Project>
       <Name>Project.UnitOfWorkProject.IoC</Name>
