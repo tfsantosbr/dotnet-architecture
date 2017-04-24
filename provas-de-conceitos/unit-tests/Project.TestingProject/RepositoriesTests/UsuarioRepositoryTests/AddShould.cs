@@ -11,6 +11,8 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
     [TestClass]
     public class AddShould : UsuarioRepositoryTestsBase
     {
+        #region - TESTS -
+
         // Deve criar um novo usuário quando os dados necessários forem passados corretamente
 
         [TestMethod, TestProperty("Usuário", "Repository")]
@@ -140,6 +142,8 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
 
             hasRequiredStatusError.Should().BeTrue();
         }
+
+        #endregion
 
         #region - SECONDARY METHODS -
 
