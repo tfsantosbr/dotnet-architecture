@@ -43,5 +43,28 @@ namespace Project.UnitOfWorkProject.Services
                 throw ex;
             }
         }
+
+        public int? Add(Usuario usuario)
+        {
+            try
+            {
+                using (var unitOfWork = unitOfWorkFactory.Invoke())
+                {
+                    var usuarioRepository = unitOfWork.GetRepository<IUsuarioRepository>();
+                    usuarioRepository.Add(usuario);
+
+                    var result = unitOfWork.Commit();
+
+                    if (result == 0)
+                        return null;
+
+                    return usuario.Id;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

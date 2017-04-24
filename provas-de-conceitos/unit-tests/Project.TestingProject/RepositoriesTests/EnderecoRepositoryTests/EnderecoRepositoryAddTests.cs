@@ -46,6 +46,7 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
             // Act
 
             // Assert
+            Assert.Fail();
         }
 
         // Deve rejeitar um endereço sem logradouro
@@ -60,6 +61,7 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
             // Act
 
             // Assert
+            Assert.Fail();
         }
 
         // Deve rejeitar um endereço sem número
@@ -74,6 +76,7 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
             // Act
 
             // Assert
+            Assert.Fail();
         }
 
         // Deve rejeitar um endereço sem bairro
@@ -88,6 +91,7 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
             // Act
 
             // Assert
+            Assert.Fail();
         }
 
         #endregion
