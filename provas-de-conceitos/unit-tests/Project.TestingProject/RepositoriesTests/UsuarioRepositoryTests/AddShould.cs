@@ -64,7 +64,7 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
         {
             // Arrange & Act
 
-            var usuarioCadastrado = _seedData.DataList.FirstOrDefault(x => x.Email != null);
+            var usuarioCadastrado = SeedData.DataList.FirstOrDefault(x => x.Email != null);
             var usuario = new Usuario { Nome = "Tiago", Email = usuarioCadastrado.Email, Status = UsuarioStatus.Ativo };
 
             try
@@ -149,7 +149,7 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
 
         private int Add(Usuario usuario)
         {
-            _repository.Add(usuario);
+            Repository.Add(usuario);
             return unitOfWorkContextAware.Commit();
         }
 
@@ -160,13 +160,13 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
         [ClassInitialize()]
         public static void ClassInitialize(TestContext context)
         {
-            _seedData.SeedDatabase();
+            SeedData.SeedDatabase();
         }
 
         [ClassCleanup()]
         public static void ClassCleanup()
         {
-            _seedData.EmptyDatabase();
+            SeedData.EmptyDatabase();
         }
 
         #endregion

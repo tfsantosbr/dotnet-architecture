@@ -25,6 +25,9 @@ namespace Project.UnitOfWorkProject.Services
         {
             try
             {
+                if (usuario == null)
+                    throw new ArgumentNullException(nameof(usuario));
+
                 using (var unitOfWork = unitOfWorkFactory.Invoke())
                 {
                     var usuarioRepository = unitOfWork.GetRepository<IUsuarioRepository>();

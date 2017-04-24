@@ -9,8 +9,8 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
     {
         #region - PROPERTIES -
 
-        public IUsuarioRepository _repository;
-        public static GenericSeedData<Usuario> _seedData = new UsuarioSeedData();
+        protected IUsuarioRepository Repository;
+        protected static GenericSeedData<Usuario> SeedData = new UsuarioSeedData();
 
         #endregion
 
@@ -18,8 +18,8 @@ namespace Project.TestingProject.RepositoriesTests.UsuarioRepositoryTests
 
         public UsuarioRepositoryTestsBase()
         {
-            _repository = new UsuarioRepository();
-            _repository.SetUnitOfWork(unitOfWorkContextAware);
+            Repository = new UsuarioRepository();
+            Repository.SetUnitOfWork(unitOfWorkContextAware);
         }
 
         #endregion
