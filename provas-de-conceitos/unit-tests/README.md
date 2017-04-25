@@ -23,12 +23,18 @@ Projeto de uma prova de conceito sobre [Unit Testing][ref-1], técnica utilizada
 [ref-3]: https://www.youtube.com/watch?v=fKy2NCKvzSQ&t=131s
 [ref-4]: https://www.youtube.com/watch?v=2Q1JbixVdmU&t=7s
 [ref-5]: https://www.youtube.com/watch?v=jX5wOLwj2sA&t=92s
+[ref-6]: http://tech.trailmax.info/2014/03/how-we-do-database-integration-tests-with-entity-framework-migrations/
+[ref-7]: https://lostechies.com/jimmybogard/2012/10/18/isolating-database-data-in-integration-tests/
+[ref-8]: https://lostechies.com/jimmybogard/2013/06/18/strategies-for-isolating-the-database-in-tests/
 
 * [Unit Testing][ref-1] - Artigo sobre a técnica de teste de unidade.
 * [TDD (Test Driven Development)][ref-2] - Artigo sobre o princípio de desenvolvimento TDD.
 * [TDD com NSubstitute, Fluent Assertions e ReSharper - PARTE 1][ref-3] - Vídeo tutorial sobre TDD (Parte 1).
 * [TDD com NSubstitute, Fluent Assertions e ReSharper - PARTE 2][ref-4] - Vídeo tutorial sobre TDD (Parte 2).
 * [TDD com NSubstitute, Fluent Assertions e ReSharper - PARTE 3][ref-5] - Vídeo tutorial sobre TDD (Parte 3).
+* [How We Do Database Integration Tests With Entity Framework Migrations][ref-6] - Tutorial ensinando a testar a camada de repositórios testes integrados.
+* [Isolating database data in integration testsPosted][ref-7] - Artigo sobre isolar um bando de dados para testes integrados.
+* [Strategies for isolating the database in tests][ref-8] - Estratégias de como isolar um banco de dados para testes integrados.
 
 ## Considerações
 
@@ -41,3 +47,8 @@ Projeto de uma prova de conceito sobre [Unit Testing][ref-1], técnica utilizada
   * https://dotnet.libhunt.com/project/fluentassertions/vs/shouldly?rel=cmp-cat
 
 * Como base de código para os testes, utilizei o projeto [Unit of Work (Prova de Conceito)](../unit-of-work/README.md) que já tinha desenvolvido antes.
+
+* Para os testes da camada de repositório, utilizei as premissas dos **Testes Integrando**, seguindo os artigos:
+  * [How We Do Database Integration Tests With Entity Framework Migrations][ref-6]
+  * [Isolating database data in integration testsPosted][ref-7]
+  * [Strategies for isolating the database in tests][ref-8]
